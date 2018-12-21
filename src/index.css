@@ -1,0 +1,52 @@
+body {
+  font-size: .875rem;
+}
+
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+/*
+ * Content
+ */
+
+[role="main"] {
+  padding-top: 20px; /* Space for fixed navbar */
+}
+
+
+/*
+ * Utilities
+ */
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.country-table-flag {
+  margin-right: 5px;
+}
+
+.hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.nav-item {
+  cursor: pointer;
+}
+
+.count-progress {
+  height: 30px;
+  margin-bottom: 20px;
+}
+
+.tab-content {
+  margin-top: 20px;
+}
+

@@ -1,0 +1,16 @@
+.react-bootstrap-table table {
+    table-layout: auto !important;
+  }
+  
+  .beertable-image {
+    height: 30px;
+    margin: 5px 10px 5px 5px;
+  }
+  
+  .react-bootstrap-table > table > tbody > tr {
+    cursor: pointer;
+  }
+  
+  .react-bootstrap-table > table > tbody > .expanding-row {
+    cursor: inherit;
+  }

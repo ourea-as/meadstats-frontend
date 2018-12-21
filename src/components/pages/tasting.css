@@ -1,0 +1,9 @@
+.tasting-table * td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tasting-table * th {
+    text-align: center;
+    vertical-align: middle;
+}
