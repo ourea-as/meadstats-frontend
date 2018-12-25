@@ -6,21 +6,24 @@ import { Col } from 'reactstrap';
 import axios from 'axios';
 import { API_ROOT } from '../../api/api-config';
 
-import { HoverMap } from '../charts/hovermap';
-import { CountryTable } from '../tables/countrytable';
+import CountryHoverMap from '../charts/countryhovermap';
+import CountryStats from '../charts/countrystats';
 import { ErrorBoundary } from '../common/errorboundary';
+import { BeerTable } from '../tables/beertable';
 
 export default function CountryMap(props) {
-  const [countries, setCountries] = useState([]);
+  const [data, setData] = useState();
 
   useEffect(
     () => {
       if (props.username !== '') {
         axios
-          .get(`${API_ROOT}/v1/users/${props.username}/countries`)
+          .get(
+            `${API_ROOT}/v1/users/${props.username}/countries/${props.country}`
+          )
           .then(({ data }) => {
             if (data.status === 'success') {
-              setCountries(data.data.countries);
+              setData(data.data);
             }
           });
       }
@@ -28,18 +31,31 @@ export default function CountryMap(props) {
     [props.username]
   );
 
-  return (
-    <>
-      <Col xs="12">
-        <ErrorBoundary>
-          <HoverMap countries={countries} selectedCountry={'NOR'} />
-        </ErrorBoundary>
-      </Col>
-      <Col xs="12">
-        <ErrorBoundary>
-          <CountryTable countries={countries} />
-        </ErrorBoundary>
-      </Col>
-    </>
-  );
+  if (data) {
+    const beers = data.breweries
+      .map(function(brewery) {
+        return brewery.beers;
+      })
+      .flat();
+
+    return (
+      <>
+        <Col xs="12" md="6">
+          <ErrorBoundary>
+            <CountryStats data={data} />
+          </ErrorBoundary>
+        </Col>
+        <Col xs="12" md="6">
+          <ErrorBoundary>
+            <CountryHoverMap data={data} />
+          </ErrorBoundary>
+        </Col>
+        <Col xs="12" md="12">
+          <BeerTable beers={beers} />
+        </Col>
+      </>
+    );
+  } else {
+    return 'Loading...';
+  }
 }

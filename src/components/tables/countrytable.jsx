@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -60,17 +60,28 @@ const defaultSorted = [
   }
 ];
 
-export const CountryTable = ({ countries }) => (
-  <BootstrapTable
-    bootstrap4
-    bordered={false}
-    keyField="name"
-    data={countries}
-    columns={columns}
-    defaultSorted={defaultSorted}
-  />
-);
+class CountryTable extends React.Component {
+  render() {
+    const { countries } = this.props;
 
-CountryTable.propTypes = {
-  countries: PropTypes.array
-};
+    const rowEvents = {
+      onClick: (e, row, rowIndex) => {
+        this.props.history.push('map/' + row.code);
+      }
+    };
+
+    return (
+      <BootstrapTable
+        bootstrap4
+        bordered={false}
+        keyField="name"
+        data={countries}
+        columns={columns}
+        defaultSorted={defaultSorted}
+        rowEvents={rowEvents}
+      />
+    );
+  }
+}
+
+export default withRouter(CountryTable);

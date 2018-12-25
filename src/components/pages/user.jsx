@@ -19,14 +19,6 @@ import { Profile } from './profile';
 
 const LoadingComponent = () => <h3>Please wait...</h3>;
 
-const WheelOfStyle = loadable({
-  loader: () => import('./wheelofstyle'),
-  loading: LoadingComponent,
-  render(loaded, props) {
-    const Component = loaded.default;
-    return <Component {...props} />;
-  }
-});
 const Patterns = loadable({
   loader: () => import('./patterns'),
   loading: LoadingComponent,
@@ -37,6 +29,14 @@ const Patterns = loadable({
 });
 const Map = loadable({
   loader: () => import('./map'),
+  loading: LoadingComponent,
+  render(loaded, props) {
+    const Component = loaded.default;
+    return <Component {...props} />;
+  }
+});
+const CountryMap = loadable({
+  loader: () => import('./countrymap'),
   loading: LoadingComponent,
   render(loaded, props) {
     const Component = loaded.default;
@@ -181,12 +181,17 @@ export class User extends React.Component {
               <ErrorBoundary>
                 <Switch>
                   <Route
-                    path="/user/:name/map"
-                    render={() => <Map username={user.user_name} />}
+                    path="/user/:name/map/:country"
+                    render={({ match }) => (
+                      <CountryMap
+                        username={user.user_name}
+                        country={match.params.country}
+                      />
+                    )}
                   />
                   <Route
-                    path="/user/:name/wheelofstyles"
-                    render={() => <WheelOfStyle username={user.user_name} />}
+                    path="/user/:name/map"
+                    render={() => <Map username={user.user_name} />}
                   />
                   <Route
                     path="/user/:name/patterns"

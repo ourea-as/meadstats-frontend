@@ -7,7 +7,7 @@ import axios from 'axios';
 import { API_ROOT } from '../../api/api-config';
 
 import { HoverMap } from '../charts/hovermap';
-import { CountryTable } from '../tables/countrytable';
+import CountryTable from '../tables/countrytable';
 import { ErrorBoundary } from '../common/errorboundary';
 
 export default function Map(props) {

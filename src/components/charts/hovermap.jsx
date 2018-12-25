@@ -7,7 +7,7 @@ import {
   ZoomableGroup
 } from 'react-simple-maps';
 import PropTypes from 'prop-types';
-import Data from '../../assets/world-50m-with-population.json';
+import Data from '../../assets/maps/world.json';
 
 export class HoverMap extends React.PureComponent {
   render() {
