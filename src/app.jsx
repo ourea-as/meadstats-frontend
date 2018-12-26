@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { Cookies, withCookies } from 'react-cookie';
 import PropTypes from 'prop-types';
 
@@ -9,9 +8,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './assets/favicon.ico';
 
 import { Container, Row } from 'reactstrap';
-import Topbar from './components/layout/topbar';
-import { Footer } from './components/layout/footer';
-import { ErrorBoundary } from './components/common/errorboundary';
+import Topbar from './components/topbar';
+import { Footer } from './components/footer';
+import { ErrorBoundary } from './components/errorboundary';
 import { Routes } from './routes';
 
 class App extends React.Component {
@@ -57,25 +56,23 @@ class App extends React.Component {
     const { isAuthenticated, username } = this.state;
 
     return (
-      <BrowserRouter>
-        <main>
-          <Topbar isAuthenticated={isAuthenticated} username={username} />
-          <Container>
-            <Row>
-              <ErrorBoundary>
-                <main role="main" className="col-md-12 col-lg-12 px-4">
-                  <Routes
-                    isAuthenticated={isAuthenticated}
-                    username={username}
-                    logoutUser={this.logoutUser}
-                  />
-                </main>
-              </ErrorBoundary>
-            </Row>
-            <Footer />
-          </Container>
-        </main>
-      </BrowserRouter>
+      <main>
+        <Topbar isAuthenticated={isAuthenticated} username={username} />
+        <Container>
+          <Row>
+            <ErrorBoundary>
+              <main role="main" className="col-md-12 col-lg-12 px-4">
+                <Routes
+                  isAuthenticated={isAuthenticated}
+                  username={username}
+                  logoutUser={this.logoutUser}
+                />
+              </main>
+            </ErrorBoundary>
+          </Row>
+          <Footer />
+        </Container>
+      </main>
     );
   }
 }

@@ -4,11 +4,11 @@ import 'react-flag-icon-css';
 import { Col } from 'reactstrap';
 
 import axios from 'axios';
-import { API_ROOT } from '../../api/api-config';
+import { API_ROOT } from '../api/api-config';
 
-import { HoverMap } from '../charts/hovermap';
-import CountryTable from '../tables/countrytable';
-import { ErrorBoundary } from '../common/errorboundary';
+import { HoverMap } from './hovermap';
+import CountryTable from './countrytable';
+import { ErrorBoundary } from './errorboundary';
 
 export default function Map(props) {
   const [countries, setCountries] = useState([]);

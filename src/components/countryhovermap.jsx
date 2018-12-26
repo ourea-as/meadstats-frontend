@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
-import { scaleLinear } from 'd3-scale';
 import {
   ComposableMap,
   Geographies,
@@ -11,7 +10,7 @@ import {
   ZoomableGroup
 } from 'react-simple-maps';
 
-import centroids from '../../assets/centroids.json';
+import centroids from '../assets/centroids.json';
 
 export default function CountryHoverMap(props) {
   const [geography, setGeography] = useState();

@@ -8,9 +8,9 @@ import { Nav, NavItem, NavLink, Row } from 'reactstrap';
 import axios from 'axios';
 import socketIOClient from 'socket.io-client';
 
-import { API_ROOT } from '../../api/api-config';
+import { API_ROOT } from '../api/api-config';
 
-import { ErrorBoundary } from '../common/errorboundary';
+import { ErrorBoundary } from './errorboundary';
 
 import './user.css';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FlagIcon from '../common/flagicon';
+import FlagIcon from './flagicon';
 
 import './countrystats.css';
 

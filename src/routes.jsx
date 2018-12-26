@@ -3,8 +3,8 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Logout from './components/logout';
-import { User } from './components/pages/user';
-import Landing from './components/pages/landing';
+import { User } from './components/user';
+import Landing from './components/landing';
 
 export const Routes = ({ isAuthenticated, username, logoutUser }) => (
   <Switch>

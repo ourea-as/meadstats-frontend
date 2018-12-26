@@ -5,12 +5,12 @@ import _ from 'lodash';
 import 'react-flag-icon-css';
 
 import axios from 'axios';
-import { API_ROOT } from '../../api/api-config';
+import { API_ROOT } from '../api/api-config';
 
-import { DayOfWeekChart } from '../charts/dayofweek';
-import { TimeOfDayChart } from '../charts/timeofday';
-import { MonthChart } from '../charts/month';
-import { YearChart } from '../charts/year';
+import { DayOfWeekChart } from './dayofweek';
+import { TimeOfDayChart } from './timeofday';
+import { MonthChart } from './month';
+import { YearChart } from './year';
 
 export default function Patterns(props) {
   const [weekdayData, setWeekdayData] = useState({ weekdays: [] });
@@ -49,7 +49,7 @@ export default function Patterns(props) {
           .get(`${API_ROOT}/v1/users/${props.username}/year`)
           .then(({ data }) => {
             if (data.status === 'success') {
-              data.data["labels"] = getLabels(data.data.years, "year");
+              data.data['labels'] = getLabels(data.data.years, 'year');
               setYearData(data.data);
             }
           });
