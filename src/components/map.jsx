@@ -1,32 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import 'react-flag-icon-css';
 import { Col } from 'reactstrap';
 
-import axios from 'axios';
-import { API_ROOT } from '../api/api-config';
-
 import { HoverMap } from './hovermap';
 import CountryTable from './countrytable';
 import { ErrorBoundary } from './errorboundary';
+import { Loading } from './loading';
 
-export default function Map(props) {
-  const [countries, setCountries] = useState([]);
+import { fetchCountries } from '../actions/map';
 
+function Map({ countries, dispatch, username }) {
   useEffect(
     () => {
-      if (props.username !== '') {
-        axios
-          .get(`${API_ROOT}/v1/users/${props.username}/countries`)
-          .then(({ data }) => {
-            if (data.status === 'success') {
-              setCountries(data.data.countries);
-            }
-          });
+      if (username !== '') {
+        dispatch(fetchCountries(username));
       }
     },
-    [props.username]
+    [username]
   );
+
+  if (!countries.length) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -43,3 +40,11 @@ export default function Map(props) {
     </>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    countries: state.countries
+  };
+};
+
+export default connect(mapStateToProps)(Map);
