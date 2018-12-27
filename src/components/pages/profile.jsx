@@ -81,10 +81,7 @@ const UpdateProgress = ({ count, total }) => (
 
 const UpdateButton = ({ updating, updateUser }) => (
   <div className="update-button">
-    <Button
-      className="btn-outline-light"
-      onClick={updating ? null : updateUser}
-    >
+    <Button outline color="primary" onClick={updating ? null : updateUser}>
       {updating ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Refresh'}
     </Button>
   </div>

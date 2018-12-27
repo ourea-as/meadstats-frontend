@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Navbar, NavItem, NavLink, NavbarBrand } from 'reactstrap';
+import { Button, Navbar, NavItem, NavLink, NavbarBrand } from 'reactstrap';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
@@ -59,13 +59,15 @@ class Topbar extends React.Component {
               onChange={evt => this.updateSearchName(evt)}
             />
           </div>
-          <button
-            className="btn btn-outline-light my-2 my-sm-0 user-search-button"
+
+          <Button
+            outline
+            color="secondary"
             type="submit"
             onClick={this.loadUser}
           >
             Load
-          </button>
+          </Button>
         </form>
 
         <ul className="navbar-nav px-3">

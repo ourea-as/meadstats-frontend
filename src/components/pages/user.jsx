@@ -6,7 +6,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Nav, NavItem, NavLink, Row } from 'reactstrap';
 
 import axios from 'axios';
-import loadable from 'react-loadable';
 import socketIOClient from 'socket.io-client';
 
 import { API_ROOT } from '../../api/api-config';
@@ -16,33 +15,37 @@ import { ErrorBoundary } from '../common/errorboundary';
 import './user.css';
 
 import { Profile } from './profile';
+import { Loading } from './loading';
 
-const LoadingComponent = () => <h3>Please wait...</h3>;
+const PatternsSuspense = React.lazy(() =>
+  import(/* webpackChunkName: "patterns" */ './patterns')
+);
 
-const Patterns = loadable({
-  loader: () => import('./patterns'),
-  loading: LoadingComponent,
-  render(loaded, props) {
-    const Component = loaded.default;
-    return <Component {...props} />;
-  }
-});
-const Map = loadable({
-  loader: () => import('./map'),
-  loading: LoadingComponent,
-  render(loaded, props) {
-    const Component = loaded.default;
-    return <Component {...props} />;
-  }
-});
-const CountryMap = loadable({
-  loader: () => import('./countrymap'),
-  loading: LoadingComponent,
-  render(loaded, props) {
-    const Component = loaded.default;
-    return <Component {...props} />;
-  }
-});
+const Patterns = props => (
+  <React.Suspense fallback={<Loading />}>
+    <PatternsSuspense {...props} />
+  </React.Suspense>
+);
+
+const MapSuspense = React.lazy(() =>
+  import(/* webpackChunkName: "map" */ './map')
+);
+
+const Map = props => (
+  <React.Suspense fallback={<Loading />}>
+    <MapSuspense {...props} />
+  </React.Suspense>
+);
+
+const CountryMapSuspense = React.lazy(() =>
+  import(/* webpackChunkName: "countrymap" */ './countrymap')
+);
+
+const CountryMap = props => (
+  <React.Suspense fallback={<Loading />}>
+    <CountryMapSuspense {...props} />
+  </React.Suspense>
+);
 
 export class User extends React.Component {
   constructor(props) {
@@ -210,10 +213,6 @@ export class User extends React.Component {
 User.propTypes = {
   username: PropTypes.string
 };
-
-const Loading = () => (
-  <h3 className="text-center text-lg-center">Loading...</h3>
-);
 
 const UserNavigation = ({ user }) => (
   <Nav pills horizontal="center" className="user-tabs">
