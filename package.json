@@ -2,7 +2,6 @@
   "name": "meadstats-frontend",
   "version": "1.0.0",
   "description": "Frontend for meadstats.com",
-  "homepage": "https://www.meadstats.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/boren/meadstats-frontend.git"
