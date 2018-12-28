@@ -48,6 +48,12 @@ const columns = [
     formatter: abvFormatter
   },
   {
+    dataField: 'userRating',
+    text: 'Rating',
+    sort: true,
+    formatter: ratingFormatter
+  },
+  {
     dataField: 'rating',
     text: 'Global Rating',
     sort: true,
