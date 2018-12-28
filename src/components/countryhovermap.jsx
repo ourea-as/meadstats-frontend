@@ -30,7 +30,14 @@ export default function CountryHoverMap(props) {
             setGeography(data);
           })
           .catch(error => {
-            setError(true);
+            console.error(error);
+            if (error.response) {
+              if (error.response.status === 404) {
+                setError('Map for country not added');
+              }
+            } else {
+              setError('Something went wrong');
+            }
           });
       }
     },
@@ -39,7 +46,7 @@ export default function CountryHoverMap(props) {
 
   if (!geography) {
     if (error) {
-      return <Error />;
+      return <Error message={error} />;
     } else {
       return <Loading />;
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Error = () => (
+export const Error = ({ message }) => (
   <div
     className="mx-auto mt-4 mb-4"
     style={{
@@ -10,6 +10,6 @@ export const Error = () => (
       fontSize: '1.5em'
     }}
   >
-    <span>Something went wrong</span>
+    <span>{message ? message : 'Something went wrong'}</span>
   </div>
 );
