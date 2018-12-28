@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Error } from './error';
+
 export class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ export class ErrorBoundary extends React.Component {
     const { children } = this.props;
 
     if (hasError) {
-      return <h1>Something went wrong.</h1>;
+      return <Error />;
     }
     return children;
   }

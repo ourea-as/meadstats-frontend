@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { scaleLinear } from 'd3-scale';
 import {
   ComposableMap,
@@ -6,10 +7,19 @@ import {
   Geography,
   ZoomableGroup
 } from 'react-simple-maps';
-import PropTypes from 'prop-types';
 import Data from '../assets/maps/world.json';
 
-export class HoverMap extends React.PureComponent {
+class HoverMap extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleMapClick = this.handleMapClick.bind(this);
+  }
+
+  handleMapClick(geography, evt) {
+    this.props.history.push('map/' + geography.properties.iso_a2);
+  }
+
   render() {
     const popScale = scaleLinear()
       .domain([0, 10, 200])
@@ -44,6 +54,7 @@ export class HoverMap extends React.PureComponent {
                   key={i}
                   geography={geography}
                   projection={projection}
+                  onClick={this.handleMapClick}
                   style={{
                     default: {
                       fill: countriesMap[
@@ -82,6 +93,4 @@ export class HoverMap extends React.PureComponent {
   }
 }
 
-HoverMap.propTypes = {
-  countries: PropTypes.array
-};
+export default withRouter(HoverMap);

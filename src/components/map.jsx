@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import 'react-flag-icon-css';
 import { Col } from 'reactstrap';
 
-import { HoverMap } from './hovermap';
+import HoverMap from './hovermap';
 import CountryTable from './countrytable';
 import { ErrorBoundary } from './errorboundary';
 import { Loading } from './loading';

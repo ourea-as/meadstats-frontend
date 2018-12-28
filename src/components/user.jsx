@@ -226,7 +226,7 @@ UserNavigation.propTypes = {
 };
 
 const UserNavigationTab = ({ text, route, user }) => (
-  <LinkContainer activeClassName="active" exact to={`/user/${user}/${route}`}>
+  <LinkContainer activeClassName="active" to={`/user/${user}/${route}`}>
     <NavItem>
       <NavLink>{text}</NavLink>
     </NavItem>
