@@ -59,11 +59,31 @@
   font-size: 13px;
 }
 
-.active .nav-link {
+.user-nav-tab {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.user-nav-tab:hover {
+  text-decoration: none;
+}
+
+.user-nav-link {
+  color: #000 !important;
+}
+
+.user-nav-link:hover {
+  color: #000 !important;
+  background-color: #E7EDF3 !important;
+}
+
+
+.active .user-nav-link {
   color: #fff !important;
   background-color: #343a40 !important;
 }
 
-.active .nav-link:hover {
+.active .user-nav-link:hover {
   color: #fff !important;
+  background-color: #4E545A !important;
 }

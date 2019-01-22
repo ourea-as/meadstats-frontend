@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, NavLink } from 'react-router-dom';
 
-import { LinkContainer } from 'react-router-bootstrap';
-import { Nav, NavItem, NavLink, Row } from 'reactstrap';
+import { Nav, NavItem, Row } from 'reactstrap';
 
 import axios from 'axios';
 import socketIOClient from 'socket.io-client';
@@ -226,11 +225,15 @@ UserNavigation.propTypes = {
 };
 
 const UserNavigationTab = ({ text, route, user }) => (
-  <LinkContainer activeClassName="active" to={`/user/${user}/${route}`}>
+  <NavLink
+    className="user-nav-tab"
+    activeClassName="active"
+    to={`/user/${user}/${route}`}
+  >
     <NavItem>
-      <NavLink>{text}</NavLink>
+      <span className="nav-link user-nav-link">{text}</span>
     </NavItem>
-  </LinkContainer>
+  </NavLink>
 );
 
 UserNavigationTab.propTypes = {
