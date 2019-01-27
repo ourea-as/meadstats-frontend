@@ -9,7 +9,7 @@ export class YearChart extends React.PureComponent {
     var x = 0;
     var len = ratingData.length;
     while (x < len) {
-      ratingData[x] = ratingData[x].toFixed(2);
+      ratingData[x] = parseFloat(ratingData[x]).toFixed(2);
       x++;
     }
 
