@@ -2,16 +2,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import 'react-flag-icon-css';
-import { Col } from 'reactstrap';
 
 import HoverMap from './hovermap';
-import CountryTable from './countrytable';
-import { ErrorBoundary } from './errorboundary';
 import { Loading } from './loading';
 
 import { fetchCountries } from '../actions/map';
 
-function Map({ countries, dispatch, username }) {
+function MockMap({ countries, dispatch, username }) {
   useEffect(
     () => {
       if (username !== '') {
@@ -27,16 +24,7 @@ function Map({ countries, dispatch, username }) {
 
   return (
     <>
-      <Col xs="12">
-        <ErrorBoundary>
-          <HoverMap countries={countries} interactive={true} />
-        </ErrorBoundary>
-      </Col>
-      <Col xs="12">
-        <ErrorBoundary>
-          <CountryTable countries={countries} />
-        </ErrorBoundary>
-      </Col>
+      <HoverMap countries={countries} interactive={false} />
     </>
   );
 }
@@ -47,4 +35,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps)(MockMap);

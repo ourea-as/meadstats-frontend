@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './assets/favicon.ico';
 
 import { Container, Row } from 'reactstrap';
-import Topbar from './components/topbar';
 import { Footer } from './components/footer';
 import { ErrorBoundary } from './components/errorboundary';
 import { Routes } from './routes';
@@ -57,7 +56,6 @@ class App extends React.Component {
 
     return (
       <main>
-        <Topbar isAuthenticated={isAuthenticated} username={username} />
         <Container>
           <Row>
             <ErrorBoundary>

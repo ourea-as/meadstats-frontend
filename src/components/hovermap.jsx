@@ -17,7 +17,9 @@ class HoverMap extends React.Component {
   }
 
   handleMapClick(geography, evt) {
-    this.props.history.push('map/' + geography.properties.iso_a2);
+    if (this.props.interactive) {
+      this.props.history.push('map/' + geography.properties.iso_a2);
+    }
   }
 
   render() {

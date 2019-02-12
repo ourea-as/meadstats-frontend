@@ -14,13 +14,14 @@ export const Routes = ({ isAuthenticated, username, logoutUser }) => (
       render={() => <Logout logoutUser={logoutUser} />}
     />
 
-    {isAuthenticated ? (
-      <Route
-        exact
-        path="/"
-        render={() => <Redirect to={`/user/${username}`} />}
-      />
-    ) : null}
+    {isAuthenticated ? null : <Route exact path="/" component={Landing} />}
+
+    <Route
+      exact
+      path="/"
+      render={() => <Redirect to={`/user/${username}`} />}
+    />
+
     <Route
       exact
       path="/user/:name"
@@ -32,7 +33,6 @@ export const Routes = ({ isAuthenticated, username, logoutUser }) => (
         <User username={match.params.name} isAuthenticated={isAuthenticated} />
       )}
     />
-    <Route exact path="/" component={Landing} />
   </Switch>
 );
 
