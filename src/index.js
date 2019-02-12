@@ -19,14 +19,15 @@ ReactGA.initialize('UA-123335075-1', {
   }
 });
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <CookiesProvider>
         <App />
       </CookiesProvider>
     </ConnectedRouter>
-  </Provider>
+  </Provider>,
+  document.getElementById('root')
 );
 
 serviceWorker.unregister();
