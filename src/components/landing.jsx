@@ -45,7 +45,7 @@ export default function Landing(props) {
                 scales: {
                   yAxes: [
                     {
-                      ticks: { display: false },
+                      ticks: { display: false, beginAtZero: true },
                       gridLines: {
                         display: false,
                         drawBorder: false
