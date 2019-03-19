@@ -1,0 +1,39 @@
+version: 2
+jobs:
+
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/meadstats-frontend:$CIRCLE_SHA1 .
+
+  push:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Push image
+          command: |
+            docker build -t $DOCKERHUB_USERNAME/meadstats-frontend:$CIRCLE_SHA1 .
+            echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
+            docker push $DOCKERHUB_USERNAME/meadstats-frontend:$CIRCLE_SHA1
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          context: DOCKERHUB
+          filters:
+            branches:
+              only: master
+      - push:
+          context: DOCKERHUB
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
