@@ -3,13 +3,25 @@ kind: Service
 metadata:
   name: meadstats
 spec:
-  type: LoadBalancer
   selector:
     app: meadstats
   ports:
   - protocol: TCP
     port: 80
     targetPort: 5000
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: meadstats-ingress
+spec:
+  rules:
+    - host: www.meadstats.com
+      http:
+        paths:
+          - backend:
+              serviceName: meadstats
+              servicePort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
