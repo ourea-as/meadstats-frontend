@@ -55,22 +55,20 @@ class App extends React.Component {
     const { isAuthenticated, username } = this.state;
 
     return (
-      <main>
-        <Container>
-          <Row>
-            <ErrorBoundary>
-              <main role="main" className="col-md-12 col-lg-12 px-4">
-                <Routes
-                  isAuthenticated={isAuthenticated}
-                  username={username}
-                  logoutUser={this.logoutUser}
-                />
-              </main>
-            </ErrorBoundary>
-          </Row>
-          <Footer />
-        </Container>
-      </main>
+      <Container>
+        <Row>
+          <ErrorBoundary>
+            <main role="main" className="col-md-12 col-lg-12 px-4">
+              <Routes
+                isAuthenticated={isAuthenticated}
+                username={username}
+                logoutUser={this.logoutUser}
+              />
+            </main>
+          </ErrorBoundary>
+        </Row>
+        <Footer />
+      </Container>
     );
   }
 }
