@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: meadstats
+spec:
+  type: LoadBalancer
+  selector:
+    app: meadstats
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meadstats
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: meadstats
+    spec:
+      containers:
+      - name: meadstats
+        image: boren/meadstats-frontend
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          periodSeconds: 30
+          timeoutSeconds: 1
+          initialDelaySeconds: 50
+        ports:
+        - containerPort: 8080
