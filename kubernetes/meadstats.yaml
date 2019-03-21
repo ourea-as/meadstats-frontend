@@ -26,9 +26,10 @@ spec:
     - host: www.meadstats.com
       http:
         paths:
-          - backend:
-              serviceName: meadstats
-              servicePort: 80
+        - path: /
+          backend:
+            serviceName: meadstats
+            servicePort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
