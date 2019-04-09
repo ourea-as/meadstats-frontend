@@ -96,3 +96,4 @@ build
 venv
 __pycache__/
 yarn-error.log
+.vscode
