@@ -14,7 +14,7 @@ RUN yarn build
 
 
 # Stage 2: Production
-FROM nginx:1.15-alpine
+FROM nginx:1.16-alpine
 
 EXPOSE 5000
 CMD ["nginx", "-g", "daemon off;"]
