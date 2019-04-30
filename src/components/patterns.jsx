@@ -11,12 +11,14 @@ import { DayOfWeekChart } from './dayofweek';
 import { TimeOfDayChart } from './timeofday';
 import { MonthChart } from './month';
 import { YearChart } from './year';
+import { GraphChart } from './graph';
 
 export default function Patterns(props) {
   const [weekdayData, setWeekdayData] = useState({ weekdays: [] });
   const [hourData, setHourData] = useState({ hours: [] });
   const [monthData, setMonthData] = useState({ months: [] });
   const [yearData, setYearData] = useState({ years: [], labels: [] });
+  const [graphData, setGraphData] = useState({ dates: [] });
 
   useEffect(
     () => {
@@ -51,6 +53,14 @@ export default function Patterns(props) {
             if (data.status === 'success') {
               data.data['labels'] = getLabels(data.data.years, 'year');
               setYearData(data.data);
+            }
+          });
+
+        axios
+          .get(`${API_ROOT}/v1/users/${props.username}/graph`)
+          .then(({ data }) => {
+            if (data.status === 'success') {
+              setGraphData(data.data);
             }
           });
       }
@@ -118,6 +128,9 @@ export default function Patterns(props) {
 
   return (
     <>
+      <GraphChart
+        data={graphData.dates}
+      />
       <DayOfWeekChart
         data={weekDataToArray(weekdayData.weekdays)}
         ratingData={weekRatingToArray(weekdayData.weekdays)}
