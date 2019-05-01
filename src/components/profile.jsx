@@ -7,15 +7,10 @@ import React from 'react';
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 function getDaysAgo(date) {
-  const utc1 = Date.parse(date);
-  const utc2 = Date.now();
+  const updatedate = Date.parse(date);
+  const datenow = Date.now();
 
-  console.log(utc1);
-  console.log(utc2);
-
-  console.log(Math.floor((utc2 - utc1) / _MS_PER_DAY));
-
-  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+  return Math.floor((datenow - updatedate) / _MS_PER_DAY);
 }
 
 export const Profile = ({
