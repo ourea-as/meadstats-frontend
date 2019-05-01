@@ -15,7 +15,8 @@ export class GraphChart extends React.PureComponent {
           backgroundColor: '#343a40',
           borderColor: '#01070D',
           borderWidth: 2,
-          data: formattedData
+          data: formattedData,
+          steppedLine: true
         }
       ]
     };
