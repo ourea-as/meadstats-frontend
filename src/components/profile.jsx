@@ -4,6 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 
+const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+function getDaysAgo(date) {
+  const utc1 = Date.parse(date);
+  const utc2 = Date.now();
+
+  console.log(utc1);
+  console.log(utc2);
+
+  console.log(Math.floor((utc2 - utc1) / _MS_PER_DAY));
+
+  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+}
+
 export const Profile = ({
   user,
   updating,
@@ -15,7 +29,7 @@ export const Profile = ({
 }) => (
   <div className="row profile bg-dark">
     {exist ? (
-      <Col xs="10" className="profile-data">
+      <Col lg="10" xs="8" className="profile-data">
         <img
           className="profile-pic"
           src={user.avatar}
@@ -27,7 +41,7 @@ export const Profile = ({
         </div>
       </Col>
     ) : (
-      <Col xs="10" className="profile-data">
+      <Col lg="10" xs="8" className="profile-data">
         <img
           className="profile-pic"
           alt="No user"
@@ -49,6 +63,7 @@ export const Profile = ({
       <Update
         count={count}
         total={total}
+        lastUpdateDays={getDaysAgo(user.last_update)}
         updating={updating}
         updateUser={updateUser}
       />
@@ -58,12 +73,12 @@ export const Profile = ({
   </div>
 );
 
-export const Update = ({ count, total, updating, updateUser }) => (
-  <Col xs="2">
+export const Update = ({ count, total, updating, updateUser, lastUpdateDays }) => (
+  <Col lg="2" xs="4">
     {total > 0 ? (
       <UpdateProgress count={count} total={total} />
     ) : (
-      <UpdateButton updating={updating} updateUser={updateUser} />
+      <UpdateButton updating={updating} updateUser={updateUser} lastUpdateDays={lastUpdateDays} />
     )}
   </Col>
 );
@@ -79,10 +94,13 @@ const UpdateProgress = ({ count, total }) => (
   </div>
 );
 
-const UpdateButton = ({ updating, updateUser }) => (
+const UpdateButton = ({ updating, updateUser, lastUpdateDays }) => (
   <div className="update-button">
-    <Button color="secondary" onClick={updating ? null : updateUser}>
-      {updating ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Refresh'}
-    </Button>
+    <div>
+      <Button color="secondary" onClick={updating ? null : updateUser}>
+        {updating ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Refresh'}
+      </Button>
+      { lastUpdateDays > 1 && <span class="update-text">Updated {lastUpdateDays} days ago</span> }
+    </div>
   </div>
 );

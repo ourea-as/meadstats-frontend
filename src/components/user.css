@@ -39,16 +39,25 @@
 }
 
 .update-button {
-  padding: 20px;
+  padding: 10px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  text-align: center;
+  justify-content: center;
   height: 100%;
 }
 
 .update-progress {
   width: 100%;
   background-color: #ff000000;
+}
+
+.update-text {
+  color: #aaa;
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .user-tabs {
