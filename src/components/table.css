@@ -1,16 +1,29 @@
 .react-bootstrap-table table {
-    table-layout: auto !important;
-  }
-  
-  .beertable-image {
-    height: 30px;
-    margin: 5px 10px 5px 5px;
-  }
-  
-  .react-bootstrap-table > table > tbody > tr {
-    cursor: pointer;
-  }
-  
-  .react-bootstrap-table > table > tbody > .expanding-row {
-    cursor: inherit;
-  }
+  table-layout: auto !important;
+}
+
+.beertable-image {
+  height: 30px;
+  margin: 5px 10px 5px 5px;
+}
+
+.react-bootstrap-table > table > tbody > tr {
+  cursor: pointer;
+}
+
+.react-bootstrap-table > table > tbody > .expanding-row {
+  cursor: inherit;
+}
+
+.table-profile-picture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 4px;
+  margin-right: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.table td {
+  vertical-align: middle;
+}

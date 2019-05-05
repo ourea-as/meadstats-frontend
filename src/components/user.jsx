@@ -26,6 +26,17 @@ const Patterns = props => (
   </React.Suspense>
 );
 
+const FriendsSuspense = React.lazy(() =>
+  import(/* webpackChunkName: "friends" */ './friends')
+);
+
+const Friends = props => (
+  <React.Suspense fallback={<Loading />}>
+    <FriendsSuspense {...props} />
+  </React.Suspense>
+);
+
+
 const MapSuspense = React.lazy(() =>
   import(/* webpackChunkName: "map" */ './map')
 );
@@ -199,6 +210,10 @@ export class User extends React.Component {
                     path="/user/:name/patterns"
                     render={() => <Patterns username={user.user_name} />}
                   />
+                  <Route
+                    path="/user/:name/friends"
+                    render={() => <Friends username={user.user_name} />}
+                  />
                 </Switch>
               </ErrorBoundary>
             </Row>
@@ -217,6 +232,7 @@ const UserNavigation = ({ user }) => (
   <Nav pills horizontal="center" className="user-tabs">
     <UserNavigationTab text="Map" route="map" user={user} />
     <UserNavigationTab text="Patterns" route="patterns" user={user} />
+    <UserNavigationTab text="Friends" route="friends" user={user} />
   </Nav>
 );
 

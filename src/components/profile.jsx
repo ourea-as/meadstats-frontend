@@ -95,7 +95,7 @@ const UpdateButton = ({ updating, updateUser, lastUpdateDays }) => (
       <Button color="secondary" onClick={updating ? null : updateUser}>
         {updating ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Refresh'}
       </Button>
-      { lastUpdateDays > 1 && <span class="update-text">Updated {lastUpdateDays} days ago</span> }
+      { lastUpdateDays > 1 && <span className="update-text">Updated {lastUpdateDays} days ago</span> }
     </div>
   </div>
 );
