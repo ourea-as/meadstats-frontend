@@ -24,7 +24,7 @@
     "connected-react-router": "6.4.0",
     "d3-scale": "3.0.0",
     "history": "4.9.0",
-    "jquery": "3.4.0",
+    "jquery": "3.4.1",
     "jwt-decode": "2.2.0",
     "lodash": "4.17.11",
     "popper.js": "1.15.0",
