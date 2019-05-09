@@ -218,7 +218,7 @@ export class User extends React.Component {
               </ErrorBoundary>
             </Row>
           </ErrorBoundary>
-        ) : null}
+        ) : <div class="user-not-exist">This user does not exist in the database. Please refresh.</div>}
       </React.Fragment>
     );
   }

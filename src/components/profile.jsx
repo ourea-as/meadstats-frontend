@@ -45,12 +45,7 @@ export const Profile = ({
           }
         />
         <div>
-          <span className="profile-name">
-            <b>{user.user_name}</b>
-          </span>
-          <span className="profile-extra profile-extra-error text-danger">
-            Does not exist in database. Please refresh.
-          </span>
+          <span className="profile-name">{user.user_name}</span>
         </div>
       </Col>
     )}
