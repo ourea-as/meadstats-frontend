@@ -15,13 +15,13 @@ metadata:
   name: meadstats-ingress
   annotations:  
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-staging
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
   - hosts:
     - meadstats.com
     - www.meadstats.com
-    secretName: letsencrypt-staging
+    secretName: letsencrypt-prod
   rules:
     - host: www.meadstats.com
       http:
