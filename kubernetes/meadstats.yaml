@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
       - name: meadstats
-        image: hovedbore/meadstats-frontend
+        image: hovedbore/meadstats-frontend:e1b6d671897a9b7a7ff1944d53729f595e0d961f
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
