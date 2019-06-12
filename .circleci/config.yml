@@ -9,14 +9,22 @@ jobs:
           name: Build docker image
           command: |
             docker build -t meadstats-frontend .
-            echo ${REGISTRY_PASSWORD} | docker login ${REGISTRY_URL} --username ${REGISTRY_USERNAME} --password-stdin
+            docker save -o image.tar $meadstats-frontend
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
 
   push-staging:
     machine: true
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: Push staging image
           command: |
+            docker load -i /tmp/workspace/image.tar
+            echo ${REGISTRY_PASSWORD} | docker login ${REGISTRY_URL} --username ${REGISTRY_USERNAME} --password-stdin
             docker tag meadstats-frontend ${REGISTRY_URL}/meadstats-frontend:latest
             docker tag meadstats-frontend ${REGISTRY_URL}/meadstats-frontend:${CIRCLE_SHA1}
             docker push ${REGISTRY_URL}/meadstats-frontend:latest
@@ -25,9 +33,13 @@ jobs:
   push-release:
     machine: true
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
           name: Push release image
           command: |
+            docker load -i /tmp/workspace/image.tar
+            echo ${REGISTRY_PASSWORD} | docker login ${REGISTRY_URL} --username ${REGISTRY_USERNAME} --password-stdin
             docker tag meadstats-frontend ${REGISTRY_URL}/meadstats-frontend:${CIRCLE_TAG} 
             docker push ${REGISTRY_URL}/meadstats-frontend:${CIRCLE_TAG} 
 
