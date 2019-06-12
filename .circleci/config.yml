@@ -9,7 +9,7 @@ jobs:
           name: Build docker image
           command: |
             docker build -t meadstats-frontend .
-            docker save -o image.tar $meadstats-frontend
+            docker save -o image.tar meadstats-frontend
       - persist_to_workspace:
           root: .
           paths:
