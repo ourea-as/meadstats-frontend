@@ -47,9 +47,9 @@ workflows:
           filters:
             tags:
               only: /.*/
-          branches:
-            only:
-              - master
+            branches:
+              only:
+                - master
       - push-release:
           context: Bore AI Registry
           requires:
