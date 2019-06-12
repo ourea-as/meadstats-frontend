@@ -21,7 +21,7 @@ spec:
   - hosts:
     - meadstats.com
     - www.meadstats.com
-    secretName: letsencrypt-prod
+    secretName: meadstats-prod-cert
   rules:
     - host: www.meadstats.com
       http:
