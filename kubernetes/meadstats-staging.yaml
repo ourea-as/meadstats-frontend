@@ -20,7 +20,7 @@ spec:
   tls:
   - hosts:
     - staging.meadstats.com
-    secretName: letsencrypt-prod
+    secretName: letsencrypt-staging
   rules:
     - host: staging.meadstats.com
       http:
