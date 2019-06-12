@@ -6,34 +6,51 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build image
+          name: Build docker image
           command: |
-            docker build -t $DOCKERHUB_USERNAME/meadstats-frontend:$CIRCLE_SHA1 .
+            docker build -t meadstats-frontend .
+            echo ${REGISTRY_PASSWORD} | docker login ${REGISTRY_URL} --username ${REGISTRY_USERNAME} --password-stdin
 
-  push:
+  push-staging:
     machine: true
     steps:
-      - checkout
       - run:
-          name: Push image
+          name: Push staging image
           command: |
-            docker build -t $DOCKERHUB_USERNAME/meadstats-frontend:$CIRCLE_SHA1 .
-            echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-            docker push $DOCKERHUB_USERNAME/meadstats-frontend:$CIRCLE_SHA1
+            docker tag meadstats-frontend ${REGISTRY_URL}/meadstats-frontend:latest
+            docker tag meadstats-frontend ${REGISTRY_URL}/meadstats-frontend:${CIRCLE_SHA1}
+            docker push ${REGISTRY_URL}/meadstats-frontend:latest
+            docker push ${REGISTRY_URL}/meadstats-frontend:${CIRCLE_SHA1}
+
+  push-release:
+    machine: true
+    steps:
+      - run:
+          name: Push release image
+          command: |
+            docker tag meadstats-frontend ${REGISTRY_URL}/meadstats-frontend:${CIRCLE_TAG} 
+            docker push ${REGISTRY_URL}/meadstats-frontend:${CIRCLE_TAG} 
 
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build:
-          context: DOCKERHUB
+          context: Bore AI Registry
           filters:
-            branches:
-              only: master
-      - push:
-          context: DOCKERHUB
+            tags:
+              only: /.*/
+      - push-staging:
           requires:
-            - build
+             - build
+          filters:
+            tags:
+              only: /.*/
+      - push-release:
+          requires:
+             - build
           filters:
             branches:
-              only: master
+              ignore: /.*/
+            tags:
+              only: /^v.*/
