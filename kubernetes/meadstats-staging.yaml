@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
       - name: meadstats-staging
-        image: hovedbore/meadstats-frontend:latest
+        image: registry.bore.ai/meadstats-frontend:latest
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -58,3 +58,5 @@ spec:
           initialDelaySeconds: 10
         ports:
         - containerPort: 5000
+      imagePullSecrets:
+      - name: regcred
