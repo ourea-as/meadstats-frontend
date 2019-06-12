@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: meadstats
+  name: meadstats-staging
 spec:
   selector:
-    app: meadstats
+    app: meadstats-staging
   ports:
   - port: 80
     targetPort: 5000
@@ -12,43 +12,42 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: meadstats-ingress
+  name: meadstats-staging-ingress
   annotations:  
     kubernetes.io/ingress.class: nginx
     certmanager.k8s.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
   - hosts:
-    - meadstats.com
-    - www.meadstats.com
+    - staging.meadstats.com
     secretName: letsencrypt-prod
   rules:
-    - host: www.meadstats.com
+    - host: staging.meadstats.com
       http:
         paths:
         - backend:
-            serviceName: meadstats
+            serviceName: meadstats-staging
             servicePort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: meadstats-deployment
+  name: meadstats-staging-deployment
   labels:
-    app: meadstats
+    app: meadstats-staging
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: meadstats
+      app: meadstats-staging
   template:
     metadata:
       labels:
-        app: meadstats
+        app: meadstats-staging
     spec:
       containers:
-      - name: meadstats
-        image: hovedbore/meadstats-frontend:v1.1.0
+      - name: meadstats-staging
+        image: hovedbore/meadstats-frontend:latest
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
