@@ -41,14 +41,19 @@ workflows:
             tags:
               only: /.*/
       - push-staging:
+          context: Bore AI Registry
           requires:
-             - build
+            - build
           filters:
             tags:
               only: /.*/
+          branches:
+            only:
+              - master
       - push-release:
+          context: Bore AI Registry
           requires:
-             - build
+            - build
           filters:
             branches:
               ignore: /.*/
