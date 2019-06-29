@@ -76,5 +76,6 @@ export const BeerTable = ({ beers }) => (
     data={beers}
     columns={columns}
     defaultSorted={defaultSorted}
+    wrapperClasses="table-responsive"
   />
 );

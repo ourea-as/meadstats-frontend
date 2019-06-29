@@ -79,6 +79,7 @@ class CountryTable extends React.Component {
         columns={columns}
         defaultSorted={defaultSorted}
         rowEvents={rowEvents}
+        wrapperClasses="table-responsive"
       />
     );
   }
