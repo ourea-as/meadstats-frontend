@@ -9,6 +9,7 @@ import {
   Marker,
   ZoomableGroup
 } from 'react-simple-maps';
+import ReactTooltip from 'react-tooltip';
 import { Loading } from './loading';
 import { Error } from './error';
 
@@ -41,8 +42,16 @@ export default function CountryHoverMap(props) {
           });
       }
     },
-    [data.code]
+    [data.code, props.data]
   );
+
+  useEffect(
+    () => {
+      setTimeout(() => {
+        ReactTooltip.rebuild()
+      }, 100);
+    }
+  )
 
   if (!geography) {
     if (error) {
@@ -65,89 +74,82 @@ export default function CountryHoverMap(props) {
   }
 
   return (
-    <ComposableMap
-      projectionConfig={{
-        scale: centroids[data.code]['scale'],
-        xOffset: 0,
-        yOffset: 0,
-        rotation: [0, 0, 0],
-        precision: 0.1
-      }}
-      width={980}
-      height={551}
-      style={{
-        width: '100%',
-        height: 'auto'
-      }}
-    >
-      <ZoomableGroup center={centroids[data.code]['centroid']} disablePanning>
-        <Geographies geography={geography} disableOptimization>
-          {(geographies, projection) =>
-            geographies.map((geography, i) => (
-              <Geography
+    <>
+      <ComposableMap
+        projectionConfig={{
+          scale: centroids[data.code]['scale'],
+          xOffset: 0,
+          yOffset: 0,
+          rotation: [0, 0, 0],
+          precision: 0.1
+        }}
+        width={980}
+        height={551}
+        style={{
+          width: '100%',
+          height: 'auto'
+        }}
+      >
+        <ZoomableGroup center={centroids[data.code]['centroid']} disablePanning>
+          <Geographies geography={geography} disableOptimization>
+            {(geographies, projection) =>
+              geographies.map((geography, i) => (
+                <Geography
+                  key={i}
+                  geography={geography}
+                  projection={projection}
+                  style={{
+                    default: {
+                      fill: '#ffffff',
+                      stroke: '#607D8B',
+                      strokeWidth: 0.75,
+                      outline: 'none'
+                    },
+                    hover: {
+                      fill: '#ffffff',
+                      stroke: '#607D8B',
+                      strokeWidth: 0.75,
+                      outline: 'none'
+                    },
+                    pressed: {
+                      fill: '#ffffff',
+                      stroke: '#607D8B',
+                      strokeWidth: 0.75,
+                      outline: 'none'
+                    }
+                  }}
+                />
+              ))
+            }
+          </Geographies>
+          <Markers>
+            {markers.map((marker, i) => (
+              <Marker
                 key={i}
-                geography={geography}
-                projection={projection}
+                marker={marker}
                 style={{
-                  default: {
-                    fill: '#ffffff',
-                    stroke: '#607D8B',
-                    strokeWidth: 0.75,
-                    outline: 'none'
-                  },
-                  hover: {
-                    fill: '#ffffff',
-                    stroke: '#607D8B',
-                    strokeWidth: 0.75,
-                    outline: 'none'
-                  },
-                  pressed: {
-                    fill: '#ffffff',
-                    stroke: '#607D8B',
-                    strokeWidth: 0.75,
-                    outline: 'none'
-                  }
-                }}
-              />
-            ))
-          }
-        </Geographies>
-        <Markers>
-          {markers.map((marker, i) => (
-            <Marker
-              key={i}
-              marker={marker}
-              style={{
-                default: { fill: '#FF5722' },
-                hover: { fill: '#FFFFFF' },
-                pressed: { fill: '#FF5722' }
-              }}
-            >
-              <circle
-                cx={0}
-                cy={0}
-                r={2}
-                style={{
-                  stroke: '#FF5722',
-                  strokeWidth: 1,
-                  opacity: 0.9
-                }}
-              />
-              <text
-                textAnchor="middle"
-                style={{
-                  fontFamily: 'Roboto, sans-serif',
-                  fontWeight: 600,
-                  fill: '#000000',
-                  fontSize: '0.6em'
+                  default: { fill: '#FF5722' },
+                  hover: { fill: '#FFFFFF' },
+                  pressed: { fill: '#FF5722' }
                 }}
               >
-                {marker.name}
-              </text>
-            </Marker>
-          ))}
-        </Markers>
-      </ZoomableGroup>
-    </ComposableMap>
+                <circle
+                  cx={0}
+                  cy={0}
+                  r={3}
+                  data-tip={marker.name}
+                  style={{
+                    stroke: '#FF5722',
+                    strokeWidth: 1,
+                    opacity: 0.9
+                  }}
+                />
+              </Marker>
+            ))}
+          </Markers>
+        </ZoomableGroup>
+      </ComposableMap>
+      <ReactTooltip />
+    </>
   );
 }
