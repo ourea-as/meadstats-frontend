@@ -15,6 +15,8 @@ import { Error } from './error';
 
 import centroids from '../assets/centroids.json';
 
+import './tooltip.css';
+
 export default function CountryHoverMap(props) {
   const [geography, setGeography] = useState();
   const [error, setError] = useState(false);
@@ -69,6 +71,8 @@ export default function CountryHoverMap(props) {
     markers.push({
       markerOffset: 0,
       name: brewery.name,
+      count: brewery.count,
+      label: brewery.label,
       coordinates: [brewery.location.lon, brewery.location.lat]
     });
   }
@@ -128,18 +132,26 @@ export default function CountryHoverMap(props) {
                 key={i}
                 marker={marker}
                 style={{
-                  default: { fill: '#FF5722' },
-                  hover: { fill: '#FFFFFF' },
-                  pressed: { fill: '#FF5722' }
+                  default: { fill: '#aaa' },
+                  hover: { fill: '#212529' },
+                  pressed: { fill: '#aaa' }
                 }}
               >
                 <circle
                   cx={0}
                   cy={0}
-                  r={3}
-                  data-tip={marker.name}
+                  r={Math.max(Math.min(5, marker.count), 3)}
+                  data-tip={`
+                  <div class="tooltip-container">
+                    <img class="tooltip-image" src="${marker.label}"/>
+                    <div class="tooltip-text">
+                      <p>${marker.name}</p>
+                      <p>${marker.count} unique</p>
+                    </div>
+                  </div>`
+                  }
                   style={{
-                    stroke: '#FF5722',
+                    stroke: '#212529',
                     strokeWidth: 1,
                     opacity: 0.9
                   }}
@@ -149,7 +161,7 @@ export default function CountryHoverMap(props) {
           </Markers>
         </ZoomableGroup>
       </ComposableMap>
-      <ReactTooltip />
+      <ReactTooltip html={true}/>
     </>
   );
 }
