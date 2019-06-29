@@ -7,7 +7,11 @@ import {
   Geography,
   ZoomableGroup
 } from 'react-simple-maps';
+import ReactTooltip from 'react-tooltip';
+
 import Data from '../assets/maps/world.json';
+
+import './tooltip.css';
 
 class HoverMap extends React.Component {
   constructor(props) {
@@ -36,61 +40,72 @@ class HoverMap extends React.Component {
     });
 
     return (
-      <ComposableMap
-        projectionConfig={{
-          scale: 205,
-          rotation: [-11, 0, 0]
-        }}
-        width={980}
-        height={551}
-        style={{
-          width: '100%',
-          height: 'auto'
-        }}
-      >
-        <ZoomableGroup center={[0, 20]} disablePanning>
-          <Geographies geography={Data} disableOptimization>
-            {(geographies, projection) =>
-              geographies.map((geography, i) => (
-                <Geography
-                  key={i}
-                  geography={geography}
-                  projection={projection}
-                  onClick={this.handleMapClick}
-                  style={{
-                    default: {
-                      fill: countriesMap[
-                        geography.properties.iso_a2.toUpperCase()
-                      ]
-                        ? popScale(
-                            countriesMap[
-                              geography.properties.iso_a2.toUpperCase()
-                            ]
-                          )
-                        : '#ffffff',
-                      stroke: '#607D8B',
-                      strokeWidth: 0.75,
-                      outline: 'none'
-                    },
-                    hover: {
-                      fill: '#263238',
-                      stroke: '#607D8B',
-                      strokeWidth: 0.75,
-                      outline: 'none'
-                    },
-                    pressed: {
-                      fill: '#263238',
-                      stroke: '#607D8B',
-                      strokeWidth: 0.75,
-                      outline: 'none'
+      <>
+        <ComposableMap
+          projectionConfig={{
+            scale: 205,
+            rotation: [-11, 0, 0]
+          }}
+          width={980}
+          height={551}
+          style={{
+            width: '100%',
+            height: 'auto'
+          }}
+        >
+          <ZoomableGroup center={[0, 20]} disablePanning>
+            <Geographies geography={Data} disableOptimization>
+              {(geographies, projection) =>
+                geographies.map((geography, i) => (
+                  <Geography
+                    key={i}
+                    data-tip={`
+                    <div class="tooltip-container">
+                      <div class="tooltip-text">
+                        <p>${geography.properties.name}</p>
+                        <p>${countriesMap[geography.properties.iso_a2.toUpperCase()] ? countriesMap[geography.properties.iso_a2.toUpperCase()] : "0"} unique</p>
+                      </div>
+                    </div>`
                     }
-                  }}
-                />
-              ))
-            }
-          </Geographies>
-        </ZoomableGroup>
-      </ComposableMap>
+                    geography={geography}
+                    projection={projection}
+                    onClick={this.handleMapClick}
+                    style={{
+                      default: {
+                        fill: countriesMap[
+                          geography.properties.iso_a2.toUpperCase()
+                        ]
+                          ? popScale(
+                              countriesMap[
+                                geography.properties.iso_a2.toUpperCase()
+                              ]
+                            )
+                          : '#ffffff',
+                        stroke: '#607D8B',
+                        strokeWidth: 0.75,
+                        outline: 'none'
+                      },
+                      hover: {
+                        fill: '#263238',
+                        stroke: '#607D8B',
+                        strokeWidth: 0.75,
+                        outline: 'none'
+                      },
+                      pressed: {
+                        fill: '#263238',
+                        stroke: '#607D8B',
+                        strokeWidth: 0.75,
+                        outline: 'none'
+                      }
+                    }}
+                  />
+                ))
+              }
+            </Geographies>
+          </ZoomableGroup>
+        </ComposableMap>
+        <ReactTooltip html={true}/>
+      </>
     );
   }
 }

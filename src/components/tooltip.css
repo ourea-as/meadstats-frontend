@@ -1,0 +1,14 @@
+.tooltip-container {
+    display: flex;
+    align-items: center;
+}
+
+.tooltip-image {
+    margin: 0 10px 0 0;
+    width: 50px;
+}
+
+.tooltip-text > p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
