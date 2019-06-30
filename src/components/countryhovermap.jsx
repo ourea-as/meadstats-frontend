@@ -100,6 +100,13 @@ export default function CountryHoverMap(props) {
               geographies.map((geography, i) => (
                 <Geography
                   key={i}
+                  data-tip={`
+                  <div class="tooltip-container">
+                    <div class="tooltip-text">
+                      <p>${geography.properties.NAME_1}</p>
+                    </div>
+                  </div>`
+                  }
                   geography={geography}
                   projection={projection}
                   style={{
@@ -110,7 +117,7 @@ export default function CountryHoverMap(props) {
                       outline: 'none'
                     },
                     hover: {
-                      fill: '#ffffff',
+                      fill: '#263238',
                       stroke: '#607D8B',
                       strokeWidth: 0.75,
                       outline: 'none'
