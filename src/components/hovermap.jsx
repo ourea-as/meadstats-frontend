@@ -8,30 +8,29 @@ import {
   ZoomableGroup
 } from "react-simple-maps";
 import ReactTooltip from "react-tooltip";
-import { Motion, spring } from "react-motion";
 
 import Data from "../assets/maps/world.json";
 
 import "./tooltip.css";
 
 const regionCenter = {
-  "All": [0, 20],
-  "Africa": [17, 3],
-  "Asia": [80, 25],
-  "Europe": [20, 56],
+  All: [0, 20],
+  Africa: [17, 3],
+  Asia: [80, 25],
+  Europe: [20, 56],
   "North America": [-102, 45],
-  "Oceania": [140, -26],
-  "South America": [-58, -23],
+  Oceania: [140, -26],
+  "South America": [-58, -23]
 };
 
 const regionScale = {
-  "All": 205,
-  "Africa": 450,
-  "Asia": 450,
-  "Europe": 450,
+  All: 205,
+  Africa: 450,
+  Asia: 450,
+  Europe: 450,
   "North America": 420,
-  "Oceania": 450,
-  "South America": 450,
+  Oceania: 450,
+  "South America": 450
 };
 
 class HoverMap extends React.Component {
@@ -62,53 +61,34 @@ class HoverMap extends React.Component {
 
     return (
       <>
-        <Motion
-          defaultStyle={{
-            scale: 205,
-            x: 0,
-            y: 20
+        <ComposableMap
+          projectionConfig={{
+            scale: regionScale[this.props.region],
+            rotation: [-11, 0, 0]
           }}
+          width={980}
+          height={551}
           style={{
-            scale: spring(regionScale[this.props.region], {
-              stiffness: 210,
-              damping: 20
-            }),
-            x: spring(regionCenter[this.props.region][0], {
-              stiffness: 210,
-              damping: 20
-            }),
-            y: spring(regionCenter[this.props.region][1], {
-              stiffness: 210,
-              damping: 20
-            })
+            width: "100%",
+            height: "auto"
           }}
         >
-          {({ scale, x, y }) => (
-            <ComposableMap
-              projectionConfig={{
-                scale: scale,
-                rotation: [-11, 0, 0]
-              }}
-              width={980}
-              height={551}
-              style={{
-                width: "100%",
-                height: "auto"
-              }}
-            >
-              <ZoomableGroup center={[x, y]} disablePanning>
-                <Geographies geography={Data} disableOptimization>
-                  {(geographies, projection) =>
-                    geographies
-                      .filter(
-                        geography =>
-                          this.props.region === "All" ||
-                          geography.properties.continent === this.props.region
-                      )
-                      .map((geography, i) => (
-                        <Geography
-                          key={i}
-                          data-tip={`
+          <ZoomableGroup
+            center={regionCenter[this.props.region]}
+            disablePanning
+          >
+            <Geographies geography={Data} disableOptimization>
+              {(geographies, projection) =>
+                geographies
+                  .filter(
+                    geography =>
+                      this.props.region === "All" ||
+                      geography.properties.continent === this.props.region
+                  )
+                  .map((geography, i) => (
+                    <Geography
+                      key={i}
+                      data-tip={`
                     <div class="tooltip-container">
                       <div class="tooltip-text">
                         <p>${geography.properties.name}</p>
@@ -123,45 +103,43 @@ class HoverMap extends React.Component {
                         } unique</p>
                       </div>
                     </div>`}
-                          geography={geography}
-                          projection={projection}
-                          onClick={this.handleMapClick}
-                          style={{
-                            default: {
-                              fill: countriesMap[
-                                geography.properties.iso_a2.toUpperCase()
-                              ]
-                                ? popScale(
-                                    countriesMap[
-                                      geography.properties.iso_a2.toUpperCase()
-                                    ]
-                                  )
-                                : "#ffffff",
-                              stroke: "#607D8B",
-                              strokeWidth: 0.75,
-                              outline: "none"
-                            },
-                            hover: {
-                              fill: "#263238",
-                              stroke: "#607D8B",
-                              strokeWidth: 0.75,
-                              outline: "none"
-                            },
-                            pressed: {
-                              fill: "#263238",
-                              stroke: "#607D8B",
-                              strokeWidth: 0.75,
-                              outline: "none"
-                            }
-                          }}
-                        />
-                      ))
-                  }
-                </Geographies>
-              </ZoomableGroup>
-            </ComposableMap>
-          )}
-        </Motion>
+                      geography={geography}
+                      projection={projection}
+                      onClick={this.handleMapClick}
+                      style={{
+                        default: {
+                          fill: countriesMap[
+                            geography.properties.iso_a2.toUpperCase()
+                          ]
+                            ? popScale(
+                                countriesMap[
+                                  geography.properties.iso_a2.toUpperCase()
+                                ]
+                              )
+                            : "#ffffff",
+                          stroke: "#607D8B",
+                          strokeWidth: 0.75,
+                          outline: "none"
+                        },
+                        hover: {
+                          fill: "#263238",
+                          stroke: "#607D8B",
+                          strokeWidth: 0.75,
+                          outline: "none"
+                        },
+                        pressed: {
+                          fill: "#263238",
+                          stroke: "#607D8B",
+                          strokeWidth: 0.75,
+                          outline: "none"
+                        }
+                      }}
+                    />
+                  ))
+              }
+            </Geographies>
+          </ZoomableGroup>
+        </ComposableMap>
         <ReactTooltip html={true} />
       </>
     );
