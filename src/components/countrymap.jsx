@@ -36,7 +36,7 @@ export default function CountryMap(props) {
           });
       }
     },
-    [props.username]
+    [props.username, props.country]
   );
 
   if (!data) {

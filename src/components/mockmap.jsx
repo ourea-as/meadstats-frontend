@@ -15,7 +15,7 @@ function MockMap({ countries, dispatch, username }) {
         dispatch(fetchCountries(username));
       }
     },
-    [username]
+    [dispatch, username]
   );
 
   if (!countries.length) {
@@ -24,7 +24,7 @@ function MockMap({ countries, dispatch, username }) {
 
   return (
     <>
-      <HoverMap countries={countries} interactive={false} />
+      <HoverMap countries={countries} interactive={false} region={"All"} />
     </>
   );
 }
