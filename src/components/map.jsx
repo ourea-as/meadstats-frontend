@@ -12,7 +12,7 @@ import { Loading } from "./loading";
 import { fetchCountries } from "../actions/map";
 
 const regions = [
-  "All",
+  "World",
   "Africa",
   "Asia",
   "Europe",
@@ -22,7 +22,7 @@ const regions = [
 ];
 
 function Map({ countries, dispatch, username }) {
-  const [region, setRegion] = useState("All");
+  const [region, setRegion] = useState("World");
 
   useEffect(() => {
     if (username !== "") {

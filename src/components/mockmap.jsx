@@ -24,7 +24,7 @@ function MockMap({ countries, dispatch, username }) {
 
   return (
     <>
-      <HoverMap countries={countries} interactive={false} region={"All"} />
+      <HoverMap countries={countries} interactive={false} region={"World"} />
     </>
   );
 }

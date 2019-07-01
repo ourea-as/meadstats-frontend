@@ -14,7 +14,7 @@ import Data from "../assets/maps/world.json";
 import "./tooltip.css";
 
 const regionCenter = {
-  All: [0, 20],
+  World: [0, 20],
   Africa: [17, 3],
   Asia: [80, 25],
   Europe: [20, 56],
@@ -24,7 +24,7 @@ const regionCenter = {
 };
 
 const regionScale = {
-  All: 205,
+  World: 205,
   Africa: 450,
   Asia: 450,
   Europe: 450,
@@ -82,7 +82,7 @@ class HoverMap extends React.Component {
                 geographies
                   .filter(
                     geography =>
-                      this.props.region === "All" ||
+                      this.props.region === "World" ||
                       geography.properties.continent === this.props.region
                   )
                   .map((geography, i) => (
