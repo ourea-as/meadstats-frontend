@@ -9409,7 +9409,7 @@ source-list-map@^2.0.0:
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
   integrity sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==
 
-source-map-explorer@^2.0.1:
+source-map-explorer@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-map-explorer/-/source-map-explorer-2.0.1.tgz#988721e8320d7b6925bc40289e5de658fe4cad4d"
   integrity sha512-mv2sv2b6oN2L9n18O/eLrYiP5zfWEHESLq4utWBqNw8GnkbuRuXs8twVCOhMT5hxRzfQgS7Yxh7HlQaW8oeiAQ==
