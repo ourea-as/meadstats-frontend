@@ -9,7 +9,11 @@ import "./table.css";
 function nameFormatter(cell, row) {
   return (
     <span className="table-flex">
-      <img className="beertable-image" alt="Beer Logo" src={row.label} /> {cell}
+      <img className="beertable-image" alt="Beer Logo" src={row.label} />
+      <div>
+        <span className="table-twoline-main">{cell}</span>
+        <span className="table-twoline-sub">{row.brewery.name}</span>
+      </div>
     </span>
   );
 }
