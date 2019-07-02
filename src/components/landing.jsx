@@ -35,9 +35,9 @@ export default function Landing(props) {
         <p className="lead">Discover deeper insights about your beers</p>
       </Jumbotron>
 
-      <div class="card-deck">
-        <div class="card">
-          <div class="card-img-top p-3">
+      <div className="card-deck">
+        <div className="card">
+          <div className="card-img-top p-3">
             <Bar
               data={barData}
               legend={{ display: false }}
@@ -65,27 +65,27 @@ export default function Landing(props) {
               }}
             />
           </div>
-          <div class="card-body">
-            <h5 class="card-title">Patterns</h5>
-            <p class="card-text">
+          <div className="card-body">
+            <h5 className="card-title">Patterns</h5>
+            <p className="card-text">
               When and on which day do you consume the most beer? Which year did
               you consume the most?
             </p>
           </div>
         </div>
-        <div class="card">
-          <div class="card-img-top p-3">
+        <div className="card">
+          <div className="card-img-top p-3">
             <MockMap username="boren" />
           </div>
-          <div class="card-body">
-            <h5 class="card-title">Interactive map</h5>
-            <p class="card-text">
+          <div className="card-body">
+            <h5 className="card-title">Interactive map</h5>
+            <p className="card-text">
               See where you have been and discover your favorite countries.
             </p>
           </div>
         </div>
-        <div class="card">
-          <div class="card-img-top p-3">
+        <div className="card">
+          <div className="card-img-top p-3">
             <Line
               data={ratingBarData}
               legend={{ display: false }}
@@ -115,9 +115,9 @@ export default function Landing(props) {
               }}
             />
           </div>
-          <div class="card-body">
-            <h5 class="card-title">Trends</h5>
-            <p class="card-text">
+          <div className="card-body">
+            <h5 className="card-title">Trends</h5>
+            <p className="card-text">
               Are you getting more skeptical or are you choosing better bers?
               Watch how your rating changes over time.
             </p>

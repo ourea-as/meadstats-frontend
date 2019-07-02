@@ -27,3 +27,20 @@
 .table td {
   vertical-align: middle;
 }
+
+.table-flex {
+  display: flex;
+  align-items: center;
+}
+
+.table-twoline-main {
+  display: block;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.table-twoline-sub {
+  display: block;
+  white-space: nowrap;
+  font-size: 12px;
+}

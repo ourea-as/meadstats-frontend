@@ -11,7 +11,7 @@ import './table.css';
 
 function countryFormatter(cell, row) {
   return (
-    <span>
+    <span className="table-flex">
       <Flagicon
         code={row.code.toLowerCase()}
         size="lg"
