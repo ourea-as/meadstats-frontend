@@ -28,6 +28,6 @@
   "se": { "centroid": [17, 63], "scale": 1400 },
   "si": { "centroid": [15, 46.1], "scale": 18000},
   "th": { "centroid": [101, 13], "scale": 2300},
-  "us": { "centroid": [48, -112], "scale": 550 },
+  "us": { "centroid": [-112, 48], "scale": 550 },
   "za": { "centroid": [25, -29], "scale": 2500}
 }
