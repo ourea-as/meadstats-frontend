@@ -7,14 +7,18 @@ import { Col } from 'reactstrap';
 import FriendsTable from './friendstable';
 import { ErrorBoundary } from './errorboundary';
 
-export default function Friends(props) {
+type FriendsProps = {
+  username: string;
+}
+
+const Friends: React.FC<FriendsProps> = ({ username }) => {
   const [friendsData, setFriendsData] = useState([]);
 
   useEffect(
     () => {
-      if (props.username !== '') {
+      if (username !== '') {
         axios
-          .get(`${API_ROOT}/v1/users/${props.username}/friends`)
+          .get(`${API_ROOT}/v1/users/${username}/friends`)
           .then(({ data }) => {
             console.log(data);
             if (data.status === 'success') {
@@ -23,7 +27,7 @@ export default function Friends(props) {
           });
       }
     },
-    [props.username]
+    [username]
   );
 
   return (
@@ -36,3 +40,5 @@ export default function Friends(props) {
     </>
   );
 }
+
+export default Friends;

@@ -11,7 +11,7 @@ import { DayOfWeekChart } from './dayofweek';
 import { TimeOfDayChart } from './timeofday';
 import { MonthChart } from './month';
 import { YearChart } from './year';
-import { GraphChart } from './graph';
+import GraphChart from './graph';
 
 export default function Patterns(props) {
   const [weekdayData, setWeekdayData] = useState({ weekdays: [] });
