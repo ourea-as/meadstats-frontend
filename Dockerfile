@@ -10,7 +10,7 @@ RUN apk add build-base autoconf automake zlib-dev
 RUN yarn install
 
 COPY . /app
-RUN yarn build
+RUN INLINE_RUNTIME_CHUNK=false yarn build
 
 
 # Stage 2: Production
