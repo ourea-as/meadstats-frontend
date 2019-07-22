@@ -35,7 +35,7 @@
     "lodash": "4.17.15",
     "popper.js": "1.15.0",
     "react": "16.8.6",
-    "react-bootstrap-table-next": "3.1.5",
+    "react-bootstrap-table-next": "3.1.7",
     "react-chartjs-2": "2.7.6",
     "react-cookie": "4.0.1",
     "react-dom": "16.8.6",
