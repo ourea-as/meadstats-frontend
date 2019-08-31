@@ -8515,10 +8515,10 @@ react-app-polyfill@^1.0.2:
     regenerator-runtime "0.13.3"
     whatwg-fetch "3.0.0"
 
-react-bootstrap-table-next@3.1.8:
-  version "3.1.8"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table-next/-/react-bootstrap-table-next-3.1.8.tgz#ecccf0018f774045e7a64dd9664c7279130ec2c2"
-  integrity sha512-1H4tIVVLHU+xJ8Tfwlil2fzC4F2FpcW+C3+UCm66y3QsRhl7JopdvWwQMUt+NvtEKw0hWCzuQ79ysTfLOlmGIA==
+react-bootstrap-table-next@3.1.9:
+  version "3.1.9"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-table-next/-/react-bootstrap-table-next-3.1.9.tgz#84b37000385d7b2bb17a4631950484b86511ba2a"
+  integrity sha512-aTj/LQtf/NdU2+J0rKAMcD95VJo6za5w1PWgovyd2djTEaPFzcmLcysbkMeU50f/fyeyOvv19MyBapPl5+ravw==
   dependencies:
     classnames "2.2.5"
     react-transition-group "2.5.3"
