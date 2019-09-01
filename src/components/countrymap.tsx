@@ -6,38 +6,38 @@ import { Col } from 'reactstrap';
 import axios from 'axios';
 import { API_ROOT } from '../api/api-config';
 
-import CountryHoverMap from './countryhovermap';
+import { CountryHoverMap } from './countryhovermap';
 import CountryStats from './countrystats';
 import { ErrorBoundary } from './errorboundary';
 import { BeerTable } from './beertable';
 import { Loading } from './loading';
 import { Error } from './error';
 
-export default function CountryMap(props) {
+interface CountryMapProps {
+  username?: string;
+  country?: string;
+}
+
+const CountryMap: React.FC<CountryMapProps> = ({ username, country }): JSX.Element => {
   const [data, setData] = useState();
   const [error, setError] = useState(false);
 
-  useEffect(
-    () => {
-      if (props.username !== '') {
-        setError(false);
+  useEffect(() => {
+    if (username && country) {
+      setError(false);
 
-        axios
-          .get(
-            `${API_ROOT}/v1/users/${props.username}/countries/${props.country}`
-          )
-          .then(({ data }) => {
-            if (data.status === 'success') {
-              setData(data.data);
-            }
-          })
-          .catch(error => {
-            setError(true);
-          });
-      }
-    },
-    [props.username, props.country]
-  );
+      axios
+        .get(`${API_ROOT}/v1/users/${username}/countries/${country}`)
+        .then(({ data }) => {
+          if (data.status === 'success') {
+            setData(data.data);
+          }
+        })
+        .catch(error => {
+          setError(true);
+        });
+    }
+  }, [username, country]);
 
   if (!data) {
     if (error) {
@@ -70,4 +70,6 @@ export default function CountryMap(props) {
       </Col>
     </>
   );
-}
+};
+
+export default CountryMap;

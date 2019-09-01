@@ -16,9 +16,7 @@ import './user.css';
 import { Profile } from './profile';
 import { Loading } from './loading';
 
-const PatternsSuspense = React.lazy(() =>
-  import(/* webpackChunkName: "patterns" */ './patterns')
-);
+const PatternsSuspense = React.lazy(() => import(/* webpackChunkName: "patterns" */ './patterns'));
 
 const Patterns = props => (
   <React.Suspense fallback={<Loading />}>
@@ -26,9 +24,7 @@ const Patterns = props => (
   </React.Suspense>
 );
 
-const FriendsSuspense = React.lazy(() =>
-  import(/* webpackChunkName: "friends" */ './friends')
-);
+const FriendsSuspense = React.lazy(() => import(/* webpackChunkName: "friends" */ './friends'));
 
 const Friends = props => (
   <React.Suspense fallback={<Loading />}>
@@ -36,10 +32,7 @@ const Friends = props => (
   </React.Suspense>
 );
 
-
-const MapSuspense = React.lazy(() =>
-  import(/* webpackChunkName: "map" */ './map')
-);
+const MapSuspense = React.lazy(() => import(/* webpackChunkName: "map" */ './map'));
 
 const Map = props => (
   <React.Suspense fallback={<Loading />}>
@@ -47,9 +40,7 @@ const Map = props => (
   </React.Suspense>
 );
 
-const CountryMapSuspense = React.lazy(() =>
-  import(/* webpackChunkName: "countrymap" */ './countrymap')
-);
+const CountryMapSuspense = React.lazy(() => import(/* webpackChunkName: "countrymap" */ './countrymap'));
 
 const CountryMap = props => (
   <React.Suspense fallback={<Loading />}>
@@ -69,21 +60,21 @@ export class User extends React.Component {
     this.state = {
       user: {
         user_name: '',
-        avatar: ''
+        avatar: '',
       },
       updating: false,
       loading: true,
       exist: true,
       updatecount: 0,
       updatetotal: 0,
-      prevUsername: ''
+      prevUsername: '',
     };
   }
 
   handleUpdateProgress(data) {
     this.setState({
       updatecount: data.progress,
-      updatetotal: data.total
+      updatetotal: data.total,
     });
   }
 
@@ -93,7 +84,7 @@ export class User extends React.Component {
       updatetotal: 0,
       loading: false,
       exist: true,
-      updating: false
+      updating: false,
     });
 
     this.socket.close();
@@ -109,10 +100,10 @@ export class User extends React.Component {
       return {
         prevUsername: nextProps.username,
         user: {
-          user_name: nextProps.username
+          user_name: nextProps.username,
         },
         loading: true,
-        exist: true
+        exist: true,
       };
     }
 
@@ -136,14 +127,14 @@ export class User extends React.Component {
         this.setState({
           updating: false,
           loading: false,
-          user: data.data.user
+          user: data.data.user,
         });
       })
       .catch(({ error }) => {
         this.setState({
           updating: false,
           loading: false,
-          exist: false
+          exist: false,
         });
       });
   }
@@ -159,20 +150,12 @@ export class User extends React.Component {
 
     this.socket.emit('update', { token, username });
     this.setState({
-      updating: true
+      updating: true,
     });
   }
 
   render() {
-    const {
-      updatecount,
-      updatetotal,
-      updating,
-      loading,
-      exist,
-      user,
-      prevUsername
-    } = this.state;
+    const { updatecount, updatetotal, updating, loading, exist, user, prevUsername } = this.state;
 
     return loading ? (
       <Loading />
@@ -195,37 +178,25 @@ export class User extends React.Component {
                 <Switch>
                   <Route
                     path="/user/:name/map/:country"
-                    render={({ match }) => (
-                      <CountryMap
-                        username={user.user_name}
-                        country={match.params.country}
-                      />
-                    )}
+                    render={({ match }) => <CountryMap username={user.user_name} country={match.params.country} />}
                   />
-                  <Route
-                    path="/user/:name/map"
-                    render={() => <Map username={user.user_name} />}
-                  />
-                  <Route
-                    path="/user/:name/patterns"
-                    render={() => <Patterns username={user.user_name} />}
-                  />
-                  <Route
-                    path="/user/:name/friends"
-                    render={() => <Friends username={user.user_name} />}
-                  />
+                  <Route path="/user/:name/map" render={() => <Map username={user.user_name} />} />
+                  <Route path="/user/:name/patterns" render={() => <Patterns username={user.user_name} />} />
+                  <Route path="/user/:name/friends" render={() => <Friends username={user.user_name} />} />
                 </Switch>
               </ErrorBoundary>
             </Row>
           </ErrorBoundary>
-        ) : <div class="user-not-exist">This user does not exist in the database. Please refresh.</div>}
+        ) : (
+          <div class="user-not-exist">This user does not exist in the database. Please refresh.</div>
+        )}
       </React.Fragment>
     );
   }
 }
 
 User.propTypes = {
-  username: PropTypes.string
+  username: PropTypes.string,
 };
 
 const UserNavigation = ({ user }) => (
@@ -237,15 +208,11 @@ const UserNavigation = ({ user }) => (
 );
 
 UserNavigation.propTypes = {
-  user: PropTypes.string
+  user: PropTypes.string,
 };
 
 const UserNavigationTab = ({ text, route, user }) => (
-  <NavLink
-    className="user-nav-tab"
-    activeClassName="active"
-    to={`/user/${user}/${route}`}
-  >
+  <NavLink className="user-nav-tab" activeClassName="active" to={`/user/${user}/${route}`}>
     <NavItem>
       <span className="nav-link user-nav-link">{text}</span>
     </NavItem>
@@ -255,5 +222,5 @@ const UserNavigationTab = ({ text, route, user }) => (
 UserNavigationTab.propTypes = {
   text: PropTypes.string,
   route: PropTypes.string,
-  user: PropTypes.string
+  user: PropTypes.string,
 };

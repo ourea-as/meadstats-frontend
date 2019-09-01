@@ -2,7 +2,7 @@ import React from 'react';
 import { Cookies, withCookies } from 'react-cookie';
 import PropTypes from 'prop-types';
 
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './assets/favicon.ico';
@@ -28,7 +28,7 @@ class App extends React.Component {
     }
 
     if (window.localStorage.getItem('authToken')) {
-      const decoded = jwt_decode(window.localStorage.getItem('authToken'));
+      const decoded = jwtDecode(window.localStorage.getItem('authToken'));
       isAuthenticated = true;
       username = decoded.identity;
     } else {
@@ -37,7 +37,7 @@ class App extends React.Component {
 
     this.state = {
       isAuthenticated,
-      username
+      username,
     };
   }
 
@@ -59,11 +59,7 @@ class App extends React.Component {
         <Row>
           <ErrorBoundary>
             <main role="main" className="col-md-12 col-lg-12 px-4">
-              <Routes
-                isAuthenticated={isAuthenticated}
-                username={username}
-                logoutUser={this.logoutUser}
-              />
+              <Routes isAuthenticated={isAuthenticated} username={username} logoutUser={this.logoutUser} />
             </main>
           </ErrorBoundary>
         </Row>
@@ -74,7 +70,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  cookies: PropTypes.instanceOf(Cookies).isRequired
+  cookies: PropTypes.instanceOf(Cookies).isRequired,
 };
 
 export default withCookies(App);

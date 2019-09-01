@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const Error = ({ message }) => (
+type ErrorProps = {
+  message?: string;
+};
+
+export const Error: React.FC<ErrorProps> = ({ message }) => (
   <div
     className="mx-auto mt-4 mb-4"
     style={{
@@ -10,6 +14,10 @@ export const Error = ({ message }) => (
       fontSize: '1.5em'
     }}
   >
-    <span>{message ? message : 'Something went wrong'}</span>
+    <span>{message}</span>
   </div>
 );
+
+Error.defaultProps = {
+  message: 'Something went wrong'
+};

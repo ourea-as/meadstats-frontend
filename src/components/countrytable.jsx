@@ -12,11 +12,7 @@ import './table.css';
 function countryFormatter(cell, row) {
   return (
     <span className="table-flex">
-      <Flagicon
-        code={row.code.toLowerCase()}
-        size="lg"
-        className="country-table-flag"
-      />
+      <Flagicon code={row.code.toLowerCase()} size="lg" className="country-table-flag" />
       {row.name}
     </span>
   );
@@ -37,27 +33,27 @@ const columns = [
   {
     dataField: 'count',
     text: 'Count',
-    sort: true
+    sort: true,
   },
   {
     dataField: 'name',
     text: 'Country',
     sort: true,
-    formatter: countryFormatter
+    formatter: countryFormatter,
   },
   {
     dataField: 'average_rating',
     text: 'Average Rating',
     sort: true,
-    formatter: ratingFormatter
-  }
+    formatter: ratingFormatter,
+  },
 ];
 
 const defaultSorted = [
   {
     dataField: 'count',
-    order: 'desc'
-  }
+    order: 'desc',
+  },
 ];
 
 class CountryTable extends React.Component {
@@ -65,9 +61,9 @@ class CountryTable extends React.Component {
     const { countries } = this.props;
 
     const rowEvents = {
-      onClick: (e, row, rowIndex) => {
+      onClick: (e, row) => {
         this.props.history.push('map/' + row.code);
-      }
+      },
     };
 
     return (

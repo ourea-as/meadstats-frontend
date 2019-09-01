@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import BootstrapTable from "react-bootstrap-table-next";
-import { Progress } from "reactstrap";
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { Progress } from 'reactstrap';
 
-import "./table.css";
+import './table.css';
 
-function nameFormatter(cell, row) {
+function nameFormatter(cell: any, row: any): JSX.Element {
   return (
     <span className="table-flex">
       <img className="beertable-image" alt="Beer Logo" src={row.label} />
@@ -18,7 +18,7 @@ function nameFormatter(cell, row) {
   );
 }
 
-function ratingFormatter(cell) {
+function ratingFormatter(cell: any): JSX.Element {
   if (cell === 0) {
     return <span>No rating</span>;
   }
@@ -29,13 +29,13 @@ function ratingFormatter(cell) {
   );
 }
 
-function abvFormatter(cell) {
-  return cell.toFixed(1) + "%";
+function abvFormatter(cell: any): string {
+  return cell.toFixed(1) + '%';
 }
 
-function styleFormatter(cell) {
-  if (cell.includes("-") > -1) {
-    const splitted = cell.split(" - ");
+function styleFormatter(cell: any): JSX.Element {
+  if (cell.includes('-')) {
+    const splitted = cell.split(' - ');
     return (
       <div>
         <span className="table-twoline-main">{splitted[0]}</span>
@@ -53,45 +53,49 @@ function styleFormatter(cell) {
 
 const columns = [
   {
-    dataField: "name",
-    text: "Name",
+    dataField: 'name',
+    text: 'Name',
     sort: true,
-    formatter: nameFormatter
+    formatter: nameFormatter,
   },
   {
-    dataField: "style",
-    text: "Style",
+    dataField: 'style',
+    text: 'Style',
     sort: true,
-    formatter: styleFormatter
+    formatter: styleFormatter,
   },
   {
-    dataField: "abv",
-    text: "ABV",
+    dataField: 'abv',
+    text: 'ABV',
     sort: true,
-    formatter: abvFormatter
+    formatter: abvFormatter,
   },
   {
-    dataField: "userRating",
-    text: "Rating",
+    dataField: 'userRating',
+    text: 'Rating',
     sort: true,
-    formatter: ratingFormatter
+    formatter: ratingFormatter,
   },
   {
-    dataField: "rating",
-    text: "Global Rating",
+    dataField: 'rating',
+    text: 'Global Rating',
     sort: true,
-    formatter: ratingFormatter
-  }
+    formatter: ratingFormatter,
+  },
 ];
 
 const defaultSorted = [
   {
-    dataField: "rating",
-    order: "desc"
-  }
+    dataField: 'rating',
+    order: 'desc',
+  },
 ];
 
-export const BeerTable = ({ beers }) => (
+interface BeerTableProps {
+  beers: any[];
+}
+
+export const BeerTable: React.FC<BeerTableProps> = ({ beers }): JSX.Element => (
   <BootstrapTable
     bootstrap4
     bordered={false}

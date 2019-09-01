@@ -15,8 +15,8 @@ import ReactGA from 'react-ga';
 
 ReactGA.initialize('UA-123335075-1', {
   gaOptions: {
-    siteSpeedSampleRate: 100
-  }
+    siteSpeedSampleRate: 100,
+  },
 });
 
 ReactDOM.render(
@@ -27,7 +27,7 @@ ReactDOM.render(
       </CookiesProvider>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 serviceWorker.register();
