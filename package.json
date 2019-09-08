@@ -35,7 +35,7 @@
     "chart.js": "2.8.0",
     "connected-react-router": "6.5.2",
     "d3-scale": "3.1.0",
-    "eslint-config-prettier": "6.1.0",
+    "eslint-config-prettier": "6.2.0",
     "eslint-plugin-prettier": "3.1.0",
     "eslint-plugin-react": "7.14.3",
     "history": "4.9.0",
