@@ -4,7 +4,7 @@
   ],
   "automerge": true,
   "major": {
-    "automerge": false
+    "automerge": true
   },
   "timezone": "Europe/Oslo",
   "schedule": "before 8am on Sunday"
