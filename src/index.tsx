@@ -11,14 +11,6 @@ import './index.css';
 import App from './app';
 import * as serviceWorker from './serviceWorker';
 
-import ReactGA from 'react-ga';
-
-ReactGA.initialize('UA-123335075-1', {
-  gaOptions: {
-    siteSpeedSampleRate: 100,
-  },
-});
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
