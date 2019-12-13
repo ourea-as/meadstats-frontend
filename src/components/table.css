@@ -33,6 +33,8 @@
 .table-flex {
   display: flex;
   align-items: center;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .table-twoline-main {

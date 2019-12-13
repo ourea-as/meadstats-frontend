@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 import Logout from './components/logout';
 import { User } from './components/user';
 import Landing from './components/landing';
+import { Tasting } from './components/tasting';
 
 export const Routes = ({ isAuthenticated, username, logoutUser }) => (
   <Switch>
+    <Route exact path="/tasting" render={() => <Tasting />} />
     <Route exact path="/signout" render={() => <Logout logoutUser={logoutUser} />} />
 
     {isAuthenticated ? null : <Route exact path="/" component={Landing} />}
@@ -19,6 +21,7 @@ export const Routes = ({ isAuthenticated, username, logoutUser }) => (
       path="/user/:name"
       render={({ match }) => <User username={match.params.name} isAuthenticated={isAuthenticated} />}
     />
+    <Redirect to="/" />
   </Switch>
 );
 
