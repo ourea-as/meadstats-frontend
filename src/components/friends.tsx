@@ -9,26 +9,20 @@ import { ErrorBoundary } from './errorboundary';
 
 type FriendsProps = {
   username: string;
-}
+};
 
 const Friends: React.FC<FriendsProps> = ({ username }) => {
   const [friendsData, setFriendsData] = useState([]);
 
-  useEffect(
-    () => {
-      if (username !== '') {
-        axios
-          .get(`${API_ROOT}/v1/users/${username}/friends`)
-          .then(({ data }) => {
-            console.log(data);
-            if (data.status === 'success') {
-              setFriendsData(data.data.friends);
-            }
-          });
-      }
-    },
-    [username]
-  );
+  useEffect(() => {
+    if (username !== '') {
+      axios.get(`${API_ROOT}/v1/users/${username}/friends`).then(({ data }) => {
+        if (data.status === 'success') {
+          setFriendsData(data.data.friends);
+        }
+      });
+    }
+  }, [username]);
 
   return (
     <>
@@ -39,6 +33,6 @@ const Friends: React.FC<FriendsProps> = ({ username }) => {
       </Col>
     </>
   );
-}
+};
 
 export default Friends;
