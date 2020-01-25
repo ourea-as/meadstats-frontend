@@ -91,9 +91,9 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
     end.setHours(end.getHours() + 2);
 
     setTasting({
-      name: 'Jul med PIP - Edition 5',
-      tasters: [3624256, 2636921, 2821605, 2721461, 6128114, 5790031, 2907284, 5575566, 5572104, 4755947],
-      beers: [1213531, 198572],
+      name: 'Julelønsj',
+      tasters: [1033418, 3624256, 1124904, 6889469, 684117],
+      beers: [3562879, 3555213, 3539893, 2830731],
       startTime: start,
       endTime: end,
       hideUntasted: true,
