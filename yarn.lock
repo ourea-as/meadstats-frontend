@@ -2103,12 +2103,13 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-simple-maps@0.12.2":
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/@types/react-simple-maps/-/react-simple-maps-0.12.2.tgz#b139d7f909e2edee6f54b53c4adce9251ebf24fb"
-  integrity sha512-dmALUc5CDy3+76sn0ZF2mcdWN0VH9d/F4P5fpEB0vdrJIw1KJjHK8kumeHsyXiktz4joBUWcxAZOTfifmj82fQ==
+"@types/react-simple-maps@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-simple-maps/-/react-simple-maps-1.0.1.tgz#cdb6a489d2aec13b194aaaddc6ba543017f23131"
+  integrity sha512-yovfUSFzerkDqQpDuljQIQCjjR5ogb2Gag6U7pIX9TFx7skNmto2Xg0enLhOZltqVMiZBwQXNIlh4u03EQUaow==
   dependencies:
     "@types/d3-geo" "*"
+    "@types/geojson" "*"
     "@types/react" "*"
 
 "@types/react-tooltip@3.11.0":
