@@ -2820,7 +2820,7 @@ classnames@2.2.5:
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
   integrity sha1-+zgB1FNGdknvNgPH1hoCvRKb3m0=
 
-classnames@^2.2.3, classnames@^2.2.5, classnames@^2.2.6:
+classnames@^2.2.3, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -9148,12 +9148,12 @@ react-simple-maps@0.12.1:
     d3-geo-projection "1.2.2"
     topojson-client "2.1.0"
 
-react-tooltip@3.11.1:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.11.1.tgz#7b4ce48ed26a46e996662b19a2afebbfd483513b"
-  integrity sha512-YCMVlEC2KuHIzOQhPplTK5jmBBwoL+PYJJdJKXj7M/h7oevupd/QSVq6z5U7/ehIGXyHsAqvwpdxexDfyQ0o3A==
+react-tooltip@3.11.5:
+  version "3.11.5"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-3.11.5.tgz#170705e659639e18f6f8032bb1c93c2373ee5509"
+  integrity sha512-VSNZTS+XN68QyIBo5SUsIn+CPmGvSIzEnsJ41WxQ+sfnf+zIHXnVG8l53/P0IklssId9yW9SPFuA6qMgX6VIQw==
   dependencies:
-    classnames "^2.2.5"
+    classnames "^2.2.6"
     prop-types "^15.6.0"
 
 react-transition-group@2.5.3:
