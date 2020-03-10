@@ -13,7 +13,7 @@ type GraphChartProps = {
 };
 
 const GraphChart: React.FC<GraphChartProps> = ({ data, labels }) => {
-  const formattedData = data.map(x => ({ t: new Date(x.date), y: x.count }));
+  const formattedData = data.map(x => ({ x: new Date(x.date), y: x.count }));
 
   const barData = {
     labels: labels,
@@ -35,6 +35,9 @@ const GraphChart: React.FC<GraphChartProps> = ({ data, labels }) => {
       point: {
         radius: 0,
       },
+    },
+    legend: {
+      display: false,
     },
     tooltips: {
       intersect: false,
@@ -69,7 +72,7 @@ const GraphChart: React.FC<GraphChartProps> = ({ data, labels }) => {
   return (
     <>
       <div className="col-md-12 col-xs-12 mb-4">
-        <Line data={barData} legend={{ display: false }} height={300} options={graphOptions} />
+        <Line data={barData} height={300} options={graphOptions} />
       </div>
     </>
   );
