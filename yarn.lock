@@ -9579,7 +9579,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -9975,12 +9975,12 @@ react-simple-maps@0.12.1:
     d3-geo-projection "1.2.2"
     topojson-client "2.1.0"
 
-react-tooltip@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-4.0.3.tgz#2c1f97bb8c4edec0c11e40d39e2c97b7c2bab72b"
-  integrity sha512-xEM+fr8tr/KJP5PZEOg/fc5bZ7ZkC658iMDgCq5DfTqHVyuIOOd5loyxQD0eAJiZ6jWdEd18owbRqd3stHtEDg==
+react-tooltip@4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-4.0.5.tgz#6fd82144bba6f70f9ab3eec8fc28b20e8e62f650"
+  integrity sha512-LtSfsUQBl0rXued0VqF1tuS4ZmXGop5fMO6S1X1cr4GY+L5oPEY338hF7ERLAYYNFJgrgpC6/klZmYaB7rgmcA==
   dependencies:
-    prop-types "^15.6.0"
+    prop-types "^15.7.2"
 
 react-transition-group@2.5.3:
   version "2.5.3"
