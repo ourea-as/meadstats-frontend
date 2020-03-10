@@ -11,7 +11,7 @@ export const Error: React.FC<ErrorProps> = ({ message }) => (
       color: 'red',
       textAlign: 'center',
       fontWeight: 400,
-      fontSize: '1.5em'
+      fontSize: '1.5em',
     }}
   >
     <span>{message}</span>
@@ -19,5 +19,5 @@ export const Error: React.FC<ErrorProps> = ({ message }) => (
 );
 
 Error.defaultProps = {
-  message: 'Something went wrong'
+  message: 'Something went wrong',
 };

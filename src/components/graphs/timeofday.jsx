@@ -6,8 +6,8 @@ export class TimeOfDayChart extends React.PureComponent {
   render() {
     const { data, ratingData } = this.props;
 
-    var x = 0;
-    var len = ratingData.length;
+    let x = 0;
+    const len = ratingData.length;
     while (x < len) {
       ratingData[x] = parseFloat(ratingData[x]).toFixed(2);
       x++;
@@ -38,16 +38,16 @@ export class TimeOfDayChart extends React.PureComponent {
         '20',
         '21',
         '22',
-        '23'
+        '23',
       ],
       datasets: [
         {
           backgroundColor: '#343a40',
           borderColor: '#01070D',
           borderWidth: 2,
-          data: data
-        }
-      ]
+          data: data,
+        },
+      ],
     };
 
     const ratingBarData = {
@@ -75,15 +75,15 @@ export class TimeOfDayChart extends React.PureComponent {
         '20',
         '21',
         '22',
-        '23'
+        '23',
       ],
       datasets: [
         {
           borderColor: '#01070D',
           borderWidth: 2,
-          data: ratingData
-        }
-      ]
+          data: ratingData,
+        },
+      ],
     };
 
     return (
@@ -99,20 +99,20 @@ export class TimeOfDayChart extends React.PureComponent {
                     ticks: { beginAtZero: true, maxTicksLimit: 5 },
                     gridLines: {
                       display: true,
-                      drawBorder: true
-                    }
-                  }
+                      drawBorder: true,
+                    },
+                  },
                 ],
                 xAxes: [
                   {
                     gridLines: {
                       display: false,
-                      drawBorder: false
-                    }
-                  }
-                ]
+                      drawBorder: false,
+                    },
+                  },
+                ],
               },
-              title: { display: true, text: 'Count by hour of day' }
+              title: { display: true, text: 'Count by hour of day' },
             }}
           />
         </div>
@@ -127,20 +127,20 @@ export class TimeOfDayChart extends React.PureComponent {
                     ticks: { beginAtZero: true, maxTicksLimit: 5, max: 5 },
                     gridLines: {
                       display: true,
-                      drawBorder: true
-                    }
-                  }
+                      drawBorder: true,
+                    },
+                  },
                 ],
                 xAxes: [
                   {
                     gridLines: {
                       display: false,
-                      drawBorder: false
-                    }
-                  }
-                ]
+                      drawBorder: false,
+                    },
+                  },
+                ],
               },
-              title: { display: true, text: 'Average rating by hour of day' }
+              title: { display: true, text: 'Average rating by hour of day' },
             }}
           />
         </div>

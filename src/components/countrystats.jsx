@@ -10,8 +10,7 @@ export default function CountryStats(props) {
   return (
     <>
       <div className="country-name-container">
-        <FlagIcon code={data.code} size="2x" />{' '}
-        <span className="country-name">{data.name}</span>
+        <FlagIcon code={data.code} size="2x" /> <span className="country-name">{data.name}</span>
       </div>
     </>
   );

@@ -16,7 +16,7 @@ class Logout extends Component {
 }
 
 Logout.propTypes = {
-  logoutUser: PropTypes.func
+  logoutUser: PropTypes.func,
 };
 
 export default Logout;

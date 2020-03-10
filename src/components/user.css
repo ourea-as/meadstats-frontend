@@ -92,9 +92,8 @@
 
 .user-nav-link:hover {
   color: #000 !important;
-  background-color: #E7EDF3 !important;
+  background-color: #e7edf3 !important;
 }
-
 
 .active .user-nav-link {
   color: #fff !important;
@@ -103,5 +102,5 @@
 
 .active .user-nav-link:hover {
   color: #fff !important;
-  background-color: #4E545A !important;
+  background-color: #4e545a !important;
 }

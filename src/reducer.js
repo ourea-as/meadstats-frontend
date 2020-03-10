@@ -6,5 +6,5 @@ import countries from './reducers/mapReducer';
 export default history =>
   combineReducers({
     countries: countries,
-    router: connectRouter(history)
+    router: connectRouter(history),
   });

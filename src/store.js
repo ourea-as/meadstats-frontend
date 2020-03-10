@@ -21,7 +21,4 @@ const getMiddleware = () => {
   }
 };
 
-export const store = createStore(
-  reducer(history),
-  composeWithDevTools(getMiddleware())
-);
+export const store = createStore(reducer(history), composeWithDevTools(getMiddleware()));
