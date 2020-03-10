@@ -6,7 +6,7 @@ import { API_ROOT } from '../api/api-config';
 
 import { Row, Col, Table } from 'reactstrap';
 
-import './table.css';
+import './tables/table.css';
 import './tasting.css';
 import { Loading } from './loading';
 

@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-import _ from 'lodash';
-
 import 'react-flag-icon-css';
 
 import axios from 'axios';
 import { API_ROOT } from '../api/api-config';
 
-import { DayOfWeekChart } from './dayofweek';
-import { TimeOfDayChart } from './timeofday';
-import { MonthChart } from './month';
-import { YearChart } from './year';
-import GraphChart from './graph';
+import { DayOfWeekChart } from './graphs/dayofweek';
+import { TimeOfDayChart } from './graphs/timeofday';
+import { MonthChart } from './graphs/month';
+import { YearChart } from './graphs/year';
+import GraphChart from './graphs/graph';
 
 export default function Patterns(props) {
   const [weekdayData, setWeekdayData] = useState({ weekdays: [] });
@@ -56,15 +54,15 @@ export default function Patterns(props) {
   }, [props.username]);
 
   function weekDataToArray(data) {
-    return _.range(1, 8).map(x => getDataCount(data, 'weekday', x));
+    return [...Array(7).keys()].map(k => k + 1).map(x => getDataCount(data, 'weekday', x));
   }
 
   function hourDataToArray(data) {
-    return _.range(0, 24).map(x => getDataCount(data, 'hour', x));
+    return [...Array(24).keys()].map(x => getDataCount(data, 'hour', x));
   }
 
   function monthDataToArray(data) {
-    return _.range(1, 13).map(x => getDataCount(data, 'month', x));
+    return [...Array(12).keys()].map(k => k + 1).map(x => getDataCount(data, 'month', x));
   }
 
   function yearDataToArray(data) {
@@ -72,15 +70,15 @@ export default function Patterns(props) {
   }
 
   function weekRatingToArray(data) {
-    return _.range(1, 8).map(x => getDataCount(data, 'weekday', x, 'averageRating'));
+    return [...Array(7).keys()].map(k => k + 1).map(x => getDataCount(data, 'weekday', x, 'averageRating'));
   }
 
   function hourRatingToArray(data) {
-    return _.range(0, 24).map(x => getDataCount(data, 'hour', x, 'averageRating'));
+    return [...Array(24).keys()].map(x => getDataCount(data, 'hour', x, 'averageRating'));
   }
 
   function monthRatingToArray(data) {
-    return _.range(1, 13).map(x => getDataCount(data, 'month', x, 'averageRating'));
+    return [...Array(12).keys()].map(k => k + 1).map(x => getDataCount(data, 'month', x, 'averageRating'));
   }
 
   function yearRatingToArray(data) {

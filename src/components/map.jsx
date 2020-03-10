@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
-import "react-flag-icon-css";
-import { Nav, NavItem, Col } from "reactstrap";
+import 'react-flag-icon-css';
+import { Nav, NavItem, Col } from 'reactstrap';
 
-import HoverMap from "./hovermap";
-import CountryTable from "./countrytable";
-import { ErrorBoundary } from "./errorboundary";
-import { Loading } from "./loading";
+import HoverMap from './maps/hovermap';
+import CountryTable from './tables/countrytable';
+import { ErrorBoundary } from './errorboundary';
+import { Loading } from './loading';
 
-import { fetchCountries } from "../actions/map";
+import { fetchCountries } from '../actions/map';
 
-const regions = [
-  "World",
-  "Africa",
-  "Asia",
-  "Europe",
-  "Oceania",
-  "North America",
-  "South America"
-];
+const regions = ['World', 'Africa', 'Asia', 'Europe', 'Oceania', 'North America', 'South America'];
 
 function Map({ countries, dispatch, username }) {
-  const [region, setRegion] = useState("World");
+  const [region, setRegion] = useState('World');
 
   useEffect(() => {
-    if (username !== "") {
+    if (username !== '') {
       dispatch(fetchCountries(username));
     }
   }, [dispatch, username]);
@@ -40,7 +32,11 @@ function Map({ countries, dispatch, username }) {
         <Nav pills horizontal="center" className="user-tabs">
           {regions.map((value, index) => {
             return (
-              <NavItem className={value === region ? "active user-nav-tab" : ""} key={index} onClick={() => setRegion(value)}>
+              <NavItem
+                className={value === region ? 'active user-nav-tab' : ''}
+                key={index}
+                onClick={() => setRegion(value)}
+              >
                 <span className="nav-link user-nav-link  user-nav-tab">{value}</span>
               </NavItem>
             );
@@ -63,7 +59,7 @@ function Map({ countries, dispatch, username }) {
 
 const mapStateToProps = state => {
   return {
-    countries: state.countries
+    countries: state.countries,
   };
 };
 

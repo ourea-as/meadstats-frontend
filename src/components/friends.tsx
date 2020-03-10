@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_ROOT } from '../api/api-config';
 import { Col } from 'reactstrap';
 
-import FriendsTable from './friendstable';
+import FriendsTable from './tables/friendstable';
 import { ErrorBoundary } from './errorboundary';
 
 type FriendsProps = {

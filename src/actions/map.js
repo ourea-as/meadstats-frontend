@@ -22,6 +22,6 @@ export function fetchCountries(username) {
 export function updateCountries(countries) {
   return {
     type: UPDATE_COUNTRIES,
-    countries
+    countries,
   };
 }

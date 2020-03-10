@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button, Jumbotron } from 'reactstrap';
-import MockMap from './mockmap';
+import MockMap from './maps/mockmap';
 import { Bar, Line } from 'react-chartjs-2';
 
 const barData = {
@@ -11,9 +11,9 @@ const barData = {
       backgroundColor: '#343a40',
       borderColor: '#01070D',
       borderWidth: 2,
-      data: [50, 62, 102, 40, 80, 90, 80]
-    }
-  ]
+      data: [50, 62, 102, 40, 80, 90, 80],
+    },
+  ],
 };
 
 const ratingBarData = {
@@ -22,9 +22,9 @@ const ratingBarData = {
     {
       borderColor: '#01070D',
       borderWidth: 2,
-      data: [3.5, 3.2, 3.8, 4.1, 4.6]
-    }
-  ]
+      data: [3.5, 3.2, 3.8, 4.1, 4.6],
+    },
+  ],
 };
 
 export default function Landing(props) {
@@ -48,28 +48,27 @@ export default function Landing(props) {
                       ticks: { display: false, beginAtZero: true },
                       gridLines: {
                         display: false,
-                        drawBorder: false
-                      }
-                    }
+                        drawBorder: false,
+                      },
+                    },
                   ],
                   xAxes: [
                     {
                       gridLines: {
                         display: false,
-                        drawBorder: false
-                      }
-                    }
-                  ]
+                        drawBorder: false,
+                      },
+                    },
+                  ],
                 },
-                title: { display: true, text: 'Count by day of week' }
+                title: { display: true, text: 'Count by day of week' },
               }}
             />
           </div>
           <div className="card-body">
             <h5 className="card-title">Patterns</h5>
             <p className="card-text">
-              When and on which day do you consume the most beer? Which year did
-              you consume the most?
+              When and on which day do you consume the most beer? Which year did you consume the most?
             </p>
           </div>
         </div>
@@ -79,9 +78,7 @@ export default function Landing(props) {
           </div>
           <div className="card-body">
             <h5 className="card-title">Interactive map</h5>
-            <p className="card-text">
-              See where you have been and discover your favorite countries.
-            </p>
+            <p className="card-text">See where you have been and discover your favorite countries.</p>
           </div>
         </div>
         <div className="card">
@@ -94,32 +91,31 @@ export default function Landing(props) {
                   yAxes: [
                     {
                       ticks: {
-                        display: false
+                        display: false,
                       },
                       gridLines: {
                         display: false,
-                        drawBorder: false
-                      }
-                    }
+                        drawBorder: false,
+                      },
+                    },
                   ],
                   xAxes: [
                     {
                       gridLines: {
                         display: false,
-                        drawBorder: false
-                      }
-                    }
-                  ]
+                        drawBorder: false,
+                      },
+                    },
+                  ],
                 },
-                title: { display: true, text: 'Average rating by year' }
+                title: { display: true, text: 'Average rating by year' },
               }}
             />
           </div>
           <div className="card-body">
             <h5 className="card-title">Trends</h5>
             <p className="card-text">
-              Are you getting more skeptical or are you choosing better bers?
-              Watch how your rating changes over time.
+              Are you getting more skeptical or are you choosing better bers? Watch how your rating changes over time.
             </p>
           </div>
         </div>

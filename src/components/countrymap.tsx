@@ -6,12 +6,13 @@ import { Col } from 'reactstrap';
 import axios from 'axios';
 import { API_ROOT } from '../api/api-config';
 
-import { CountryHoverMap } from './countryhovermap';
+import { CountryHoverMap } from './maps/countryhovermap';
 import CountryStats from './countrystats';
 import { ErrorBoundary } from './errorboundary';
-import { BeerTable } from './beertable';
+import { BeerTable } from './tables/beertable';
 import { Loading } from './loading';
 import { Error } from './error';
+import { CountryData } from '../types';
 
 interface CountryMapProps {
   username?: string;
@@ -19,7 +20,7 @@ interface CountryMapProps {
 }
 
 const CountryMap: React.FC<CountryMapProps> = ({ username, country }): JSX.Element => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<CountryData>();
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const CountryMap: React.FC<CountryMapProps> = ({ username, country }): JSX.Eleme
         })
         .catch(error => {
           setError(true);
+          console.error(error);
         });
     }
   }, [username, country]);
@@ -42,13 +44,11 @@ const CountryMap: React.FC<CountryMapProps> = ({ username, country }): JSX.Eleme
   if (!data) {
     if (error) {
       return <Error />;
-    } else {
-      return <Loading />;
     }
+    return <Loading />;
   }
-
   const beers = data.breweries
-    .map(function(brewery) {
+    .map(brewery => {
       return brewery.beers;
     })
     .flat();

@@ -4,19 +4,16 @@ import { connect } from 'react-redux';
 import 'react-flag-icon-css';
 
 import HoverMap from './hovermap';
-import { Loading } from './loading';
+import { Loading } from '../loading';
 
-import { fetchCountries } from '../actions/map';
+import { fetchCountries } from '../../actions/map';
 
 function MockMap({ countries, dispatch, username }) {
-  useEffect(
-    () => {
-      if (username !== '') {
-        dispatch(fetchCountries(username));
-      }
-    },
-    [dispatch, username]
-  );
+  useEffect(() => {
+    if (username !== '') {
+      dispatch(fetchCountries(username));
+    }
+  }, [dispatch, username]);
 
   if (!countries.length) {
     return <Loading />;
@@ -24,14 +21,14 @@ function MockMap({ countries, dispatch, username }) {
 
   return (
     <>
-      <HoverMap countries={countries} interactive={false} region={"World"} />
+      <HoverMap countries={countries} interactive={false} region={'World'} />
     </>
   );
 }
 
 const mapStateToProps = state => {
   return {
-    countries: state.countries
+    countries: state.countries,
   };
 };
 
