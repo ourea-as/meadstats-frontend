@@ -4,7 +4,7 @@ import axios from 'axios';
 import 'react-flag-icon-css';
 import { Nav, NavItem, Col } from 'reactstrap';
 
-import HoverMap from './maps/hovermap';
+import { HoverMap } from './maps/hovermap';
 import CountryTable from './tables/countrytable';
 import { ErrorBoundary } from './errorboundary';
 import { Loading } from './loading';

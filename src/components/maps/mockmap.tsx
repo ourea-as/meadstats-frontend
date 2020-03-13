@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import 'react-flag-icon-css';
 
-import HoverMap from './hovermap';
+import { HoverMap } from './hovermap';
 import { Loading } from '../loading';
 
 import { API_ROOT } from '../../api/api-config';

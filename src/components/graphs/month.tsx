@@ -2,17 +2,13 @@ import React from 'react';
 
 import { Bar, Line } from 'react-chartjs-2';
 
-const getDayInYear = () => {
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now - start + (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-  const oneDay = 1000 * 60 * 60 * 24;
-  const day = Math.floor(diff / oneDay);
-  return day;
+type MonthChartProps = {
+  data: any;
+  ratingData: any;
 };
 
-export const YearChart = props => {
-  const { data, ratingData, labels } = props;
+export const MonthChart: React.FC<MonthChartProps> = props => {
+  const { data, ratingData } = props;
 
   let x = 0;
   const len = ratingData.length;
@@ -22,36 +18,45 @@ export const YearChart = props => {
   }
 
   const barData = {
-    labels: labels,
+    labels: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
     datasets: [
       {
-        label: 'Consumed',
-        stack: 'stack',
         backgroundColor: '#343a40',
         borderColor: '#01070D',
         borderWidth: 2,
         data: data,
       },
-
-      {
-        label: 'Projection',
-        stack: 'stack',
-        backgroundColor: '#00000000',
-        borderColor: '#01070D',
-        borderWidth: 2,
-        data: [...data].map((d, index) => {
-          if (index === data.length - 1) {
-            return Math.floor((d / getDayInYear()) * 365);
-          } else {
-            return 0;
-          }
-        }),
-      },
     ],
   };
 
   const ratingBarData = {
-    labels: labels,
+    labels: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
     datasets: [
       {
         borderColor: '#01070D',
@@ -87,7 +92,7 @@ export const YearChart = props => {
                 },
               ],
             },
-            title: { display: true, text: 'Count by Year' },
+            title: { display: true, text: 'Count by Month' },
           }}
         />
       </div>
@@ -115,7 +120,7 @@ export const YearChart = props => {
                 },
               ],
             },
-            title: { display: true, text: 'Average rating by year' },
+            title: { display: true, text: 'Average rating by month' },
           }}
         />
       </div>
