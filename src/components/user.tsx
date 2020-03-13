@@ -89,11 +89,11 @@ export const User: React.FunctionComponent<UserProps> = props => {
         setLoading(false);
         console.error(error);
       });
-  }, []);
+  }, [username]);
 
   useEffect(() => {
     if (user === undefined && loading === false) loadUser();
-  }, [username, loading, user]);
+  }, [username, loading, loadUser, user]);
 
   const handleUpdateProgress = useCallback(data => {
     console.log('Progress!');
@@ -114,7 +114,7 @@ export const User: React.FunctionComponent<UserProps> = props => {
     }
 
     loadUser();
-  }, []);
+  }, [loadUser, socket]);
 
   const updateUser = useCallback(() => {
     const token = window.localStorage.getItem('authToken') || null;
@@ -127,7 +127,7 @@ export const User: React.FunctionComponent<UserProps> = props => {
 
     socket.emit('update', { token, username: user?.userName });
     setUpdating(true);
-  }, [user]);
+  }, [user, handleUpdateFinished, handleUpdateProgress]);
 
   return loading || user === undefined ? (
     <Loading />

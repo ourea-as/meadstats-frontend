@@ -14,6 +14,7 @@ import { Routes } from './routes';
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies(['jwt_token']);
 
   const logoutUser = (): void => {
