@@ -58,7 +58,6 @@ const defaultSorted = [
 
 type CountryTableProps = {
   countries: any;
-  history: any;
 };
 
 const CountryTable: React.FC<CountryTableProps> = props => {

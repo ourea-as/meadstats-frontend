@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import axios from 'axios';
 
 import 'react-flag-icon-css';
 import { Nav, NavItem, Col } from 'reactstrap';
@@ -9,18 +9,33 @@ import CountryTable from './tables/countrytable';
 import { ErrorBoundary } from './errorboundary';
 import { Loading } from './loading';
 
-import { fetchCountries } from '../actions/map';
+import { API_ROOT } from '../api/api-config';
 
 const regions = ['World', 'Africa', 'Asia', 'Europe', 'Oceania', 'North America', 'South America'];
 
-function Map({ countries, dispatch, username }) {
+type MapProps = {
+  username: string;
+};
+
+const Map: React.FC<MapProps> = ({ username }) => {
   const [region, setRegion] = useState('World');
+  const [countries, setCountries] = useState([]);
 
   useEffect(() => {
     if (username !== '') {
-      dispatch(fetchCountries(username));
+      axios
+        .get(`${API_ROOT}/v1/users/${username}/countries`)
+        .then(({ data }) => {
+          if (data.status === 'success') {
+            const countries = data.data.countries;
+            setCountries(countries);
+          }
+        })
+        .catch(error => {
+          throw error;
+        });
     }
-  }, [dispatch, username]);
+  }, [username]);
 
   if (!countries.length) {
     return <Loading />;
@@ -35,7 +50,7 @@ function Map({ countries, dispatch, username }) {
               <NavItem
                 className={value === region ? 'active user-nav-tab' : ''}
                 key={index}
-                onClick={() => setRegion(value)}
+                onClick={(): void => setRegion(value)}
               >
                 <span className="nav-link user-nav-link  user-nav-tab">{value}</span>
               </NavItem>
@@ -55,12 +70,6 @@ function Map({ countries, dispatch, username }) {
       </Col>
     </>
   );
-}
-
-const mapStateToProps = state => {
-  return {
-    countries: state.countries,
-  };
 };
 
-export default connect(mapStateToProps)(Map);
+export default Map;

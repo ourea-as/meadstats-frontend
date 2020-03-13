@@ -1,1 +1,0 @@
-export const UPDATE_COUNTRIES = 'UPDATE_COUNTRIES';
