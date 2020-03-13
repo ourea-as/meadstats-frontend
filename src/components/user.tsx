@@ -5,7 +5,7 @@ import { Nav, NavItem, Row } from 'reactstrap';
 
 import axios from 'axios';
 import socketIOClient from 'socket.io-client';
-import { User as IUser } from '../interfaces';
+import { User as IUser } from '../types';
 
 import { API_ROOT } from '../api/api-config';
 
@@ -18,7 +18,7 @@ import { Loading } from './loading';
 
 const PatternsSuspense = React.lazy(() => import(/* webpackChunkName: "patterns" */ './patterns'));
 
-const Patterns = props => (
+const Patterns = (props): JSX.Element => (
   <React.Suspense fallback={<Loading />}>
     <PatternsSuspense {...props} />
   </React.Suspense>
@@ -26,7 +26,7 @@ const Patterns = props => (
 
 const FriendsSuspense = React.lazy(() => import(/* webpackChunkName: "friends" */ './friends'));
 
-const Friends = props => (
+const Friends = (props): JSX.Element => (
   <React.Suspense fallback={<Loading />}>
     <FriendsSuspense {...props} />
   </React.Suspense>
@@ -34,7 +34,7 @@ const Friends = props => (
 
 const MapSuspense = React.lazy(() => import(/* webpackChunkName: "map" */ './map'));
 
-const Map = props => (
+const Map = (props): JSX.Element => (
   <React.Suspense fallback={<Loading />}>
     <MapSuspense {...props} />
   </React.Suspense>
@@ -42,7 +42,7 @@ const Map = props => (
 
 const CountryMapSuspense = React.lazy(() => import(/* webpackChunkName: "countrymap" */ './countrymap'));
 
-const CountryMap = props => (
+const CountryMap = (props): JSX.Element => (
   <React.Suspense fallback={<Loading />}>
     <CountryMapSuspense {...props} />
   </React.Suspense>
@@ -65,7 +65,6 @@ export const User: React.FunctionComponent<UserProps> = props => {
   const [socket, setSocket] = useState<any>(null);
 
   const loadUser = useCallback(() => {
-    console.log('Loading suer!');
     axios
       .get(`${API_ROOT}/v1/users/${username}`)
       .then(({ data }) => {
@@ -88,6 +87,7 @@ export const User: React.FunctionComponent<UserProps> = props => {
       .catch(({ error }) => {
         setExist(false);
         setLoading(false);
+        console.error(error);
       });
   }, []);
 
@@ -150,11 +150,13 @@ export const User: React.FunctionComponent<UserProps> = props => {
               <Switch>
                 <Route
                   path="/user/:name/map/:country"
-                  render={({ match }) => <CountryMap username={user.userName} country={match.params.country} />}
+                  render={({ match }): JSX.Element => (
+                    <CountryMap username={user.userName} country={match.params.country} />
+                  )}
                 />
-                <Route path="/user/:name/map" render={() => <Map username={user.userName} />} />
-                <Route path="/user/:name/patterns" render={() => <Patterns username={user.userName} />} />
-                <Route path="/user/:name/friends" render={() => <Friends username={user.userName} />} />
+                <Route path="/user/:name/map" render={(): JSX.Element => <Map username={user.userName} />} />
+                <Route path="/user/:name/patterns" render={(): JSX.Element => <Patterns username={user.userName} />} />
+                <Route path="/user/:name/friends" render={(): JSX.Element => <Friends username={user.userName} />} />
               </Switch>
             </ErrorBoundary>
           </Row>
@@ -166,7 +168,7 @@ export const User: React.FunctionComponent<UserProps> = props => {
   );
 };
 
-const UserNavigation = ({ user }) => (
+const UserNavigation = ({ user }): JSX.Element => (
   <Nav pills horizontal="center" className="user-tabs">
     <UserNavigationTab text="Map" route="map" user={user} />
     <UserNavigationTab text="Patterns" route="patterns" user={user} />
@@ -174,7 +176,7 @@ const UserNavigation = ({ user }) => (
   </Nav>
 );
 
-const UserNavigationTab = ({ text, route, user }) => (
+const UserNavigationTab = ({ text, route, user }): JSX.Element => (
   <NavLink className="user-nav-tab" activeClassName="active" to={`/user/${user}/${route}`}>
     <NavItem>
       <span className="nav-link user-nav-link">{text}</span>

@@ -9,14 +9,12 @@ type DataPoint = {
 
 type GraphChartProps = {
   data: Array<DataPoint>;
-  labels: string[];
 };
 
-const GraphChart: React.FC<GraphChartProps> = ({ data, labels }) => {
+const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
   const formattedData = data.map(x => ({ x: new Date(x.date), y: x.count }));
 
   const barData = {
-    labels: labels,
     datasets: [
       {
         backgroundColor: '#343a40',

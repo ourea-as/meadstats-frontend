@@ -7,7 +7,7 @@ import axios from 'axios';
 import { API_ROOT } from '../api/api-config';
 
 import { CountryHoverMap } from './maps/countryhovermap';
-import CountryStats from './countrystats';
+import { CountryStats } from './countrystats';
 import { ErrorBoundary } from './errorboundary';
 import { BeerTable } from './tables/beertable';
 import { Loading } from './loading';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -8,14 +8,14 @@ import './table.css';
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-function getDaysAgo(date) {
+const getDaysAgo = date => {
   const updatedate = Date.parse(date);
   const datenow = Date.now();
 
   return Math.floor((datenow - updatedate) / _MS_PER_DAY);
-}
+};
 
-function nameFormatter(cell, row) {
+const nameFormatter = (cell, row) => {
   return (
     <span className="table-flex">
       <img className="table-profile-picture" src={row.avatar} alt={`${row.user_name}`} />
@@ -27,14 +27,14 @@ function nameFormatter(cell, row) {
       </div>
     </span>
   );
-}
+};
 
-function updatedFormatter(cell) {
+const updatedFormatter = cell => {
   if (cell === null) {
     return <span>Never</span>;
   }
   return <span>{getDaysAgo(cell)} days ago</span>;
-}
+};
 
 const columns = [
   {
@@ -73,29 +73,33 @@ const defaultSorted = [
   },
 ];
 
-class FriendsTable extends React.Component {
-  render() {
-    const { friends } = this.props;
+type FriendsTableProps = {
+  friends: any;
+};
 
-    const rowEvents = {
-      onClick: (e, row) => {
-        this.props.history.push('../' + row.user_name);
-      },
-    };
+const FriendsTable: React.FC<FriendsTableProps> = props => {
+  const { friends } = props;
 
-    return (
-      <BootstrapTable
-        bootstrap4
-        bordered={false}
-        keyField="id"
-        data={friends}
-        columns={columns}
-        defaultSorted={defaultSorted}
-        rowEvents={rowEvents}
-        wrapperClasses="table-responsive"
-      />
-    );
-  }
-}
+  const history = useHistory();
 
-export default withRouter(FriendsTable);
+  const rowEvents = {
+    onClick: (e, row) => {
+      history.push('../' + row.user_name);
+    },
+  };
+
+  return (
+    <BootstrapTable
+      bootstrap4
+      bordered={false}
+      keyField="id"
+      data={friends}
+      columns={columns}
+      defaultSorted={defaultSorted}
+      rowEvents={rowEvents}
+      wrapperClasses="table-responsive"
+    />
+  );
+};
+
+export default FriendsTable;

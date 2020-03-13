@@ -3,6 +3,13 @@ import { UPDATE_COUNTRIES } from './types';
 import axios from 'axios';
 import { API_ROOT } from '../api/api-config';
 
+export function updateCountries(countries) {
+  return {
+    type: UPDATE_COUNTRIES,
+    countries,
+  };
+}
+
 export function fetchCountries(username) {
   return dispatch => {
     return axios
@@ -16,12 +23,5 @@ export function fetchCountries(username) {
       .catch(error => {
         throw error;
       });
-  };
-}
-
-export function updateCountries(countries) {
-  return {
-    type: UPDATE_COUNTRIES,
-    countries,
   };
 }

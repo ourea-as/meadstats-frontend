@@ -4,7 +4,11 @@ import FlagIcon from './flagicon';
 
 import './countrystats.css';
 
-export default function CountryStats(props) {
+type CountryStatsProps = {
+  data: any;
+};
+
+export const CountryStats: React.FC<CountryStatsProps> = props => {
   const { data } = props;
 
   return (
@@ -14,4 +18,4 @@ export default function CountryStats(props) {
       </div>
     </>
   );
-}
+};

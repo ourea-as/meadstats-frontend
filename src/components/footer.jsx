@@ -1,6 +1,6 @@
 import React from 'react';
 
-import UntappdAttribution from '../assets/pbu_160_black.png';
+import UntappdAttribution from '../assets/untappd_logo.png';
 import './footer.css';
 
 export const Footer = () => (

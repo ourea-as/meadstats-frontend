@@ -27,7 +27,7 @@ const ratingBarData = {
   ],
 };
 
-export default function Landing(props) {
+const Landing: React.FC = () => {
   return (
     <>
       <Jumbotron className="bg-dark text-white">
@@ -131,4 +131,6 @@ export default function Landing(props) {
       </div>
     </>
   );
-}
+};
+
+export default Landing;

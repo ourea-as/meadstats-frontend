@@ -2,13 +2,19 @@ import React from 'react';
 
 import { Error } from './error';
 
-export class ErrorBoundary extends React.Component {
+type ErrorBoundaryProps = {};
+type ErrorBoundaryState = {
+  hasError: boolean;
+};
+
+export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
   }
 
-  componentDidCatch() {
+  componentDidCatch(error: Error | null, info: object) {
+    console.error(error);
     this.setState({ hasError: true });
   }
 

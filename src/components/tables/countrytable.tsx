@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -9,16 +9,16 @@ import Flagicon from '../flagicon';
 
 import './table.css';
 
-function countryFormatter(cell, row) {
+const countryFormatter = (cell, row): JSX.Element => {
   return (
     <span className="table-flex">
       <Flagicon code={row.code.toLowerCase()} size="lg" className="country-table-flag" />
       {row.name}
     </span>
   );
-}
+};
 
-function ratingFormatter(cell) {
+const ratingFormatter = (cell): JSX.Element => {
   if (cell === 0) {
     return <span>No rating</span>;
   }
@@ -27,7 +27,7 @@ function ratingFormatter(cell) {
       {cell.toFixed(2)}
     </Progress>
   );
-}
+};
 
 const columns = [
   {
@@ -56,29 +56,34 @@ const defaultSorted = [
   },
 ];
 
-class CountryTable extends React.Component {
-  render() {
-    const { countries } = this.props;
+type CountryTableProps = {
+  countries: any;
+  history: any;
+};
 
-    const rowEvents = {
-      onClick: (e, row) => {
-        this.props.history.push('map/' + row.code);
-      },
-    };
+const CountryTable: React.FC<CountryTableProps> = props => {
+  const { countries } = props;
 
-    return (
-      <BootstrapTable
-        bootstrap4
-        bordered={false}
-        keyField="name"
-        data={countries}
-        columns={columns}
-        defaultSorted={defaultSorted}
-        rowEvents={rowEvents}
-        wrapperClasses="table-responsive"
-      />
-    );
-  }
-}
+  const history = useHistory();
 
-export default withRouter(CountryTable);
+  const rowEvents = {
+    onClick: (e, row) => {
+      history.push('map/' + row.code);
+    },
+  };
+
+  return (
+    <BootstrapTable
+      bootstrap4
+      bordered={false}
+      keyField="name"
+      data={countries}
+      columns={columns}
+      defaultSorted={defaultSorted}
+      rowEvents={rowEvents}
+      wrapperClasses="table-responsive"
+    />
+  );
+};
+
+export default CountryTable;

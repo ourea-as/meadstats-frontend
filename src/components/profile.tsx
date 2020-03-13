@@ -3,7 +3,7 @@ import { Button, Col, Progress } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import { User } from '../interfaces';
+import { User } from '../types';
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
