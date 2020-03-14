@@ -93,6 +93,7 @@ export const HoverMap: React.FC<HoverMapProps> = props => {
                     onClick={handleMapClick}
                     style={{
                       default: {
+                        cursor: 'pointer',
                         fill: countriesMap[geography.properties.iso_a2.toUpperCase()]
                           ? popScale(countriesMap[geography.properties.iso_a2.toUpperCase()])
                           : '#ffffff',
@@ -101,12 +102,14 @@ export const HoverMap: React.FC<HoverMapProps> = props => {
                         outline: 'none',
                       },
                       hover: {
+                        cursor: 'pointer',
                         fill: '#263238',
                         stroke: '#607D8B',
                         strokeWidth: 0.75,
                         outline: 'none',
                       },
                       pressed: {
+                        cursor: 'pointer',
                         fill: '#263238',
                         stroke: '#607D8B',
                         strokeWidth: 0.75,

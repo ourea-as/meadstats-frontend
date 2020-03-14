@@ -116,18 +116,21 @@ export const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): JSX.E
                     projection={projection}
                     style={{
                       default: {
+                        cursor: 'pointer',
                         fill: '#ffffff',
                         stroke: '#607D8B',
                         strokeWidth: 0.75,
                         outline: 'none',
                       },
                       hover: {
+                        cursor: 'pointer',
                         fill: '#263238',
                         stroke: '#607D8B',
                         strokeWidth: 0.75,
                         outline: 'none',
                       },
                       pressed: {
+                        cursor: 'pointer',
                         fill: '#ffffff',
                         stroke: '#607D8B',
                         strokeWidth: 0.75,
