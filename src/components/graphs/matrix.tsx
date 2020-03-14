@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { scaleLinear } from 'd3-scale';
 import { useWindowSize } from 'react-use';
@@ -16,10 +16,20 @@ type MatrixChartProps = {
 };
 
 const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
+  const [animationDuration, setAnimationDuration] = useState(0);
+
+  useEffect(() => {
+    setAnimationDuration(3000);
+  }, [setAnimationDuration]);
+
   const { width } = useWindowSize();
 
   // Show different amount on days depending on window size. Max 1 year, min a month
-  const filterDays = Math.max(30, Math.min(365, Math.round(width * (365 / 1140))));
+  const filterDays = Math.max(
+    30,
+    Math.min(270, Math.round(width * (270 / (1140 * (Math.log(width) / Math.log(14) / 2))))),
+  );
+
   const filteredData = data.filter(x => moment().diff(moment(x.date), 'days') < filterDays);
 
   const maxCount = Math.max(...filteredData.map(x => x.countDay), 0);
@@ -44,7 +54,7 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
 
   // Remove dates present in dataset
   formattedData.forEach(x => {
-    dates.delete(x.x.format('YYYY-MM-DD'));
+    dates.delete(moment(x.x).format('YYYY-MM-DD'));
   });
 
   // Generate missing dates
@@ -56,6 +66,8 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
       v: 0,
     });
   });
+
+  formattedData.sort((a, b) => (a.x > b.x ? -1 : 1));
 
   const colorScale = scaleLinear()
     .domain([0, Math.ceil(Math.sqrt(maxCount)), maxCount])
@@ -79,7 +91,7 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
         borderSkipped: true,
         width: (ctx): number => {
           const a = ctx.chart.chartArea;
-          return (a.right - a.left) / (filterDays / 7) - 3;
+          return (a.right - a.left) / (filterDays / 6) - 5;
         },
         height: (ctx): number => {
           const a = ctx.chart.chartArea;
@@ -94,6 +106,10 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
     maintainAspectRatio: false,
     legend: {
       display: false,
+    },
+    animation: {
+      duration: animationDuration,
+      easing: 'easeOutCubic',
     },
     tooltips: {
       intersect: false,
@@ -144,7 +160,6 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
           ticks: {
             // workaround, see: https://github.com/chartjs/Chart.js/pull/6257
             maxRotation: 90,
-            padding: 10,
             reverse: true,
           },
           gridLines: {
