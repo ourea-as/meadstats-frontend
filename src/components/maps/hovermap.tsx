@@ -74,9 +74,9 @@ export const HoverMap: React.FC<HoverMapProps> = props => {
             {(geographies, projection): Array<JSX.Element> =>
               geographies
                 .filter((geography: any) => region === 'World' || geography.properties.continent === region)
-                .map((geography: any, i) => (
+                .map((geography: any) => (
                   <Geography
-                    key={i}
+                    key={geography.properties.name}
                     data-tip={`
                     <div class="tooltip-container">
                       <div class="tooltip-text">

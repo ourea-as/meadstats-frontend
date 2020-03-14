@@ -102,10 +102,10 @@ export const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): JSX.E
         >
           <ZoomableGroup center={[centroids[data.code].centroid[0], centroids[data.code].centroid[1]]} disablePanning>
             <Geographies geography={geography} disableOptimization>
-              {(geographies, projection) =>
+              {(geographies, projection): Array<JSX.Element> =>
                 geographies.map((geography: any) => (
                   <Geography
-                    key={geography.srmKey}
+                    key={geography.properties.NAME_1}
                     data-tip={`
                   <div class="tooltip-container">
                     <div class="tooltip-text">
