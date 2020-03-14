@@ -128,7 +128,7 @@ export const TimeOfDayChart: React.FC<TimeOfDayChartProps> = props => {
             scales: {
               yAxes: [
                 {
-                  ticks: { beginAtZero: true, maxTicksLimit: 5, max: 5 },
+                  ticks: { beginAtZero: true, maxTicksLimit: 10, max: 5 },
                   gridLines: {
                     display: true,
                     drawBorder: true,

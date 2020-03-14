@@ -11,6 +11,7 @@ import { MonthChart } from './graphs/month';
 import { YearChart } from './graphs/year';
 import GraphChart from './graphs/graph';
 import { APIResponse, MonthsData, DayOfWeekData, TimeOfDayData, YearsData, GraphData } from '../types';
+import MatrixChart from './graphs/matrix';
 
 const getDataCount = (data, field, number, dataField = 'count'): number => {
   const outdata = data.find(x => x[field] === number);
@@ -114,6 +115,7 @@ const Patterns: React.FC<PatternsProps> = props => {
   return (
     <>
       <GraphChart data={graphData} />
+      <MatrixChart data={graphData} />
       <DayOfWeekChart data={weekDataToArray(weekdayData)} ratingData={weekRatingToArray(weekdayData)} />
       <TimeOfDayChart data={hourDataToArray(hourData)} ratingData={hourRatingToArray(hourData)} />
       <MonthChart data={monthDataToArray(monthData)} ratingData={monthRatingToArray(monthData)} />

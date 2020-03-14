@@ -13,6 +13,12 @@ type GraphChartProps = {
 
 const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
   const formattedData = data.map(x => ({ x: new Date(x.date), y: x.count }));
+  const today = new Date();
+
+  if (!formattedData.some(x => x.x.toDateString() === today.toDateString())) {
+    const maxCount = Math.max(...formattedData.map(x => x.y), 0);
+    formattedData.push({ x: today, y: maxCount });
+  }
 
   const barData = {
     datasets: [
@@ -55,7 +61,7 @@ const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
           type: 'time',
           time: {
             unit: 'year',
-            tooltipFormat: 'LL',
+            tooltipFormat: 'D MMMM',
           },
           gridLines: {
             display: false,

@@ -80,6 +80,7 @@ export type DayOfWeekData = {
 
 export type GraphData = {
   count: number;
+  countDay: number;
   date: string;
 };
 
