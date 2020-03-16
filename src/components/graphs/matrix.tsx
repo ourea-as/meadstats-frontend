@@ -95,7 +95,7 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
         },
         height: (ctx): number => {
           const a = ctx.chart.chartArea;
-          return (a.bottom - a.top) / 7 - 3;
+          return (a.right - a.left) / (filterDays / 6) - 5;
         },
       },
     ],
