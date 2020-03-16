@@ -96,19 +96,16 @@ export const User: React.FunctionComponent<UserProps> = props => {
   }, [username, loading, loadUser, user]);
 
   const handleUpdateProgress = useCallback(data => {
-    console.log('Progress!');
     setUpdateCount(data.progress);
     setUpdateTotal(data.total);
   }, []);
 
   const handleUpdateFinished = useCallback(() => {
-    console.log('Finished!');
     setUpdateCount(0);
     setUpdateTotal(0);
     setUpdating(false);
 
     if (socket !== null) {
-      console.log('Closing');
       socket.close();
       setSocket(null);
     }
@@ -123,7 +120,6 @@ export const User: React.FunctionComponent<UserProps> = props => {
     setSocket(socket);
     socket.on('update:progress', handleUpdateProgress);
     socket.on('update:finished', handleUpdateFinished);
-    console.log(user);
 
     socket.emit('update', { token, username: user?.userName });
     setUpdating(true);
