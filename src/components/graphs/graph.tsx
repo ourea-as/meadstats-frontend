@@ -49,10 +49,10 @@ const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
     scales: {
       yAxes: [
         {
-          ticks: { beginAtZero: true, maxTicksLimit: 5 },
+          ticks: { beginAtZero: true, maxTicksLimit: 5, padding: 8 },
           gridLines: {
             display: true,
-            drawBorder: true,
+            drawBorder: false,
           },
         },
       ],
