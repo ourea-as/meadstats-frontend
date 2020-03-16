@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { Line } from 'react-chartjs-2';
+import moment from 'moment';
+import { useWindowSize } from 'react-use';
 
 type DataPoint = {
   date: string;
@@ -14,11 +16,22 @@ type GraphChartProps = {
 const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
   const formattedData = data.map(x => ({ x: new Date(x.date), y: x.count }));
   const today = new Date();
+  const { width } = useWindowSize();
 
+  const shouldDisplayMonths = data => {
+    const firstDate = data[0].x;
+
+    return moment().diff(moment(firstDate), 'days') < 365 * (width < 1000 ? 0.5 : 1) ? true : false;
+  };
+
+  // Create a data point today containing the same value as the last day with data
   if (!formattedData.some(x => x.x.toDateString() === today.toDateString())) {
     const maxCount = Math.max(...formattedData.map(x => x.y), 0);
     formattedData.push({ x: today, y: maxCount });
   }
+
+  formattedData.sort((a, b) => (a.x < b.x ? -1 : 1));
+  const months = shouldDisplayMonths(formattedData);
 
   const barData = {
     datasets: [
@@ -60,7 +73,10 @@ const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
         {
           type: 'time',
           time: {
-            unit: 'year',
+            unit: months ? 'month' : 'year',
+            displayFormats: {
+              month: 'MMM YY',
+            },
             tooltipFormat: 'D MMMM',
           },
           gridLines: {
