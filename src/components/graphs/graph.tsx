@@ -18,7 +18,7 @@ const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
   const today = new Date();
   const { width } = useWindowSize();
 
-  const shouldDisplayMonths = data => {
+  const shouldDisplayMonths = (data: any): boolean => {
     const firstDate = data[0].x;
 
     return moment().diff(moment(firstDate), 'days') < 365 * (width < 1000 ? 0.5 : 1) ? true : false;

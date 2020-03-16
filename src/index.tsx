@@ -6,7 +6,6 @@ import { CookiesProvider } from 'react-cookie';
 
 import './index.css';
 import App from './app';
-import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <CookiesProvider>
@@ -16,5 +15,3 @@ ReactDOM.render(
   </CookiesProvider>,
   document.getElementById('root'),
 );
-
-serviceWorker.unregister();

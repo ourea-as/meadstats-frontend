@@ -19,6 +19,10 @@ module.exports = {
     "react/jsx-filename-extension": [1, {
       "extensions": [".jsx", ".tsx"]
     }],
+
+    // Enable later
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
   },
   settings: {
     react: {
