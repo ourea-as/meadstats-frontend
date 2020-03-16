@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Bar, Line } from 'react-chartjs-2';
+import { RatingLine } from './charts/ratingLine';
+import { CountBar } from './charts/countBar';
 
 type TimeOfDayChartProps = {
   data: any;
@@ -93,60 +94,10 @@ export const TimeOfDayChart: React.FC<TimeOfDayChartProps> = props => {
   return (
     <>
       <div className="col-md-6 col-xs-12 mb-4">
-        <Bar
-          data={barData}
-          legend={{ display: false }}
-          options={{
-            scales: {
-              yAxes: [
-                {
-                  ticks: { beginAtZero: true, maxTicksLimit: 5 },
-                  gridLines: {
-                    display: true,
-                    drawBorder: true,
-                  },
-                },
-              ],
-              xAxes: [
-                {
-                  gridLines: {
-                    display: false,
-                    drawBorder: false,
-                  },
-                },
-              ],
-            },
-            title: { display: true, text: 'Count by hour of day' },
-          }}
-        />
+        <CountBar data={barData} title="Count by hour of day" />
       </div>
       <div className="col-md-6 col-xs-12 mb-4">
-        <Line
-          data={ratingBarData}
-          legend={{ display: false }}
-          options={{
-            scales: {
-              yAxes: [
-                {
-                  ticks: { beginAtZero: true, maxTicksLimit: 10, max: 5 },
-                  gridLines: {
-                    display: true,
-                    drawBorder: true,
-                  },
-                },
-              ],
-              xAxes: [
-                {
-                  gridLines: {
-                    display: false,
-                    drawBorder: false,
-                  },
-                },
-              ],
-            },
-            title: { display: true, text: 'Average rating by hour of day' },
-          }}
-        />
+        <RatingLine data={ratingBarData} title="Average rating by hour of day" />
       </div>
     </>
   );

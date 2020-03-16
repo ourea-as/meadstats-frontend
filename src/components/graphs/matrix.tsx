@@ -3,7 +3,7 @@ import moment from 'moment';
 import { scaleLinear } from 'd3-scale';
 import { useWindowSize } from 'react-use';
 
-import { Matrix } from './matrixChart';
+import { Matrix } from './charts/matrixChart';
 
 type DataPoint = {
   date: string;
