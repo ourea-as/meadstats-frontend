@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { scaleLinear } from 'd3-scale';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
+import { renderToString } from 'react-dom/server';
+
+import Flagicon from '../flagicon';
 
 import Data from '../../assets/maps/world.json';
 
@@ -32,6 +35,11 @@ type HoverMapProps = {
   countries: any;
   interactive: any;
   region: any;
+};
+
+const renderFlag = countrycode => {
+  if (countrycode === '-99') return '';
+  return renderToString(<Flagicon code={countrycode} size="lg" className="country-table-flag" />);
 };
 
 export const HoverMap: React.FC<HoverMapProps> = props => {
@@ -79,14 +87,17 @@ export const HoverMap: React.FC<HoverMapProps> = props => {
                     key={geography.properties.name}
                     data-tip={`
                     <div class="tooltip-container">
-                      <div class="tooltip-text">
-                        <p>${geography.properties.name}</p>
-                        <p>${
-                          countriesMap[geography.properties.iso_a2.toUpperCase()]
-                            ? countriesMap[geography.properties.iso_a2.toUpperCase()]
-                            : '0'
-                        } unique</p>
-                      </div>
+                        <div class="tooltip-image">
+                          ${renderFlag(geography.properties.iso_a2.toLowerCase())}
+                        </div>
+                        <div class="tooltip-text">
+                          <p>${geography.properties.name}</p>
+                          <p>${
+                            countriesMap[geography.properties.iso_a2.toUpperCase()]
+                              ? countriesMap[geography.properties.iso_a2.toUpperCase()]
+                              : '0'
+                          } unique</p>
+                        </div>
                     </div>`}
                     geography={geography}
                     projection={projection}
