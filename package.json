@@ -73,6 +73,13 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "bundlewatch" : {
+    "files": [
+      {
+        "path": "build/*.js"
+      }
+    ]
+  }
   "browserslist": {
     "production": [
       ">0.2%",
