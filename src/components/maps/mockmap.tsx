@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ReactElement } from 'react';
 import axios from 'axios';
 
 import 'react-flag-icon-css';
 
-import { HoverMap } from './hovermap';
 import { Loading } from '../loading';
 
 import { API_ROOT } from '../../api/api-config';
+
+const HoverMapSuspense = React.lazy(() => import(/* webpackChunkName: "hovermap" */ './hovermap'));
+
+const HoverMap = (props): ReactElement => (
+  <React.Suspense fallback={<Loading />}>
+    <HoverMapSuspense {...props} />
+  </React.Suspense>
+);
 
 type MockMapProps = {
   username: string;

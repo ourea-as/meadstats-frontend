@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 
 import 'react-flag-icon-css';
 import { Col } from 'reactstrap';
@@ -6,7 +6,6 @@ import { Col } from 'reactstrap';
 import axios from 'axios';
 import { API_ROOT } from '../api/api-config';
 
-import { CountryHoverMap } from './maps/countryhovermap';
 import { CountryStats } from './countrystats';
 import { ErrorBoundary } from './errorboundary';
 import { BeerTable } from './tables/beertable';
@@ -14,12 +13,22 @@ import { Loading } from './loading';
 import { Error } from './error';
 import { CountryData } from '../types';
 
+const CountryHoverMapSuspense = React.lazy(() =>
+  import(/* webpackChunkName: "countryhovermap" */ './maps/countryhovermap'),
+);
+
+const CountryHoverMap = (props): ReactElement => (
+  <React.Suspense fallback={<Loading />}>
+    <CountryHoverMapSuspense {...props} />
+  </React.Suspense>
+);
+
 interface CountryMapProps {
   username?: string;
   country?: string;
 }
 
-const CountryMap: React.FC<CountryMapProps> = ({ username, country }): JSX.Element => {
+const CountryMap: React.FC<CountryMapProps> = ({ username, country }): ReactElement => {
   const [data, setData] = useState<CountryData>();
   const [error, setError] = useState(false);
 

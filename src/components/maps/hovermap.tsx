@@ -42,7 +42,7 @@ const renderFlag = countrycode => {
   return renderToString(<Flagicon code={countrycode} size="lg" className="country-table-flag" />);
 };
 
-export const HoverMap: React.FC<HoverMapProps> = props => {
+const HoverMap: React.FC<HoverMapProps> = props => {
   const { countries, interactive, region } = props;
 
   const history = useHistory();
@@ -137,3 +137,5 @@ export const HoverMap: React.FC<HoverMapProps> = props => {
     </>
   );
 };
+
+export default HoverMap;

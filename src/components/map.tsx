@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import axios from 'axios';
 
 import 'react-flag-icon-css';
 import { Nav, NavItem, Col } from 'reactstrap';
 
-import { HoverMap } from './maps/hovermap';
 import CountryTable from './tables/countrytable';
 import { ErrorBoundary } from './errorboundary';
 import { Loading } from './loading';
@@ -16,6 +15,14 @@ const regions = ['World', 'Africa', 'Asia', 'Europe', 'Oceania', 'North America'
 type MapProps = {
   username: string;
 };
+
+const HoverMapSuspense = React.lazy(() => import(/* webpackChunkName: "hovermap" */ './maps/hovermap'));
+
+const HoverMap = (props): ReactElement => (
+  <React.Suspense fallback={<Loading />}>
+    <HoverMapSuspense {...props} />
+  </React.Suspense>
+);
 
 const Map: React.FC<MapProps> = ({ username }) => {
   const [region, setRegion] = useState('World');

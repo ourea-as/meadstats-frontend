@@ -35,7 +35,7 @@ const centroids: {
   };
 } = centroidsJson;
 
-export const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): JSX.Element => {
+const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): JSX.Element => {
   const [geography, setGeography] = useState<TopoJSON.Topology>();
   const [scale, setScale] = useState<number>(100);
   const [centroid, setCentroid] = useState<Point>([0, 0]);
@@ -224,3 +224,5 @@ export const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): JSX.E
   }
   return <Loading />;
 };
+
+export default CountryHoverMap;
