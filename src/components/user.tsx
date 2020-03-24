@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
 
 import { Nav, NavItem, Row } from 'reactstrap';
@@ -18,7 +18,7 @@ import { Loading } from './loading';
 
 const PatternsSuspense = React.lazy(() => import(/* webpackChunkName: "patterns" */ './patterns'));
 
-const Patterns = (props): JSX.Element => (
+const Patterns = (props): ReactElement => (
   <React.Suspense fallback={<Loading />}>
     <PatternsSuspense {...props} />
   </React.Suspense>
@@ -26,7 +26,7 @@ const Patterns = (props): JSX.Element => (
 
 const FriendsSuspense = React.lazy(() => import(/* webpackChunkName: "friends" */ './friends'));
 
-const Friends = (props): JSX.Element => (
+const Friends = (props): ReactElement => (
   <React.Suspense fallback={<Loading />}>
     <FriendsSuspense {...props} />
   </React.Suspense>
@@ -34,7 +34,7 @@ const Friends = (props): JSX.Element => (
 
 const MapSuspense = React.lazy(() => import(/* webpackChunkName: "map" */ './map'));
 
-const Map = (props): JSX.Element => (
+const Map = (props): ReactElement => (
   <React.Suspense fallback={<Loading />}>
     <MapSuspense {...props} />
   </React.Suspense>
@@ -42,7 +42,7 @@ const Map = (props): JSX.Element => (
 
 const CountryMapSuspense = React.lazy(() => import(/* webpackChunkName: "countrymap" */ './countrymap'));
 
-const CountryMap = (props): JSX.Element => (
+const CountryMap = (props): ReactElement => (
   <React.Suspense fallback={<Loading />}>
     <CountryMapSuspense {...props} />
   </React.Suspense>
@@ -146,13 +146,13 @@ export const User: React.FunctionComponent<UserProps> = props => {
               <Switch>
                 <Route
                   path="/user/:name/map/:country"
-                  render={({ match }): JSX.Element => (
+                  render={({ match }): ReactElement => (
                     <CountryMap username={user.userName} country={match.params.country} />
                   )}
                 />
-                <Route path="/user/:name/map" render={(): JSX.Element => <Map username={user.userName} />} />
-                <Route path="/user/:name/patterns" render={(): JSX.Element => <Patterns username={user.userName} />} />
-                <Route path="/user/:name/friends" render={(): JSX.Element => <Friends username={user.userName} />} />
+                <Route path="/user/:name/map" render={(): ReactElement => <Map username={user.userName} />} />
+                <Route path="/user/:name/patterns" render={(): ReactElement => <Patterns username={user.userName} />} />
+                <Route path="/user/:name/friends" render={(): ReactElement => <Friends username={user.userName} />} />
               </Switch>
             </ErrorBoundary>
           </Row>
@@ -164,7 +164,7 @@ export const User: React.FunctionComponent<UserProps> = props => {
   );
 };
 
-const UserNavigation = ({ user }): JSX.Element => (
+const UserNavigation = ({ user }): ReactElement => (
   <Nav pills horizontal="center" className="user-tabs">
     <UserNavigationTab text="Map" route="map" user={user} />
     <UserNavigationTab text="Patterns" route="patterns" user={user} />
@@ -172,7 +172,7 @@ const UserNavigation = ({ user }): JSX.Element => (
   </Nav>
 );
 
-const UserNavigationTab = ({ text, route, user }): JSX.Element => (
+const UserNavigationTab = ({ text, route, user }): ReactElement => (
   <NavLink className="user-nav-tab" activeClassName="active" to={`/user/${user}/${route}`}>
     <NavItem>
       <span className="nav-link user-nav-link">{text}</span>

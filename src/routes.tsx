@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Logout from './components/logout';
@@ -17,21 +17,21 @@ export const Routes: React.FC<RoutesProps> = props => {
 
   return (
     <Switch>
-      <Route exact path="/tasting" render={(): JSX.Element => <Tasting />} />
-      <Route exact path="/signout" render={(): JSX.Element => <Logout logoutUser={logoutUser} />} />
+      <Route exact path="/tasting" render={(): ReactElement => <Tasting />} />
+      <Route exact path="/signout" render={(): ReactElement => <Logout logoutUser={logoutUser} />} />
 
       {isAuthenticated ? null : <Route exact path="/" component={Landing} />}
 
-      <Route exact path="/" render={(): JSX.Element => <Redirect to={`/user/${username}`} />} />
+      <Route exact path="/" render={(): ReactElement => <Redirect to={`/user/${username}`} />} />
 
       <Route
         exact
         path="/user/:name"
-        render={({ match }): JSX.Element => <Redirect to={`/user/${match.params.name}/map`} />}
+        render={({ match }): ReactElement => <Redirect to={`/user/${match.params.name}/map`} />}
       />
       <Route
         path="/user/:name"
-        render={({ match }): JSX.Element => <User username={match.params.name} isAuthenticated={isAuthenticated} />}
+        render={({ match }): ReactElement => <User username={match.params.name} isAuthenticated={isAuthenticated} />}
       />
       <Redirect to="/" />
     </Switch>

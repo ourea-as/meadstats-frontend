@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useHistory } from 'react-router-dom';
 import { scaleLinear } from 'd3-scale';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
@@ -79,7 +79,7 @@ const HoverMap: React.FC<HoverMapProps> = props => {
       >
         <ZoomableGroup center={regionCenter[region]} disablePanning>
           <Geographies geography={Data} disableOptimization>
-            {(geographies, projection): Array<JSX.Element> =>
+            {(geographies, projection): Array<ReactElement> =>
               geographies
                 .filter((geography: any) => region === 'World' || geography.properties.continent === region)
                 .map((geography: any) => (

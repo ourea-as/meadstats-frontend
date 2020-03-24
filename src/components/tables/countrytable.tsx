@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
@@ -9,7 +9,7 @@ import Flagicon from '../flagicon';
 
 import './table.css';
 
-const countryFormatter = (cell, row): JSX.Element => {
+const countryFormatter = (cell, row): ReactElement => {
   return (
     <span className="table-flex">
       <Flagicon code={row.code.toLowerCase()} size="lg" className="country-table-flag" />
@@ -18,7 +18,7 @@ const countryFormatter = (cell, row): JSX.Element => {
   );
 };
 
-const ratingFormatter = (cell): JSX.Element => {
+const ratingFormatter = (cell): ReactElement => {
   if (cell === 0) {
     return <span>No rating</span>;
   }

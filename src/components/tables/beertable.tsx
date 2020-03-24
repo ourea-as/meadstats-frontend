@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -6,7 +6,7 @@ import { Progress } from 'reactstrap';
 
 import './table.css';
 
-function nameFormatter(cell: any, row: any): JSX.Element {
+function nameFormatter(cell: any, row: any): ReactElement {
   return (
     <span className="table-flex">
       <img className="beertable-image" alt="Beer Logo" src={row.label} />
@@ -18,7 +18,7 @@ function nameFormatter(cell: any, row: any): JSX.Element {
   );
 }
 
-function ratingFormatter(cell: any): JSX.Element {
+function ratingFormatter(cell: any): ReactElement {
   if (cell === 0) {
     return <span>No rating</span>;
   }
@@ -33,7 +33,7 @@ function abvFormatter(cell: any): string {
   return cell.toFixed(1) + '%';
 }
 
-function styleFormatter(cell: any): JSX.Element {
+function styleFormatter(cell: any): ReactElement {
   if (cell.includes('-')) {
     const splitted = cell.split(' - ');
     return (
@@ -95,7 +95,7 @@ interface BeerTableProps {
   beers: any[];
 }
 
-export const BeerTable: React.FC<BeerTableProps> = ({ beers }): JSX.Element => (
+export const BeerTable: React.FC<BeerTableProps> = ({ beers }): ReactElement => (
   <BootstrapTable
     bootstrap4
     bordered={false}

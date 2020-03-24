@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import axios from 'axios';
 import useInterval from 'use-interval';
 
@@ -298,7 +298,7 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
   );
 };
 
-function BeerElement(props): JSX.Element {
+function BeerElement(props): ReactElement {
   let style;
 
   if (props.beer.style.includes(' - ')) {
@@ -333,7 +333,7 @@ function BeerElement(props): JSX.Element {
   );
 }
 
-function UserElement(props): JSX.Element {
+function UserElement(props): ReactElement {
   return (
     <>
       <div>
@@ -348,7 +348,7 @@ function UserElement(props): JSX.Element {
   );
 }
 
-function CheckinElement(props): JSX.Element {
+function CheckinElement(props): ReactElement {
   if (props.checkin == null) {
     return <span className="tasting-checkin">-</span>;
   }

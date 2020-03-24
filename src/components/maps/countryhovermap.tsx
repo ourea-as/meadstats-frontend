@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 
 import axios from 'axios';
 import { ComposableMap, Geographies, Geography, Markers, Marker, ZoomableGroup, Point } from 'react-simple-maps';
@@ -35,7 +35,7 @@ const centroids: {
   };
 } = centroidsJson;
 
-const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): JSX.Element => {
+const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): ReactElement => {
   const [geography, setGeography] = useState<TopoJSON.Topology>();
   const [scale, setScale] = useState<number>(100);
   const [centroid, setCentroid] = useState<Point>([0, 0]);
@@ -142,7 +142,7 @@ const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): JSX.Element 
             >
               <ZoomableGroup center={props.centroid} disablePanning>
                 <Geographies geography={geography} disableOptimization>
-                  {(geographies, projection): Array<JSX.Element> =>
+                  {(geographies, projection): Array<ReactElement> =>
                     geographies.map((geography: any, i: number) => (
                       <Geography
                         key={geography.properties.NAME_1 + i}
