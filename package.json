@@ -76,7 +76,7 @@
   "bundlewatch": {
     "files": [
       {
-        "path": "build/*.js"
+        "path": "build/**/*"
       }
     ]
   },
