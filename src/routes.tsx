@@ -3,8 +3,16 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Logout from './components/logout';
 import { User } from './components/user';
-import Landing from './components/landing';
 import { Tasting } from './components/tasting';
+import { Loading } from './components/loading';
+
+const LandingSuspense = React.lazy(() => import(/* webpackChunkName: "landing" */ './components/landing'));
+
+const Landing = (props): ReactElement => (
+  <React.Suspense fallback={<Loading />}>
+    <LandingSuspense {...props} />
+  </React.Suspense>
+);
 
 type RoutesProps = {
   isAuthenticated: boolean;
