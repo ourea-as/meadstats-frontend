@@ -20,7 +20,7 @@ type RoutesProps = {
   logoutUser: () => void;
 };
 
-export const Routes: React.FC<RoutesProps> = props => {
+export const Routes: React.FC<RoutesProps> = (props) => {
   const { isAuthenticated, username, logoutUser } = props;
 
   return (

@@ -6,7 +6,7 @@ type LogoutProps = {
   logoutUser: () => void;
 };
 
-const Logout: React.FC<LogoutProps> = props => {
+const Logout: React.FC<LogoutProps> = (props) => {
   const { logoutUser } = props;
 
   logoutUser();

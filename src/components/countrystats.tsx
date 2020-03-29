@@ -8,7 +8,7 @@ type CountryStatsProps = {
   data: any;
 };
 
-export const CountryStats: React.FC<CountryStatsProps> = props => {
+export const CountryStats: React.FC<CountryStatsProps> = (props) => {
   const { data } = props;
 
   return (

@@ -37,12 +37,12 @@ type HoverMapProps = {
   region: any;
 };
 
-const renderFlag = countrycode => {
+const renderFlag = (countrycode) => {
   if (countrycode === '-99') return '';
   return renderToString(<Flagicon code={countrycode} size="lg" className="country-table-flag" />);
 };
 
-const HoverMap: React.FC<HoverMapProps> = props => {
+const HoverMap: React.FC<HoverMapProps> = (props) => {
   const { countries, interactive, region } = props;
 
   const history = useHistory();
@@ -53,13 +53,11 @@ const HoverMap: React.FC<HoverMapProps> = props => {
     }
   };
 
-  const popScale = scaleLinear()
-    .domain([0, 10, 200])
-    .range(['#CFD8DC', '#607D8B', '#37474F']);
+  const popScale = scaleLinear().domain([0, 10, 200]).range(['#CFD8DC', '#607D8B', '#37474F']);
 
   const countriesMap = {};
 
-  countries.forEach(country => {
+  countries.forEach((country) => {
     countriesMap[country.code.toUpperCase()] = country.count;
   });
 

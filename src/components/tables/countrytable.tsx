@@ -60,7 +60,7 @@ type CountryTableProps = {
   countries: any;
 };
 
-const CountryTable: React.FC<CountryTableProps> = props => {
+const CountryTable: React.FC<CountryTableProps> = (props) => {
   const { countries } = props;
 
   const history = useHistory();

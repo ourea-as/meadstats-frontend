@@ -8,7 +8,7 @@ import './table.css';
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-const getDaysAgo = date => {
+const getDaysAgo = (date) => {
   const updatedate = Date.parse(date);
   const datenow = Date.now();
 
@@ -29,7 +29,7 @@ const nameFormatter = (cell, row) => {
   );
 };
 
-const updatedFormatter = cell => {
+const updatedFormatter = (cell) => {
   if (cell === null) {
     return <span>Never</span>;
   }
@@ -77,7 +77,7 @@ type FriendsTableProps = {
   friends: any;
 };
 
-const FriendsTable: React.FC<FriendsTableProps> = props => {
+const FriendsTable: React.FC<FriendsTableProps> = (props) => {
   const { friends } = props;
 
   const history = useHistory();

@@ -24,7 +24,7 @@ interface ProfileProps {
   isAuthenticated: boolean;
 }
 
-export const Profile: React.FunctionComponent<ProfileProps> = props => {
+export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
   const { user, updating, updateUser, count, total, exist, isAuthenticated } = props;
 
   return (

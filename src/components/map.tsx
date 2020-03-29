@@ -38,7 +38,7 @@ const Map: React.FC<MapProps> = ({ username }) => {
             setCountries(countries);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           throw error;
         });
     }

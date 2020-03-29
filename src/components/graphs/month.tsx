@@ -8,7 +8,7 @@ type MonthChartProps = {
   ratingData: any;
 };
 
-export const MonthChart: React.FC<MonthChartProps> = props => {
+export const MonthChart: React.FC<MonthChartProps> = (props) => {
   const { data, ratingData } = props;
 
   let x = 0;

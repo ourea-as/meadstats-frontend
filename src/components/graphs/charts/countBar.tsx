@@ -6,7 +6,7 @@ type CountBarProps = {
   title: string;
 };
 
-export const CountBar: React.FC<CountBarProps> = props => {
+export const CountBar: React.FC<CountBarProps> = (props) => {
   const { data, title } = props;
 
   return (

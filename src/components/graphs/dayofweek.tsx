@@ -8,7 +8,7 @@ type DayOfWeekChartProps = {
   ratingData: any;
 };
 
-export const DayOfWeekChart: React.FC<DayOfWeekChartProps> = props => {
+export const DayOfWeekChart: React.FC<DayOfWeekChartProps> = (props) => {
   const { data, ratingData } = props;
 
   let x = 0;

@@ -30,11 +30,11 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
     Math.min(270, Math.round(width * (270 / (1140 * (Math.log(width) / Math.log(14) / 2))))),
   );
 
-  const filteredData = data.filter(x => moment().diff(moment(x.date), 'days') < filterDays);
+  const filteredData = data.filter((x) => moment().diff(moment(x.date), 'days') < filterDays);
 
-  const maxCount = Math.max(...filteredData.map(x => x.countDay), 0);
+  const maxCount = Math.max(...filteredData.map((x) => x.countDay), 0);
 
-  const formattedData = filteredData.map(x => ({
+  const formattedData = filteredData.map((x) => ({
     x: moment(x.date),
     y: moment(x.date).format('e'),
     d: moment(x.date),
@@ -43,9 +43,7 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
 
   // Generate list of
   const dates: Set<string> = new Set();
-  let dt = moment()
-    .subtract(filterDays, 'days')
-    .startOf('day');
+  let dt = moment().subtract(filterDays, 'days').startOf('day');
   const end = moment().startOf('day');
   while (dt <= end) {
     dates.add(dt.format('YYYY-MM-DD'));
@@ -53,12 +51,12 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
   }
 
   // Remove dates present in dataset
-  formattedData.forEach(x => {
+  formattedData.forEach((x) => {
     dates.delete(moment(x.x).format('YYYY-MM-DD'));
   });
 
   // Generate missing dates
-  dates.forEach(x => {
+  dates.forEach((x) => {
     formattedData.push({
       x: moment(x),
       y: moment(x).format('e'),

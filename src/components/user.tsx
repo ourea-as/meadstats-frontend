@@ -53,7 +53,7 @@ interface UserProps {
   username: string;
 }
 
-export const User: React.FunctionComponent<UserProps> = props => {
+export const User: React.FunctionComponent<UserProps> = (props) => {
   const { isAuthenticated, username } = props;
 
   const [user, setUser] = useState<IUser | undefined>(undefined);
@@ -95,7 +95,7 @@ export const User: React.FunctionComponent<UserProps> = props => {
     if (user === undefined && loading === false) loadUser();
   }, [username, loading, loadUser, user]);
 
-  const handleUpdateProgress = useCallback(data => {
+  const handleUpdateProgress = useCallback((data) => {
     setUpdateCount(data.progress);
     setUpdateTotal(data.total);
   }, []);

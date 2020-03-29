@@ -14,7 +14,7 @@ type GraphChartProps = {
 };
 
 const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
-  const formattedData = data.map(x => ({ x: new Date(x.date), y: x.count }));
+  const formattedData = data.map((x) => ({ x: new Date(x.date), y: x.count }));
   const today = new Date();
   const { width } = useWindowSize();
 
@@ -25,8 +25,8 @@ const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
   };
 
   // Create a data point today containing the same value as the last day with data
-  if (!formattedData.some(x => x.x.toDateString() === today.toDateString())) {
-    const maxCount = Math.max(...formattedData.map(x => x.y), 0);
+  if (!formattedData.some((x) => x.x.toDateString() === today.toDateString())) {
+    const maxCount = Math.max(...formattedData.map((x) => x.y), 0);
     formattedData.push({ x: today, y: maxCount });
   }
 

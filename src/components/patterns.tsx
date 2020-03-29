@@ -14,7 +14,7 @@ import { APIResponse, MonthsData, DayOfWeekData, TimeOfDayData, YearsData, Graph
 import MatrixChart from './graphs/matrix';
 
 const getDataCount = (data, field, number, dataField = 'count'): number => {
-  const outdata = data.find(x => x[field] === number);
+  const outdata = data.find((x) => x[field] === number);
   if (typeof outdata != 'undefined') return outdata[dataField];
   return 0;
 };
@@ -22,7 +22,7 @@ const getDataCount = (data, field, number, dataField = 'count'): number => {
 const getLabels = (data: Array<object>, field: string): Array<string> => {
   const labels: Array<string> = [];
 
-  data.forEach(dataPoint => {
+  data.forEach((dataPoint) => {
     labels.push(dataPoint[field]);
   });
 
@@ -32,42 +32,42 @@ const getLabels = (data: Array<object>, field: string): Array<string> => {
 };
 
 const weekDataToArray = (data: Array<DayOfWeekData>): Array<number> => {
-  return [...Array(7).keys()].map(k => k + 1).map(x => getDataCount(data, 'weekday', x));
+  return [...Array(7).keys()].map((k) => k + 1).map((x) => getDataCount(data, 'weekday', x));
 };
 
 const hourDataToArray = (data: Array<TimeOfDayData>): Array<number> => {
-  return [...Array(24).keys()].map(x => getDataCount(data, 'hour', x));
+  return [...Array(24).keys()].map((x) => getDataCount(data, 'hour', x));
 };
 
 const monthDataToArray = (data: Array<MonthsData>): Array<number> => {
-  return [...Array(12).keys()].map(k => k + 1).map(x => getDataCount(data, 'month', x));
+  return [...Array(12).keys()].map((k) => k + 1).map((x) => getDataCount(data, 'month', x));
 };
 
 const yearDataToArray = (data: Array<YearsData>, labels: Array<string>): Array<number> => {
-  return labels.map(x => getDataCount(data, 'year', x));
+  return labels.map((x) => getDataCount(data, 'year', x));
 };
 
 const weekRatingToArray = (data: Array<DayOfWeekData>): Array<number> => {
-  return [...Array(7).keys()].map(k => k + 1).map(x => getDataCount(data, 'weekday', x, 'averageRating'));
+  return [...Array(7).keys()].map((k) => k + 1).map((x) => getDataCount(data, 'weekday', x, 'averageRating'));
 };
 
 const hourRatingToArray = (data: Array<TimeOfDayData>): Array<number> => {
-  return [...Array(24).keys()].map(x => getDataCount(data, 'hour', x, 'averageRating'));
+  return [...Array(24).keys()].map((x) => getDataCount(data, 'hour', x, 'averageRating'));
 };
 
 const monthRatingToArray = (data: Array<MonthsData>): Array<number> => {
-  return [...Array(12).keys()].map(k => k + 1).map(x => getDataCount(data, 'month', x, 'averageRating'));
+  return [...Array(12).keys()].map((k) => k + 1).map((x) => getDataCount(data, 'month', x, 'averageRating'));
 };
 
 const yearRatingToArray = (data: Array<YearsData>, labels: Array<string>): Array<number> => {
-  return labels.map(x => getDataCount(data, 'year', x, 'averageRating'));
+  return labels.map((x) => getDataCount(data, 'year', x, 'averageRating'));
 };
 
 type PatternsProps = {
   username: string;
 };
 
-const Patterns: React.FC<PatternsProps> = props => {
+const Patterns: React.FC<PatternsProps> = (props) => {
   const [weekdayData, setWeekdayData] = useState<Array<DayOfWeekData>>([]);
   const [hourData, setHourData] = useState<Array<TimeOfDayData>>([]);
   const [monthData, setMonthData] = useState<Array<MonthsData>>([]);

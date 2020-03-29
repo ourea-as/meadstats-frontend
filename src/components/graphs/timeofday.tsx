@@ -8,7 +8,7 @@ type TimeOfDayChartProps = {
   ratingData: any;
 };
 
-export const TimeOfDayChart: React.FC<TimeOfDayChartProps> = props => {
+export const TimeOfDayChart: React.FC<TimeOfDayChartProps> = (props) => {
   const { data, ratingData } = props;
 
   let x = 0;

@@ -6,7 +6,7 @@ type RatingLineProps = {
   title: string;
 };
 
-export const RatingLine: React.FC<RatingLineProps> = props => {
+export const RatingLine: React.FC<RatingLineProps> = (props) => {
   const { data, title } = props;
 
   return (

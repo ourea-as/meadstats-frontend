@@ -43,7 +43,7 @@ const CountryMap: React.FC<CountryMapProps> = ({ username, country }): ReactElem
             setData(data.data);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           setError(true);
           console.error(error);
         });
@@ -57,7 +57,7 @@ const CountryMap: React.FC<CountryMapProps> = ({ username, country }): ReactElem
     return <Loading />;
   }
   const beers = data.breweries
-    .map(brewery => {
+    .map((brewery) => {
       return brewery.beers;
     })
     .flat();

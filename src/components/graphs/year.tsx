@@ -18,7 +18,7 @@ type YearChartProps = {
   labels: Array<string>;
 };
 
-export const YearChart: React.FC<YearChartProps> = props => {
+export const YearChart: React.FC<YearChartProps> = (props) => {
   const { data, ratingData, labels } = props;
 
   let x = 0;

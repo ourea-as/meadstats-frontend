@@ -8,7 +8,7 @@ export class Matrix extends React.Component {
     Chart.controllers.matrix = Chart.controllers.bar.extend({
       dataElementType: Chart.elements.Rectangle,
 
-      update: function(reset) {
+      update: function (reset) {
         const meta = this.getMeta();
         const data = meta.data || [];
         let i, ilen;
@@ -21,7 +21,7 @@ export class Matrix extends React.Component {
         }
       },
 
-      updateElement: function(item, index, reset) {
+      updateElement: function (item, index, reset) {
         const dataset = this.getDataset();
         const datasetIndex = this.index;
         const value = dataset.data[index];
@@ -55,7 +55,7 @@ export class Matrix extends React.Component {
         item.pivot();
       },
 
-      draw: function() {
+      draw: function () {
         const data = this.getMeta().data || [];
         let i, ilen;
 
@@ -67,7 +67,7 @@ export class Matrix extends React.Component {
       /**
        * @private
        */
-      _resolveElementOptions: function(rectangle, index) {
+      _resolveElementOptions: function (rectangle, index) {
         const chart = this.chart;
         const datasets = chart.data.datasets;
         const dataset = datasets[this.index];
@@ -97,7 +97,7 @@ export class Matrix extends React.Component {
 
   render() {
     return (
-      <ChartComponent {...this.props} ref={ref => (this.chart_instance = ref && ref.chart_instance)} type="matrix" />
+      <ChartComponent {...this.props} ref={(ref) => (this.chart_instance = ref && ref.chart_instance)} type="matrix" />
     );
   }
 }

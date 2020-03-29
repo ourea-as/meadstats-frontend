@@ -64,7 +64,7 @@ function mapTotalToRank(total: number): string {
   return 'Misjonær';
 }
 
-export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props => {
+export const Tasting: React.FunctionComponent<{ tastingId?: number }> = (props) => {
   const { tastingId } = props;
 
   const [tasting, setTasting] = useState<Tasting>({
@@ -113,7 +113,7 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
           .get(`${API_ROOT}/v1/tasting/beers?beers=` + tasting.beers.join(','))
           .then(({ data }) => {
             setBeers(
-              data.data.beers.map(beer => {
+              data.data.beers.map((beer) => {
                 return {
                   id: beer.id,
                   name: beer.name,
@@ -137,7 +137,7 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
           .get(`${API_ROOT}/v1/tasting/users?users=` + tasting.tasters.join(','))
           .then(({ data }) => {
             setUsers(
-              data.data.users.map(user => {
+              data.data.users.map((user) => {
                 return {
                   id: user.id,
                   name: user.user_name,
@@ -160,7 +160,7 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
           .get(`${API_ROOT}/v1/tasting/checkins?users=${tasting.tasters.join(',')}&beers=${tasting.beers.join(',')}`)
           .then(({ data }) => {
             setCheckins(
-              data.data.checkins.map(checkin => {
+              data.data.checkins.map((checkin) => {
                 return {
                   id: checkin.id,
                   beerid: checkin.beer.id,
@@ -195,7 +195,7 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
               )
               .then(({ data }) => {
                 setCheckins(
-                  data.data.checkins.map(checkin => {
+                  data.data.checkins.map((checkin) => {
                     return {
                       id: checkin.id,
                       beerid: checkin.beer.id,
@@ -220,10 +220,10 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
     }
   }, 0.5 * 60 * 1000);
 
-  const visibleBeers = new Set(checkins.map(checkin => checkin.beerid));
+  const visibleBeers = new Set(checkins.map((checkin) => checkin.beerid));
   const firstCheckin = {};
 
-  checkins.forEach(checkin => {
+  checkins.forEach((checkin) => {
     if (checkin.beerid in firstCheckin) {
       if (firstCheckin[checkin.beerid] > checkin.date) {
         firstCheckin[checkin.beerid] = checkin.date;
@@ -248,7 +248,7 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
               <th></th>
               {users
                 .sort((a, b) => (a.totalBeers < b.totalBeers ? 1 : -1))
-                .map(user => (
+                .map((user) => (
                   <th key={user.id}>
                     <UserElement user={user} missing={missing} />
                   </th>
@@ -258,9 +258,9 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
           </thead>
           <tbody>
             {beers
-              .filter(beer => (tasting.hideUntasted ? visibleBeers.has(beer.id) : true))
+              .filter((beer) => (tasting.hideUntasted ? visibleBeers.has(beer.id) : true))
               .sort((a, b) => (firstCheckin[a.id] < firstCheckin[b.id] ? 1 : -1))
-              .map(beer => {
+              .map((beer) => {
                 return (
                   <tr key={beer.id}>
                     <th scope="row">
@@ -268,9 +268,9 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
                     </th>
                     {users
                       .sort((a, b) => (a.totalBeers < b.totalBeers ? 1 : -1))
-                      .map(user => {
+                      .map((user) => {
                         const checkin = checkins.find(
-                          checkin => checkin.beerid === beer.id && checkin.userid === user.id,
+                          (checkin) => checkin.beerid === beer.id && checkin.userid === user.id,
                         );
                         return (
                           <td key={beer.id + '' + user.id}>
@@ -281,11 +281,11 @@ export const Tasting: React.FunctionComponent<{ tastingId?: number }> = props =>
                     <td className="tasting-checkin">
                       {(
                         checkins
-                          .filter(checkin => checkin.beerid === beer.id)
-                          .map(checkin => checkin.rating)
+                          .filter((checkin) => checkin.beerid === beer.id)
+                          .map((checkin) => checkin.rating)
                           .reduce((a, b) => {
                             return a + b;
-                          }, 0) / checkins.filter(checkin => checkin.beerid === beer.id).length
+                          }, 0) / checkins.filter((checkin) => checkin.beerid === beer.id).length
                       ).toFixed(2)}
                     </td>
                   </tr>
@@ -340,7 +340,7 @@ function UserElement(props): ReactElement {
         <img className="beertable-image" alt={props.user.name} src={props.user.avatarHd} />
       </div>
       <div>{props.user.name}</div>
-      {props.missing.find(user => user === props.user.name) ? <div className="missing-token">Missing token</div> : ''}
+      {props.missing.find((user) => user === props.user.name) ? <div className="missing-token">Missing token</div> : ''}
       <div>
         {props.user.totalBeers} - {props.user.rank}
       </div>

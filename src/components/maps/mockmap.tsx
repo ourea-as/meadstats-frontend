@@ -32,7 +32,7 @@ const MockMap: React.FC<MockMapProps> = ({ username }) => {
             setCountries(countries);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           throw error;
         });
     }

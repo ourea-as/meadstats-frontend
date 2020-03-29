@@ -81,7 +81,7 @@ const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): ReactElement
         .then(({ data }) => {
           setGeography(data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
           if (error.response) {
             if (error.response.status === 404) {
@@ -124,7 +124,7 @@ const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): ReactElement
     return (
       <>
         <Spring to={{ centroid: centroid, scale: scale }} config={config.slow}>
-          {props => (
+          {(props) => (
             <ComposableMap
               projectionConfig={{
                 scale: props.scale,
