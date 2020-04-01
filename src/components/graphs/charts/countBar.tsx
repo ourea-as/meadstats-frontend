@@ -17,6 +17,7 @@ export const CountBar: React.FC<CountBarProps> = (props) => {
         scales: {
           yAxes: [
             {
+              stacked: false,
               ticks: { beginAtZero: true, maxTicksLimit: 5, padding: 8 },
               gridLines: {
                 display: true,
@@ -26,6 +27,7 @@ export const CountBar: React.FC<CountBarProps> = (props) => {
           ],
           xAxes: [
             {
+              stacked: true,
               gridLines: {
                 display: false,
                 drawBorder: false,
