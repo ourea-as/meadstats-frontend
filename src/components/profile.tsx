@@ -4,15 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { User } from '../types';
-
-const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-function getDaysAgo(date) {
-  const updatedate = Date.parse(date);
-  const datenow = Date.now();
-
-  return Math.floor((datenow - updatedate) / _MS_PER_DAY);
-}
+import moment from 'moment';
 
 interface ProfileProps {
   user: User;
@@ -52,13 +44,7 @@ export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
         </Col>
       )}
       {isAuthenticated ? (
-        <Update
-          count={count}
-          total={total}
-          lastUpdateDays={getDaysAgo(user.lastUpdate)}
-          updating={updating}
-          updateUser={updateUser}
-        />
+        <Update count={count} total={total} lastUpdate={user.lastUpdate} updating={updating} updateUser={updateUser} />
       ) : (
         ''
       )}
@@ -66,12 +52,12 @@ export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
   );
 };
 
-export const Update = ({ count, total, updating, updateUser, lastUpdateDays }) => (
+export const Update = ({ count, total, updating, updateUser, lastUpdate }) => (
   <Col lg="2" xs="4">
     {total > 0 ? (
       <UpdateProgress count={count} total={total} />
     ) : (
-      <UpdateButton updating={updating} updateUser={updateUser} lastUpdateDays={lastUpdateDays} />
+      <UpdateButton updating={updating} updateUser={updateUser} lastUpdate={lastUpdate} />
     )}
   </Col>
 );
@@ -82,13 +68,17 @@ const UpdateProgress = ({ count, total }) => (
   </div>
 );
 
-const UpdateButton = ({ updating, updateUser, lastUpdateDays }) => (
-  <div className="update-button">
-    <div>
-      <Button color="secondary" onClick={updating ? null : updateUser}>
-        {updating ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Refresh'}
-      </Button>
-      {lastUpdateDays > 1 && <span className="update-text">Updated {lastUpdateDays} days ago</span>}
+const UpdateButton = ({ updating, updateUser, lastUpdate }) => {
+  const lastUpdateDays = moment(lastUpdate).fromNow();
+
+  return (
+    <div className="update-button">
+      <div>
+        <Button color="secondary" onClick={updating ? null : updateUser}>
+          {updating ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Refresh'}
+        </Button>
+        <span className="update-text">Updated {lastUpdateDays}</span>
+      </div>
     </div>
-  </div>
-);
+  );
+};

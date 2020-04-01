@@ -5,15 +5,7 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 
 import './table.css';
-
-const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-const getDaysAgo = (date) => {
-  const updatedate = Date.parse(date);
-  const datenow = Date.now();
-
-  return Math.floor((datenow - updatedate) / _MS_PER_DAY);
-};
+import moment from 'moment';
 
 const nameFormatter = (cell, row) => {
   return (
@@ -33,7 +25,7 @@ const updatedFormatter = (cell) => {
   if (cell === null) {
     return <span>Never</span>;
   }
-  return <span>{getDaysAgo(cell)} days ago</span>;
+  return <span>{moment(cell).fromNow()}</span>;
 };
 
 const columns = [
