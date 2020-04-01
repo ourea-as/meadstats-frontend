@@ -10,7 +10,7 @@ import { TimeOfDayChart } from './graphs/timeofday';
 import { MonthChart } from './graphs/month';
 import { YearChart } from './graphs/year';
 import GraphChart from './graphs/graph';
-import { APIResponse, MonthsData, DayOfWeekData, TimeOfDayData, YearsData, GraphData } from '../types';
+import { APIResponse, MonthsData, DayOfWeekData, TimeOfDayData, YearsData, GraphData, User } from '../types';
 import MatrixChart from './graphs/matrix';
 
 const getDataCount = (data, field, number, dataField = 'count'): number => {
@@ -64,10 +64,12 @@ const yearRatingToArray = (data: Array<YearsData>, labels: Array<string>): Array
 };
 
 type PatternsProps = {
-  username: string;
+  user: User;
 };
 
 const Patterns: React.FC<PatternsProps> = (props) => {
+  const { user } = props;
+
   const [weekdayData, setWeekdayData] = useState<Array<DayOfWeekData>>([]);
   const [hourData, setHourData] = useState<Array<TimeOfDayData>>([]);
   const [monthData, setMonthData] = useState<Array<MonthsData>>([]);
@@ -78,39 +80,39 @@ const Patterns: React.FC<PatternsProps> = (props) => {
   const [graphData, setGraphData] = useState<Array<GraphData>>([]);
 
   useEffect(() => {
-    if (props.username !== '') {
-      axios.get<APIResponse<DayOfWeekData>>(`${API_ROOT}/v1/users/${props.username}/dayofweek`).then(({ data }) => {
+    if (user.userName !== '') {
+      axios.get<APIResponse<DayOfWeekData>>(`${API_ROOT}/v1/users/${user.userName}/dayofweek`).then(({ data }) => {
         if (data.status === 'success') {
           setWeekdayData(data.data.weekdays);
         }
       });
 
-      axios.get<APIResponse<TimeOfDayData>>(`${API_ROOT}/v1/users/${props.username}/timeofday`).then(({ data }) => {
+      axios.get<APIResponse<TimeOfDayData>>(`${API_ROOT}/v1/users/${user.userName}/timeofday`).then(({ data }) => {
         if (data.status === 'success') {
           setHourData(data.data.hours);
         }
       });
 
-      axios.get<APIResponse<MonthsData>>(`${API_ROOT}/v1/users/${props.username}/month`).then(({ data }) => {
+      axios.get<APIResponse<MonthsData>>(`${API_ROOT}/v1/users/${user.userName}/month`).then(({ data }) => {
         if (data.status === 'success') {
           setMonthData(data.data.months);
         }
       });
 
-      axios.get<APIResponse<YearsData>>(`${API_ROOT}/v1/users/${props.username}/year`).then(({ data }) => {
+      axios.get<APIResponse<YearsData>>(`${API_ROOT}/v1/users/${user.userName}/year`).then(({ data }) => {
         if (data.status === 'success') {
           const labels = getLabels(data.data.years, 'year');
           setYearData({ years: data.data.years, labels: labels });
         }
       });
 
-      axios.get<APIResponse<GraphData>>(`${API_ROOT}/v1/users/${props.username}/graph`).then(({ data }) => {
+      axios.get<APIResponse<GraphData>>(`${API_ROOT}/v1/users/${user.userName}/graph`).then(({ data }) => {
         if (data.status === 'success') {
           setGraphData(data.data.dates);
         }
       });
     }
-  }, [props.username]);
+  }, [user]);
 
   return (
     <>

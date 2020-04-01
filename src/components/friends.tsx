@@ -6,23 +6,26 @@ import { Col } from 'reactstrap';
 
 import FriendsTable from './tables/friendstable';
 import { ErrorBoundary } from './errorboundary';
+import { User } from '../types';
 
 type FriendsProps = {
-  username: string;
+  user: User;
 };
 
-const Friends: React.FC<FriendsProps> = ({ username }) => {
+const Friends: React.FC<FriendsProps> = (props) => {
+  const { user } = props;
+
   const [friendsData, setFriendsData] = useState([]);
 
   useEffect(() => {
-    if (username !== '') {
-      axios.get(`${API_ROOT}/v1/users/${username}/friends`).then(({ data }) => {
+    if (user.userName !== '') {
+      axios.get(`${API_ROOT}/v1/users/${user.userName}/friends`).then(({ data }) => {
         if (data.status === 'success') {
           setFriendsData(data.data.friends);
         }
       });
     }
-  }, [username]);
+  }, [user]);
 
   return (
     <>

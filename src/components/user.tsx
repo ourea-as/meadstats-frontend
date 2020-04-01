@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, ReactElement } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom';
 
 import { Nav, NavItem, Row } from 'reactstrap';
@@ -64,7 +64,7 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
   const [updateTotal, setUpdateTotal] = useState(0);
   const [socket, setSocket] = useState<any>(null);
 
-  const loadUser = useCallback(() => {
+  const loadUser = () => {
     axios
       .get(`${API_ROOT}/v1/users/${username}`)
       .then(({ data }) => {
@@ -89,18 +89,18 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
         setLoading(false);
         console.error(error);
       });
-  }, [username]);
+  };
 
   useEffect(() => {
     if (user === undefined && loading === false) loadUser();
-  }, [username, loading, loadUser, user]);
+  });
 
-  const handleUpdateProgress = useCallback((data) => {
+  const handleUpdateProgress = (data) => {
     setUpdateCount(data.progress);
     setUpdateTotal(data.total);
-  }, []);
+  };
 
-  const handleUpdateFinished = useCallback(() => {
+  const handleUpdateFinished = () => {
     setUpdateCount(0);
     setUpdateTotal(0);
     setUpdating(false);
@@ -111,9 +111,9 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
     }
 
     loadUser();
-  }, [loadUser, socket]);
+  };
 
-  const updateUser = useCallback(() => {
+  const updateUser = () => {
     const token = window.localStorage.getItem('authToken') || null;
 
     const socket = socketIOClient(`${API_ROOT}`);
@@ -123,7 +123,7 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
 
     socket.emit('update', { token, username: user?.userName });
     setUpdating(true);
-  }, [user, handleUpdateFinished, handleUpdateProgress]);
+  };
 
   return loading || user === undefined ? (
     <Loading />
@@ -140,19 +140,17 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
       />
       {exist && user.lastUpdate !== null ? (
         <ErrorBoundary>
-          <UserNavigation user={user.userName} />
+          <UserNavigation user={user} />
           <Row>
             <ErrorBoundary>
               <Switch>
                 <Route
                   path="/user/:name/map/:country"
-                  render={({ match }): ReactElement => (
-                    <CountryMap username={user.userName} country={match.params.country} />
-                  )}
+                  render={({ match }): ReactElement => <CountryMap user={user} country={match.params.country} />}
                 />
-                <Route path="/user/:name/map" render={(): ReactElement => <Map username={user.userName} />} />
-                <Route path="/user/:name/patterns" render={(): ReactElement => <Patterns username={user.userName} />} />
-                <Route path="/user/:name/friends" render={(): ReactElement => <Friends username={user.userName} />} />
+                <Route path="/user/:name/map" render={(): ReactElement => <Map user={user} />} />
+                <Route path="/user/:name/patterns" render={(): ReactElement => <Patterns user={user} />} />
+                <Route path="/user/:name/friends" render={(): ReactElement => <Friends user={user} />} />
               </Switch>
             </ErrorBoundary>
           </Row>
@@ -173,7 +171,7 @@ const UserNavigation = ({ user }): ReactElement => (
 );
 
 const UserNavigationTab = ({ text, route, user }): ReactElement => (
-  <NavLink className="user-nav-tab" activeClassName="active" to={`/user/${user}/${route}`}>
+  <NavLink className="user-nav-tab" activeClassName="active" to={`/user/${user.userName}/${route}`}>
     <NavItem>
       <span className="nav-link user-nav-link">{text}</span>
     </NavItem>

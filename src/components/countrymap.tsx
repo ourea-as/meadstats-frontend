@@ -11,7 +11,7 @@ import { ErrorBoundary } from './errorboundary';
 import { BeerTable } from './tables/beertable';
 import { Loading } from './loading';
 import { Error } from './error';
-import { CountryData } from '../types';
+import { CountryData, User } from '../types';
 
 const CountryHoverMapSuspense = React.lazy(() =>
   import(/* webpackChunkName: "countryhovermap" */ './maps/countryhovermap'),
@@ -24,20 +24,20 @@ const CountryHoverMap = (props): ReactElement => (
 );
 
 interface CountryMapProps {
-  username?: string;
+  user?: User;
   country?: string;
 }
 
-const CountryMap: React.FC<CountryMapProps> = ({ username, country }): ReactElement => {
+const CountryMap: React.FC<CountryMapProps> = ({ user, country }): ReactElement => {
   const [data, setData] = useState<CountryData>();
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (username && country) {
+    if (user && country) {
       setError(false);
 
       axios
-        .get(`${API_ROOT}/v1/users/${username}/countries/${country}`)
+        .get(`${API_ROOT}/v1/users/${user.userName}/countries/${country}`)
         .then(({ data }) => {
           if (data.status === 'success') {
             setData(data.data);
@@ -48,7 +48,7 @@ const CountryMap: React.FC<CountryMapProps> = ({ username, country }): ReactElem
           console.error(error);
         });
     }
-  }, [username, country]);
+  }, [user, country]);
 
   if (!data) {
     if (error) {

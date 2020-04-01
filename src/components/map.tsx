@@ -9,11 +9,12 @@ import { ErrorBoundary } from './errorboundary';
 import { Loading } from './loading';
 
 import { API_ROOT } from '../api/api-config';
+import { User } from '../types';
 
 const regions = ['World', 'Africa', 'Asia', 'Europe', 'Oceania', 'North America', 'South America'];
 
 type MapProps = {
-  username: string;
+  user: User;
 };
 
 const HoverMapSuspense = React.lazy(() => import(/* webpackChunkName: "hovermap" */ './maps/hovermap'));
@@ -24,14 +25,14 @@ const HoverMap = (props): ReactElement => (
   </React.Suspense>
 );
 
-const Map: React.FC<MapProps> = ({ username }) => {
+const Map: React.FC<MapProps> = ({ user }) => {
   const [region, setRegion] = useState('World');
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    if (username !== '') {
+    if (user.userName !== '') {
       axios
-        .get(`${API_ROOT}/v1/users/${username}/countries`)
+        .get(`${API_ROOT}/v1/users/${user.userName}/countries`)
         .then(({ data }) => {
           if (data.status === 'success') {
             const countries = data.data.countries;
@@ -42,7 +43,7 @@ const Map: React.FC<MapProps> = ({ username }) => {
           throw error;
         });
     }
-  }, [username]);
+  }, [user]);
 
   if (!countries.length) {
     return <Loading />;
