@@ -5,6 +5,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { User } from '../types';
 import moment from 'moment';
+import { useSpring, animated } from 'react-spring';
 
 interface ProfileProps {
   user: User;
@@ -19,6 +20,8 @@ interface ProfileProps {
 export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
   const { user, updating, updateUser, count, total, exist, isAuthenticated } = props;
 
+  const totalBeers = useSpring({ number: user.totalBeers });
+
   return (
     <div className="row profile bg-dark">
       {exist ? (
@@ -26,7 +29,12 @@ export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
           <img className="profile-pic" src={user.avatar} alt={`${user.userName}`} />
           <div>
             <span className="profile-name">{user.userName}</span>
-            <span className="profile-extra">{user.totalBeers} Unique Beers</span>
+            <span className="profile-extra">
+              <animated.span className="profile-extra-count">
+                {totalBeers.number.interpolate((number) => Math.floor(number))}
+              </animated.span>{' '}
+              unique beers
+            </span>
           </div>
         </Col>
       ) : (

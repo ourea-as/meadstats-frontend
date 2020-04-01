@@ -24,6 +24,12 @@
   font-weight: 300;
 }
 
+.profile-extra-count {
+  font-weight: 600;
+  font-size: 14px;
+  margin-right: 2px;
+}
+
 .profile-extra-error {
   font-size: 18px;
 }
