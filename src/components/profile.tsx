@@ -25,7 +25,7 @@ export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
   return (
     <div className="row profile bg-dark">
       {!user || (user && exist) ? (
-        <Col lg="10" xs="8" className="profile-data">
+        <Col lg="9" xs="8" className="profile-data">
           <img
             className="profile-pic"
             src={
@@ -46,7 +46,7 @@ export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
           </div>
         </Col>
       ) : (
-        <Col lg="10" xs="8" className="profile-data">
+        <Col lg="9" xs="8" className="profile-data">
           <img
             className="profile-pic"
             alt="No user"
@@ -69,7 +69,7 @@ export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
 };
 
 export const Update = ({ count, total, updating, updateUser, lastUpdate }) => (
-  <Col lg="2" xs="4">
+  <Col lg="3" xs="4">
     {total > 0 ? (
       <UpdateProgress count={count} total={total} />
     ) : (
