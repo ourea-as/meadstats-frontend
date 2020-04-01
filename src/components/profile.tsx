@@ -8,7 +8,7 @@ import moment from 'moment';
 import { useSpring, animated } from 'react-spring';
 
 interface ProfileProps {
-  user: User;
+  user: User | undefined;
   updating: boolean;
   updateUser: Function;
   count: number;
@@ -20,15 +20,23 @@ interface ProfileProps {
 export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
   const { user, updating, updateUser, count, total, exist, isAuthenticated } = props;
 
-  const totalBeers = useSpring({ number: user.totalBeers });
+  const totalBeers = useSpring({ number: user ? user.totalBeers : 0 });
 
   return (
     <div className="row profile bg-dark">
-      {exist ? (
+      {!user || (user && exist) ? (
         <Col lg="10" xs="8" className="profile-data">
-          <img className="profile-pic" src={user.avatar} alt={`${user.userName}`} />
+          <img
+            className="profile-pic"
+            src={
+              user
+                ? user.avatar
+                : 'https://gravatar.com/avatar/dda81c541d804f53148efea3b4eec136?size=100&d=https%3A%2F%2Funtappd.akamaized.net%2Fsite%2Fassets%2Fimages%2Fdefault_avatar_v3_gravatar.jpg%3Fv%3D2'
+            }
+            alt={`${user ? user.userName : '...'}`}
+          />
           <div>
-            <span className="profile-name">{user.userName}</span>
+            <span className="profile-name">{user ? user.userName : '...'}</span>
             <span className="profile-extra">
               <animated.span className="profile-extra-count">
                 {totalBeers.number.interpolate((number) => Math.floor(number))}
@@ -51,7 +59,7 @@ export const Profile: React.FunctionComponent<ProfileProps> = (props) => {
           </div>
         </Col>
       )}
-      {isAuthenticated ? (
+      {isAuthenticated && user ? (
         <Update count={count} total={total} lastUpdate={user.lastUpdate} updating={updating} updateUser={updateUser} />
       ) : (
         ''
@@ -85,7 +93,7 @@ const UpdateButton = ({ updating, updateUser, lastUpdate }) => {
         <Button color="secondary" onClick={updating ? null : updateUser}>
           {updating ? <FontAwesomeIcon icon={faSpinner} spin /> : 'Refresh'}
         </Button>
-        <span className="update-text">Updated {lastUpdateDays}</span>
+        {lastUpdate && <span className="update-text">Updated {lastUpdateDays}</span>}
       </div>
     </div>
   );

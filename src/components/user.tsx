@@ -86,6 +86,21 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
       })
       .catch(({ error }) => {
         setExist(false);
+        setUser({
+          avatar:
+            'https://gravatar.com/avatar/dda81c541d804f53148efea3b4eec136?size=100&d=https%3A%2F%2Funtappd.akamaized.net%2Fsite%2Fassets%2Fimages%2Fdefault_avatar_v3_gravatar.jpg%3Fv%3D2',
+          avatarHd:
+            'https://gravatar.com/avatar/dda81c541d804f53148efea3b4eec136?size=100&d=https%3A%2F%2Funtappd.akamaized.net%2Fsite%2Fassets%2Fimages%2Fdefault_avatar_v3_gravatar.jpg%3Fv%3D2',
+          firstName: '',
+          id: 0,
+          lastName: '',
+          lastUpdate: null,
+          totalBadges: 0,
+          totalBeers: 0,
+          totalCheckins: 0,
+          totalFriends: 0,
+          userName: username,
+        });
         setLoading(false);
         console.error(error);
       });
@@ -125,9 +140,7 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
     setUpdating(true);
   };
 
-  return loading || user === undefined ? (
-    <Loading />
-  ) : (
+  return (
     <React.Fragment>
       <Profile
         user={user}
@@ -138,7 +151,9 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
         exist={exist}
         isAuthenticated={isAuthenticated}
       />
-      {exist && user.lastUpdate !== null ? (
+      {loading || user === undefined ? (
+        <Loading />
+      ) : exist && user.lastUpdate !== null ? (
         <ErrorBoundary>
           <UserNavigation user={user} />
           <Row>
