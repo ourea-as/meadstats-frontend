@@ -25,7 +25,7 @@ const updatedFormatter = (cell) => {
   if (cell === null) {
     return <span>Never</span>;
   }
-  return <span>{moment(cell).fromNow()}</span>;
+  return <span>{moment.utc(cell).fromNow()}</span>;
 };
 
 const columns = [

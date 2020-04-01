@@ -85,7 +85,7 @@ const UpdateProgress = ({ count, total }) => (
 );
 
 const UpdateButton = ({ updating, updateUser, lastUpdate }) => {
-  const lastUpdateDays = moment(lastUpdate).fromNow();
+  const lastUpdateDays = moment.utc(lastUpdate).fromNow();
 
   return (
     <div className="update-button">
