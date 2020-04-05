@@ -9,6 +9,14 @@
   margin: 5px 10px 5px 5px;
 }
 
+.progress-bar-gold {
+  background-color: rgb(255, 193, 7) !important;
+}
+
+.progress-half-size {
+  height: 0.5rem;
+}
+
 .react-bootstrap-table > table > tbody > tr {
   cursor: pointer;
 }
@@ -26,6 +34,13 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.table-profile-picture-empty {
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+  margin-right: 10px;
+}
+
 .table td {
   vertical-align: middle;
 }
@@ -40,11 +55,23 @@
 .table-twoline-main {
   display: block;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.table-twoline-main-count {
+  text-align: center;
 }
 
 .table-twoline-sub {
   display: block;
   white-space: nowrap;
   font-size: 12px;
+}
+
+.table-twoline-sub-count {
+  text-align: center;
+}
+
+.table-count-container {
+  width: 100px;
 }

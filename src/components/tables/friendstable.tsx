@@ -8,16 +8,16 @@ import './table.css';
 import moment from 'moment';
 
 const mapBeerToImage = (count: number) => {
-  if (count >= 10000) return 'bdg_Uber_lg.jpg';
-  if (count >= 5000) return 'bdg_Epic_lg.jpg';
-  if (count >= 2500) return 'bdg_elite_lg.jpg';
-  if (count >= 1000) return 'bdg_extraordinary_lg.jpg';
-  if (count >= 500) return 'bdg_legendary_lg.jpg';
-  if (count >= 200) return 'bdg_check200_lg.jpg';
-  if (count >= 100) return 'bdg_check100_lg.jpg';
-  if (count >= 50) return 'bdg_check50_lg.jpg';
-  if (count >= 25) return 'bdg_check25_lg.jpg';
-  return 'bdg_newbie_lg.jpg';
+  if (count >= 10000) return 'bdg_Uber_sm.jpg';
+  if (count >= 5000) return 'bdg_Epic_sm.jpg';
+  if (count >= 2500) return 'bdg_elite_sm.jpg';
+  if (count >= 1000) return 'bdg_extraordinary_sm.jpg';
+  if (count >= 500) return 'bdg_legendary_sm.jpg';
+  if (count >= 200) return 'bdg_check200_sm.jpg';
+  if (count >= 100) return 'bdg_check100_sm.jpg';
+  if (count >= 50) return 'bdg_check50_sm.jpg';
+  if (count >= 25) return 'bdg_check25_sm.jpg';
+  return 'bdg_newbie_sm.jpg';
 };
 
 const mapBeerToName = (count: number) => {
