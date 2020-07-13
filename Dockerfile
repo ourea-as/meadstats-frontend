@@ -14,7 +14,7 @@ RUN INLINE_RUNTIME_CHUNK=false yarn build
 
 
 # Stage 2: Production
-FROM nginx:1.19.0-alpine
+FROM nginx:1.19.1-alpine
 
 EXPOSE 5000
 CMD ["nginx", "-g", "daemon off;"]
