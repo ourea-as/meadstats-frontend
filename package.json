@@ -29,7 +29,7 @@
     "@typescript-eslint/eslint-plugin": "3.7.1",
     "@typescript-eslint/parser": "3.7.1",
     "axios": "0.19.2",
-    "bootstrap": "4.5.0",
+    "bootstrap": "4.5.2",
     "chart.js": "2.9.3",
     "d3-scale": "3.2.1",
     "eslint-config-prettier": "6.11.0",
