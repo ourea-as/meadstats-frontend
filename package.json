@@ -27,7 +27,7 @@
     "@types/reactstrap": "8.5.0",
     "@types/topojson-specification": "1.0.1",
     "@typescript-eslint/eslint-plugin": "3.7.1",
-    "@typescript-eslint/parser": "3.7.1",
+    "@typescript-eslint/parser": "3.9.0",
     "axios": "0.19.2",
     "bootstrap": "4.5.2",
     "chart.js": "2.9.3",
