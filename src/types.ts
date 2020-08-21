@@ -84,6 +84,14 @@ export type GraphData = {
   date: string;
 };
 
+export type CheckinsData = {
+  beer: Beer;
+  count: number;
+  first_had: Date;
+  id: number;
+  rating: number;
+};
+
 // JSON Types
 
 export type Transform = {

@@ -10,8 +10,18 @@ import { TimeOfDayChart } from './graphs/timeofday';
 import { MonthChart } from './graphs/month';
 import { YearChart } from './graphs/year';
 import GraphChart from './graphs/graph';
-import { APIResponse, MonthsData, DayOfWeekData, TimeOfDayData, YearsData, GraphData, User } from '../types';
+import {
+  APIResponse,
+  MonthsData,
+  DayOfWeekData,
+  TimeOfDayData,
+  YearsData,
+  GraphData,
+  User,
+  CheckinsData,
+} from '../types';
 import MatrixChart from './graphs/matrix';
+import { BoxAndWhiskers } from './graphs/boxandwhisker';
 
 const getDataCount = (data, field, number, dataField = 'count'): number => {
   const outdata = data.find((x) => x[field] === number);
@@ -19,7 +29,7 @@ const getDataCount = (data, field, number, dataField = 'count'): number => {
   return 0;
 };
 
-const getLabels = (data: Array<object>, field: string): Array<string> => {
+const getLabels = (data: Array<YearsData>, field: string): Array<string> => {
   const labels: Array<string> = [];
 
   data.forEach((dataPoint) => {
@@ -78,6 +88,7 @@ const Patterns: React.FC<PatternsProps> = (props) => {
     labels: [],
   });
   const [graphData, setGraphData] = useState<Array<GraphData>>([]);
+  const [checkins, setCheckins] = useState<Array<CheckinsData>>([]);
 
   useEffect(() => {
     if (user.userName !== '') {
@@ -111,6 +122,12 @@ const Patterns: React.FC<PatternsProps> = (props) => {
           setGraphData(data.data.dates);
         }
       });
+
+      axios.get<APIResponse<CheckinsData>>(`${API_ROOT}/v1/users/${user.userName}/checkins`).then(({ data }) => {
+        if (data.status === 'success') {
+          setCheckins(data.data.checkins);
+        }
+      });
     }
   }, [user]);
 
@@ -118,6 +135,7 @@ const Patterns: React.FC<PatternsProps> = (props) => {
     <>
       <GraphChart data={graphData} />
       <MatrixChart data={graphData} />
+      <BoxAndWhiskers data={checkins} />
       <DayOfWeekChart data={weekDataToArray(weekdayData)} ratingData={weekRatingToArray(weekdayData)} />
       <TimeOfDayChart data={hourDataToArray(hourData)} ratingData={hourRatingToArray(hourData)} />
       <MonthChart data={monthDataToArray(monthData)} ratingData={monthRatingToArray(monthData)} />
