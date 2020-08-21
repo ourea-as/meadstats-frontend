@@ -3,6 +3,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import { useWindowSize } from 'react-use';
+import { ChartOptions } from 'chart.js';
 
 type DataPoint = {
   date: string;
@@ -87,7 +88,7 @@ const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
       ],
     },
     title: { display: true, text: 'Cumulative count over time' },
-  };
+  } as ChartOptions;
 
   return (
     <>
