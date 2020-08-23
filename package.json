@@ -14,6 +14,8 @@
   "author": "Fredrik Bore <fredrik@bore.ai> (https://www.bore.ai)",
   "private": true,
   "dependencies": {
+    "@commitlint/cli": "9.1.2",
+    "@commitlint/config-conventional": "9.1.2",
     "@fortawesome/fontawesome-svg-core": "1.2.30",
     "@fortawesome/free-regular-svg-icons": "5.14.0",
     "@fortawesome/free-solid-svg-icons": "5.14.0",
@@ -39,6 +41,7 @@
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.20.6",
     "history": "5.0.0",
+    "husky": "4.2.5",
     "jwt-decode": "2.2.0",
     "moment": "2.27.0",
     "popper.js": "1.16.1",
@@ -92,5 +95,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
