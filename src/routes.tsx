@@ -25,10 +25,18 @@ export const Routes: React.FC<RoutesProps> = (props) => {
 
   return (
     <Switch>
-      <Route exact path="/tasting" render={(): ReactElement => <Tasting />} />
-      <Route exact path="/signout" render={(): ReactElement => <Logout logoutUser={logoutUser} />} />
+      <Route exact path="/tasting">
+        <Tasting />
+      </Route>
+      <Route exact path="/signout">
+        <Logout logoutUser={logoutUser} />
+      </Route>
 
-      {isAuthenticated ? null : <Route exact path="/" component={Landing} />}
+      {isAuthenticated ? null : (
+        <Route exact path="/">
+          <Landing />
+        </Route>
+      )}
 
       <Route exact path="/" render={(): ReactElement => <Redirect to={`/user/${username}`} />} />
 

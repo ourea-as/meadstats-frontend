@@ -163,9 +163,15 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
                   path="/user/:name/map/:country"
                   render={({ match }): ReactElement => <CountryMap user={user} country={match.params.country} />}
                 />
-                <Route path="/user/:name/map" render={(): ReactElement => <Map user={user} />} />
-                <Route path="/user/:name/patterns" render={(): ReactElement => <Patterns user={user} />} />
-                <Route path="/user/:name/friends" render={(): ReactElement => <Friends user={user} />} />
+                <Route path="/user/:name/map">
+                  <Map user={user} />
+                </Route>
+                <Route path="/user/:name/patterns">
+                  <Patterns user={user} />
+                </Route>
+                <Route path="/user/:name/friends">
+                  <Friends user={user} />
+                </Route>
               </Switch>
             </ErrorBoundary>
           </Row>
@@ -180,7 +186,7 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
 const UserNavigation = ({ user }): ReactElement => (
   <Nav pills horizontal="center" className="user-tabs">
     <UserNavigationTab text="Map" route="map" user={user} />
-    <UserNavigationTab text="Patterns" route="patterns" user={user} />
+    <UserNavigationTab text="Patterns" route="patterns/weekday" user={user} />
     <UserNavigationTab text="Friends" route="friends" user={user} />
   </Nav>
 );
