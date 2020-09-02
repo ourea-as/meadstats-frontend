@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 
 import 'react-flag-icon-css';
 
@@ -22,6 +22,8 @@ import {
 } from '../types';
 import MatrixChart from './graphs/matrix';
 import { BoxAndWhiskers } from './graphs/boxandwhisker';
+import { Nav, NavItem } from 'reactstrap';
+import { NavLink, Switch, Route } from 'react-router-dom';
 
 const getDataCount = (data, field, number, dataField = 'count'): number => {
   const outdata = data.find((x) => x[field] === number);
@@ -136,16 +138,54 @@ const Patterns: React.FC<PatternsProps> = (props) => {
       <GraphChart data={graphData} />
       <MatrixChart data={graphData} />
       <BoxAndWhiskers data={checkins} />
-      <DayOfWeekChart data={weekDataToArray(weekdayData)} ratingData={weekRatingToArray(weekdayData)} />
-      <TimeOfDayChart data={hourDataToArray(hourData)} ratingData={hourRatingToArray(hourData)} />
-      <MonthChart data={monthDataToArray(monthData)} ratingData={monthRatingToArray(monthData)} />
-      <YearChart
-        data={yearDataToArray(yearData.years, yearData.labels)}
-        ratingData={yearRatingToArray(yearData.years, yearData.labels)}
-        labels={yearData.labels}
-      />
+      <div className="col-md-12 col-xs-12 mb-4">
+        <Nav pills horizontal="center" className="user-tabs">
+          <NavigationTab text="Weekday" route="weekday" user={user} />
+          <NavigationTab text="Hour" route="hour" user={user} />
+          <NavigationTab text="Month" route="month" user={user} />
+          <NavigationTab text="Year" route="year" user={user} />
+        </Nav>
+      </div>
+      <Switch>
+        <Route
+          path="/user/:name/patterns/weekday"
+          render={(): ReactElement => (
+            <DayOfWeekChart data={weekDataToArray(weekdayData)} ratingData={weekRatingToArray(weekdayData)} />
+          )}
+        />
+        <Route
+          path="/user/:name/patterns/hour"
+          render={(): ReactElement => (
+            <TimeOfDayChart data={hourDataToArray(hourData)} ratingData={hourRatingToArray(hourData)} />
+          )}
+        />
+        <Route
+          path="/user/:name/patterns/month"
+          render={(): ReactElement => (
+            <MonthChart data={monthDataToArray(monthData)} ratingData={monthRatingToArray(monthData)} />
+          )}
+        />
+        <Route
+          path="/user/:name/patterns/year"
+          render={(): ReactElement => (
+            <YearChart
+              data={yearDataToArray(yearData.years, yearData.labels)}
+              ratingData={yearRatingToArray(yearData.years, yearData.labels)}
+              labels={yearData.labels}
+            />
+          )}
+        />
+      </Switch>
     </>
   );
 };
+
+const NavigationTab = ({ text, route, user }): ReactElement => (
+  <NavLink className="user-nav-tab" activeClassName="active" to={`/user/${user.userName}/patterns/${route}`}>
+    <NavItem>
+      <span className="nav-link user-nav-link">{text}</span>
+    </NavItem>
+  </NavLink>
+);
 
 export default Patterns;
