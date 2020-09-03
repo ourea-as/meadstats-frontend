@@ -38,17 +38,18 @@ export const Routes: React.FC<RoutesProps> = (props) => {
         </Route>
       )}
 
-      <Route exact path="/" render={(): ReactElement => <Redirect to={`/user/${username}`} />} />
+      <Route exact path="/">
+        <Redirect to={`/user/${username}`} />
+      </Route>
 
       <Route
         exact
         path="/user/:name"
         render={({ match }): ReactElement => <Redirect to={`/user/${match.params.name}/map`} />}
       />
-      <Route
-        path="/user/:name"
-        render={({ match }): ReactElement => <User username={match.params.name} isAuthenticated={isAuthenticated} />}
-      />
+      <Route path="/user/:username">
+        <User isAuthenticated={isAuthenticated} />
+      </Route>
       <Redirect to="/" />
     </Switch>
   );

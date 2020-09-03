@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactElement } from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch, NavLink, useParams } from 'react-router-dom';
 
 import { Nav, NavItem, Row } from 'reactstrap';
 
@@ -50,11 +50,12 @@ const CountryMap = (props): ReactElement => (
 
 interface UserProps {
   isAuthenticated: boolean;
-  username: string;
 }
 
 export const User: React.FunctionComponent<UserProps> = (props) => {
-  const { isAuthenticated, username } = props;
+  const { isAuthenticated } = props;
+
+  const { username } = useParams();
 
   const [user, setUser] = useState<IUser | undefined>(undefined);
   const [loading, setLoading] = useState(false);
@@ -107,7 +108,7 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
   };
 
   useEffect(() => {
-    if (user === undefined && loading === false) loadUser();
+    if (!user && !loading && username) loadUser();
   });
 
   const handleUpdateProgress = (data) => {
@@ -159,10 +160,9 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
           <Row>
             <ErrorBoundary>
               <Switch>
-                <Route
-                  path="/user/:name/map/:country"
-                  render={({ match }): ReactElement => <CountryMap user={user} country={match.params.country} />}
-                />
+                <Route path="/user/:name/map/:country">
+                  <CountryMap user={user} />
+                </Route>
                 <Route path="/user/:name/map">
                   <Map user={user} />
                 </Route>

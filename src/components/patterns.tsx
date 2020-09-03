@@ -147,34 +147,22 @@ const Patterns: React.FC<PatternsProps> = (props) => {
         </Nav>
       </div>
       <Switch>
-        <Route
-          path="/user/:name/patterns/weekday"
-          render={(): ReactElement => (
-            <DayOfWeekChart data={weekDataToArray(weekdayData)} ratingData={weekRatingToArray(weekdayData)} />
-          )}
-        />
-        <Route
-          path="/user/:name/patterns/hour"
-          render={(): ReactElement => (
-            <TimeOfDayChart data={hourDataToArray(hourData)} ratingData={hourRatingToArray(hourData)} />
-          )}
-        />
-        <Route
-          path="/user/:name/patterns/month"
-          render={(): ReactElement => (
-            <MonthChart data={monthDataToArray(monthData)} ratingData={monthRatingToArray(monthData)} />
-          )}
-        />
-        <Route
-          path="/user/:name/patterns/year"
-          render={(): ReactElement => (
-            <YearChart
-              data={yearDataToArray(yearData.years, yearData.labels)}
-              ratingData={yearRatingToArray(yearData.years, yearData.labels)}
-              labels={yearData.labels}
-            />
-          )}
-        />
+        <Route path="/user/:name/patterns/weekday">
+          <DayOfWeekChart data={weekDataToArray(weekdayData)} ratingData={weekRatingToArray(weekdayData)} />
+        </Route>
+        <Route path="/user/:name/patterns/hour">
+          <TimeOfDayChart data={hourDataToArray(hourData)} ratingData={hourRatingToArray(hourData)} />
+        </Route>
+        <Route path="/user/:name/patterns/month">
+          <MonthChart data={monthDataToArray(monthData)} ratingData={monthRatingToArray(monthData)} />
+        </Route>
+        <Route path="/user/:name/patterns/year">
+          <YearChart
+            data={yearDataToArray(yearData.years, yearData.labels)}
+            ratingData={yearRatingToArray(yearData.years, yearData.labels)}
+            labels={yearData.labels}
+          />
+        </Route>
       </Switch>
     </>
   );

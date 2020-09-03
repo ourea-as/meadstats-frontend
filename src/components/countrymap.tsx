@@ -12,9 +12,10 @@ import { BeerTable } from './tables/beertable';
 import { Loading } from './loading';
 import { Error } from './error';
 import { CountryData, User } from '../types';
+import { useParams } from 'react-router';
 
-const CountryHoverMapSuspense = React.lazy(() =>
-  import(/* webpackChunkName: "countryhovermap" */ './maps/countryhovermap'),
+const CountryHoverMapSuspense = React.lazy(
+  () => import(/* webpackChunkName: "countryhovermap" */ './maps/countryhovermap'),
 );
 
 const CountryHoverMap = (props): ReactElement => (
@@ -25,12 +26,13 @@ const CountryHoverMap = (props): ReactElement => (
 
 interface CountryMapProps {
   user?: User;
-  country?: string;
 }
 
-const CountryMap: React.FC<CountryMapProps> = ({ user, country }): ReactElement => {
+const CountryMap: React.FC<CountryMapProps> = ({ user }): ReactElement => {
   const [data, setData] = useState<CountryData>();
   const [error, setError] = useState(false);
+
+  const { country } = useParams();
 
   useEffect(() => {
     if (user && country) {
