@@ -23,7 +23,7 @@ import {
 import MatrixChart from './graphs/matrix';
 import { BoxAndWhiskers } from './graphs/boxandwhisker';
 import { Nav, NavItem } from 'reactstrap';
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { NavLink, Routes, Route } from 'react-router-dom';
 
 const getDataCount = (data, field, number, dataField = 'count'): number => {
   const outdata = data.find((x) => x[field] === number);
@@ -146,24 +146,24 @@ const Patterns: React.FC<PatternsProps> = (props) => {
           <NavigationTab text="Year" route="year" user={user} />
         </Nav>
       </div>
-      <Switch>
-        <Route path="/user/:name/patterns/weekday">
+      <Routes>
+        <Route path="weekday">
           <DayOfWeekChart data={weekDataToArray(weekdayData)} ratingData={weekRatingToArray(weekdayData)} />
         </Route>
-        <Route path="/user/:name/patterns/hour">
+        <Route path="hour">
           <TimeOfDayChart data={hourDataToArray(hourData)} ratingData={hourRatingToArray(hourData)} />
         </Route>
-        <Route path="/user/:name/patterns/month">
+        <Route path="month">
           <MonthChart data={monthDataToArray(monthData)} ratingData={monthRatingToArray(monthData)} />
         </Route>
-        <Route path="/user/:name/patterns/year">
+        <Route path="year">
           <YearChart
             data={yearDataToArray(yearData.years, yearData.labels)}
             ratingData={yearRatingToArray(yearData.years, yearData.labels)}
             labels={yearData.labels}
           />
         </Route>
-      </Switch>
+      </Routes>
     </>
   );
 };

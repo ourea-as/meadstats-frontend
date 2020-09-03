@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -115,11 +115,11 @@ type FriendsTableProps = {
 const FriendsTable: React.FC<FriendsTableProps> = (props) => {
   const { friends } = props;
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const rowEvents = {
     onClick: (e, row) => {
-      history.push('../' + row.user_name);
+      navigate('/user/' + row.user_name + '/map');
     },
   };
 

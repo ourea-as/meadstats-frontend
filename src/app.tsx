@@ -9,7 +9,7 @@ import './assets/favicon.ico';
 import { Container, Row } from 'reactstrap';
 import { Footer } from './components/footer';
 import { ErrorBoundary } from './components/errorboundary';
-import { Routes } from './routes';
+import { AppRoutes } from './routes';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -49,7 +49,7 @@ const App: React.FC = () => {
       <Row>
         <ErrorBoundary>
           <main role="main" className="col-md-12 col-lg-12 px-4">
-            <Routes isAuthenticated={isAuthenticated} username={username} logoutUser={logoutUser} />
+            <AppRoutes isAuthenticated={isAuthenticated} username={username} logoutUser={logoutUser} />
           </main>
         </ErrorBoundary>
       </Row>

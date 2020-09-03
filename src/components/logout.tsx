@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
 type LogoutProps = {
   logoutUser: () => void;
@@ -11,7 +11,7 @@ const Logout: React.FC<LogoutProps> = (props) => {
 
   logoutUser();
 
-  return <Redirect to="/" />;
+  return <Navigate to="/" />;
 };
 
 export default Logout;

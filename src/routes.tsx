@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Logout from './components/logout';
 import { User } from './components/user';
@@ -20,37 +20,37 @@ type RoutesProps = {
   logoutUser: () => void;
 };
 
-export const Routes: React.FC<RoutesProps> = (props) => {
+export const AppRoutes: React.FC<RoutesProps> = (props) => {
   const { isAuthenticated, username, logoutUser } = props;
 
   return (
-    <Switch>
-      <Route exact path="/tasting">
+    <Routes>
+      <Route path="/tasting">
         <Tasting />
       </Route>
-      <Route exact path="/signout">
+      <Route path="/signout">
         <Logout logoutUser={logoutUser} />
       </Route>
 
       {isAuthenticated ? null : (
-        <Route exact path="/">
+        <Route path="/">
           <Landing />
         </Route>
       )}
 
-      <Route exact path="/">
-        <Redirect to={`/user/${username}`} />
+      <Route path="/">
+        <Navigate to={`/user/${username}`} />
       </Route>
 
-      <Route
-        exact
+      {
+        // TODO: Redirect to map
+        /*<Route
         path="/user/:name"
-        render={({ match }): ReactElement => <Redirect to={`/user/${match.params.name}/map`} />}
-      />
-      <Route path="/user/:username">
-        <User isAuthenticated={isAuthenticated} />
-      </Route>
-      <Redirect to="/" />
-    </Switch>
+        render={({ match }): ReactElement => <Navigate to={`/user/${match.params.name}/map`} />}
+      />*/
+      }
+      <Route path="/user/:username/*" element={<User isAuthenticated={isAuthenticated} />} />
+      <Navigate to="/" />
+    </Routes>
   );
 };

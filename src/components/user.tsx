@@ -1,5 +1,5 @@
-import React, { useState, useEffect, ReactElement } from 'react';
-import { Route, Switch, NavLink, useParams } from 'react-router-dom';
+import React, { useState, useEffect, ReactElement, useCallback } from 'react';
+import { Route, Routes, NavLink, useParams, Navigate } from 'react-router-dom';
 
 import { Nav, NavItem, Row } from 'reactstrap';
 
@@ -65,7 +65,7 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
   const [updateTotal, setUpdateTotal] = useState(0);
   const [socket, setSocket] = useState<any>(null);
 
-  const loadUser = () => {
+  const loadUser = useCallback((username) => {
     axios
       .get(`${API_ROOT}/v1/users/${username}`)
       .then(({ data }) => {
@@ -105,11 +105,11 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
         setLoading(false);
         console.error(error);
       });
-  };
+  }, []);
 
   useEffect(() => {
-    if (!user && !loading && username) loadUser();
-  });
+    if (username) loadUser(username);
+  }, [username, loadUser]);
 
   const handleUpdateProgress = (data) => {
     setUpdateCount(data.progress);
@@ -126,7 +126,7 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
       setSocket(null);
     }
 
-    loadUser();
+    loadUser(username);
   };
 
   const updateUser = () => {
@@ -142,7 +142,7 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Profile
         user={user}
         updating={updating}
@@ -159,27 +159,20 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
           <UserNavigation user={user} />
           <Row>
             <ErrorBoundary>
-              <Switch>
-                <Route path="/user/:name/map/:country">
-                  <CountryMap user={user} />
-                </Route>
-                <Route path="/user/:name/map">
-                  <Map user={user} />
-                </Route>
-                <Route path="/user/:name/patterns">
-                  <Patterns user={user} />
-                </Route>
-                <Route path="/user/:name/friends">
-                  <Friends user={user} />
-                </Route>
-              </Switch>
+              <Routes>
+                <Route path="/" element={<Navigate to={`map`} />} />
+                <Route path="map/:country/*" element={<CountryMap user={user} />} />
+                <Route path="map/*" element={<Map user={user} />} />
+                <Route path="patterns/*" element={<Patterns user={user} />} />
+                <Route path="friends/*" element={<Friends user={user} />} />
+              </Routes>
             </ErrorBoundary>
           </Row>
         </ErrorBoundary>
       ) : (
         <div className="user-not-exist">This user does not exist in the database. Please refresh.</div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

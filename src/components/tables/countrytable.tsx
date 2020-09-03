@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -140,11 +140,11 @@ type CountryTableProps = {
 const CountryTable: React.FC<CountryTableProps> = (props) => {
   const { countries } = props;
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const rowEvents = {
     onClick: (e, row) => {
-      history.push('map/' + row.code);
+      navigate(row.code);
     },
   };
 

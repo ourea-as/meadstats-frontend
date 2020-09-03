@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { scaleLinear } from 'd3-scale';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import ReactTooltip from 'react-tooltip';
@@ -45,11 +45,11 @@ const renderFlag = (countrycode) => {
 const HoverMap: React.FC<HoverMapProps> = (props) => {
   const { countries, interactive, region } = props;
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleMapClick = (geography: any): void => {
     if (interactive) {
-      history.push('map/' + geography.properties.iso_a2);
+      navigate(geography.properties.iso_a2);
     }
   };
 

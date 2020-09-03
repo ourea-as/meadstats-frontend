@@ -44,8 +44,14 @@ const CountryHoverMap: React.FC<CountryHoverMapProps> = ({ data }): ReactElement
 
   const zoomToWholeCountry = useCallback((): void => {
     if (data) {
-      setCentroid([centroids[data.code].centroid[0], centroids[data.code].centroid[1]]);
-      setScale(centroids[data.code].scale);
+      if (centroids[data.code]) {
+        setCentroid([centroids[data.code].centroid[0], centroids[data.code].centroid[1]]);
+        setScale(centroids[data.code].scale);
+      } else {
+        console.warn(
+          `Missing centroid for country ${data.code}. Please open a issue at: https://github.com/Boren/meadstats-frontend/issues`,
+        );
+      }
     }
   }, [data]);
 
