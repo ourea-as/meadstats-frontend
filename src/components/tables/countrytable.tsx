@@ -76,8 +76,6 @@ const ratingFormatter = (cell): ReactElement => {
 };
 
 const countFormatter = (cell, row) => {
-  console.log(row);
-
   const badgelevel = mapCountryToLevel(row.code, row.count);
   const badgeImage = mapCountryToImage(row.code, badgelevel);
 
