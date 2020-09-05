@@ -1,14 +1,12 @@
-import React, { useEffect, useMemo, useRef } from 'react';
-import Chart from 'chart.js';
-// @ts-ignore
-import 'chartjs-chart-box-and-violin-plot';
+import React, { useMemo } from 'react';
+import { Chart } from './chart';
 import { CheckinsData } from '../../types';
 
-type BoxProps = {
+type StyleBoxesProps = {
   data: Array<CheckinsData>;
 };
 
-export const BoxAndWhiskers: React.FC<BoxProps> = (props) => {
+export const StyleBoxes: React.FC<StyleBoxesProps> = (props) => {
   const { data } = props;
 
   const computedData = useMemo(() => {
@@ -43,50 +41,37 @@ export const BoxAndWhiskers: React.FC<BoxProps> = (props) => {
     return { labels, values };
   }, [data]);
 
-  const chartRef = useRef<HTMLCanvasElement>(null);
+  const formattedData = {
+    labels: computedData.labels,
+    datasets: [
+      {
+        label: '',
+        backgroundColor: '#343a40',
+        borderColor: '#01070D',
+        borderWidth: 2,
+        //outlierColor: '#999999',
+        //padding: 10,
+        //itemRadius: 0,
+        data: computedData.values as number[][],
+      },
+    ],
+  };
 
-  useEffect(() => {
-    const myChartRef = chartRef.current;
-
-    if (myChartRef) {
-      const context = myChartRef.getContext('2d');
-
-      if (context) {
-        new Chart(context, {
-          type: 'boxplot',
-          data: {
-            labels: computedData.labels,
-            datasets: [
-              {
-                label: '',
-                backgroundColor: '#343a40',
-                borderColor: '#01070D',
-                borderWidth: 2,
-                //outlierColor: '#999999',
-                //padding: 10,
-                //itemRadius: 0,
-                data: computedData.values as number[][],
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            legend: {
-              display: false,
-            },
-            title: {
-              display: true,
-              text: 'Style Preferences',
-            },
-          },
-        });
-      }
-    }
-  });
+  const options = {
+    animation: { duration: 0 },
+    responsive: true,
+    legend: {
+      display: false,
+    },
+    title: {
+      display: true,
+      text: 'Style Preferences',
+    },
+  };
 
   return (
     <div className="col-md-12 col-xs-12 mb-4">
-      <canvas id="styleChart" ref={chartRef} />
+      <Chart data={formattedData} options={options} type="boxplot" />
     </div>
   );
 };

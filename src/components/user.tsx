@@ -179,13 +179,13 @@ export const User: React.FunctionComponent<UserProps> = (props) => {
 const UserNavigation = ({ user }): ReactElement => (
   <Nav pills horizontal="center" className="user-tabs">
     <UserNavigationTab text="Map" route="map" user={user} />
-    <UserNavigationTab text="Patterns" route="patterns/weekday" user={user} />
+    <UserNavigationTab text="Patterns" route="patterns" user={user} />
     <UserNavigationTab text="Friends" route="friends" user={user} />
   </Nav>
 );
 
 const UserNavigationTab = ({ text, route, user }): ReactElement => (
-  <NavLink className="user-nav-tab" activeClassName="active" to={`/user/${user.userName}/${route}`}>
+  <NavLink className="user-nav-tab" activeClassName="active" to={`${route}`}>
     <NavItem>
       <span className="nav-link user-nav-link">{text}</span>
     </NavItem>

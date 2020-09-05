@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import { Chart } from '../chart';
 
 type RatingLineProps = {
   data: any;
@@ -9,32 +9,30 @@ type RatingLineProps = {
 export const RatingLine: React.FC<RatingLineProps> = (props) => {
   const { data, title } = props;
 
-  return (
-    <Line
-      data={data}
-      legend={{ display: false }}
-      options={{
-        scales: {
-          yAxes: [
-            {
-              ticks: { beginAtZero: true, maxTicksLimit: 10, max: 5, padding: 8 },
-              gridLines: {
-                display: true,
-                drawBorder: false,
-              },
-            },
-          ],
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-                drawBorder: false,
-              },
-            },
-          ],
+  const options = {
+    animation: { duration: 0 },
+    legend: { display: false },
+    scales: {
+      yAxes: [
+        {
+          ticks: { beginAtZero: true, maxTicksLimit: 10, max: 5, padding: 8 },
+          gridLines: {
+            display: true,
+            drawBorder: false,
+          },
         },
-        title: { display: true, text: title },
-      }}
-    />
-  );
+      ],
+      xAxes: [
+        {
+          gridLines: {
+            display: false,
+            drawBorder: false,
+          },
+        },
+      ],
+    },
+    title: { display: true, text: title },
+  };
+
+  return <Chart data={data} options={options} type="line" />;
 };

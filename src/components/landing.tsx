@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button, Jumbotron } from 'reactstrap';
 import MockMap from './maps/mockmap';
-import { Bar, Line } from 'react-chartjs-2';
+import { Chart } from './graphs/chart';
 
 const barData = {
   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -38,10 +38,11 @@ const Landing: React.FC = () => {
       <div className="card-deck">
         <div className="card">
           <div className="card-img-top p-3">
-            <Bar
+            <Chart
               data={barData}
-              legend={{ display: false }}
               options={{
+                animation: { duration: 0 },
+                legend: { display: false },
                 scales: {
                   yAxes: [
                     {
@@ -63,6 +64,7 @@ const Landing: React.FC = () => {
                 },
                 title: { display: true, text: 'Count by day of week' },
               }}
+              type="bar"
             />
           </div>
           <div className="card-body">
@@ -83,10 +85,11 @@ const Landing: React.FC = () => {
         </div>
         <div className="card">
           <div className="card-img-top p-3">
-            <Line
+            <Chart
               data={ratingBarData}
-              legend={{ display: false }}
               options={{
+                animation: { duration: 0 },
+                legend: { display: false },
                 scales: {
                   yAxes: [
                     {
@@ -110,6 +113,7 @@ const Landing: React.FC = () => {
                 },
                 title: { display: true, text: 'Average rating by year' },
               }}
+              type="line"
             />
           </div>
           <div className="card-body">

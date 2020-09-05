@@ -21,9 +21,9 @@ import {
   CheckinsData,
 } from '../types';
 import MatrixChart from './graphs/matrix';
-import { BoxAndWhiskers } from './graphs/boxandwhisker';
+import { StyleBoxes } from './graphs/styleboxes';
 import { Nav, NavItem } from 'reactstrap';
-import { NavLink, Routes, Route } from 'react-router-dom';
+import { NavLink, Routes, Route, Navigate } from 'react-router-dom';
 
 const getDataCount = (data, field, number, dataField = 'count'): number => {
   const outdata = data.find((x) => x[field] === number);
@@ -137,7 +137,7 @@ const Patterns: React.FC<PatternsProps> = (props) => {
     <>
       <GraphChart data={graphData} />
       <MatrixChart data={graphData} />
-      <BoxAndWhiskers data={checkins} />
+      <StyleBoxes data={checkins} />
       <div className="col-md-12 col-xs-12 mb-4">
         <Nav pills horizontal="center" className="user-tabs">
           <NavigationTab text="Weekday" route="weekday" user={user} />
@@ -147,6 +147,7 @@ const Patterns: React.FC<PatternsProps> = (props) => {
         </Nav>
       </div>
       <Routes>
+        <Route path="/" element={<Navigate to={`weekday`} />} />
         <Route path="weekday">
           <DayOfWeekChart data={weekDataToArray(weekdayData)} ratingData={weekRatingToArray(weekdayData)} />
         </Route>

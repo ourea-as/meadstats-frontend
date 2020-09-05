@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+//@ts-nocheck
+import React, { useMemo } from 'react';
 import moment from 'moment';
 import { scaleLinear } from 'd3-scale';
 import { useWindowSize } from 'react-use';
 
-import Chart from 'chart.js';
-import 'chartjs-chart-matrix';
+import { Chart } from './chart';
 
 type DataPoint = {
   date: string;
@@ -97,98 +97,81 @@ const MatrixChart: React.FC<MatrixChartProps> = ({ data }) => {
     return barData;
   }, [data, width]);
 
-  const chartRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const myChartRef = chartRef.current;
-
-    if (myChartRef) {
-      const context = myChartRef.getContext('2d');
-
-      if (context) {
-        new Chart(context, {
-          type: 'matrix',
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+    },
+    animation: {
+      duration: 0,
+    },
+    tooltips: {
+      intersect: false,
+      callbacks: {
+        label: (tooltipItem, data): string => {
           // @ts-ignore
-          data: computedData,
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              display: false,
+          return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].v;
+        },
+      },
+    },
+    scales: {
+      xAxes: [
+        {
+          type: 'time',
+          position: 'top',
+          offset: true,
+          time: {
+            unit: 'month',
+            round: 'week',
+            tooltipFormat: 'D MMMM',
+            displayFormats: {
+              month: 'MMM',
             },
-            animation: {
-              duration: 0,
-            },
-            tooltips: {
-              intersect: false,
-              callbacks: {
-                label: (tooltipItem, data): string => {
-                  // @ts-ignore
-                  return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].v;
-                },
-              },
-            },
-            scales: {
-              xAxes: [
-                {
-                  type: 'time',
-                  position: 'top',
-                  offset: true,
-                  time: {
-                    unit: 'month',
-                    round: 'week',
-                    tooltipFormat: 'D MMMM',
-                    displayFormats: {
-                      month: 'MMM',
-                    },
-                  },
-                  ticks: {
-                    maxRotation: 0,
-                    autoSkip: true,
-                    padding: 10,
-                  },
-                  gridLines: {
-                    display: false,
-                    drawBorder: false,
-                    tickMarkLength: 0,
-                  },
-                },
-              ],
-              yAxes: [
-                {
-                  type: 'time',
-                  offset: true,
-                  position: 'left',
-                  time: {
-                    unit: 'day',
-                    parser: 'e',
-                    displayFormats: {
-                      day: 'ddd',
-                    },
-                  },
-                  ticks: {
-                    // workaround, see: https://github.com/chartjs/Chart.js/pull/6257
-                    maxRotation: 90,
-                    reverse: true,
-                  },
-                  gridLines: {
-                    display: false,
-                    drawBorder: false,
-                    tickMarkLength: 0,
-                  },
-                },
-              ],
-            },
-            title: { display: false },
           },
-        });
-      }
-    }
-  });
+          ticks: {
+            maxRotation: 0,
+            autoSkip: true,
+            padding: 10,
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false,
+            tickMarkLength: 0,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          type: 'time',
+          offset: true,
+          position: 'left',
+          time: {
+            unit: 'day',
+            parser: 'e',
+            displayFormats: {
+              day: 'ddd',
+            },
+          },
+          ticks: {
+            // workaround, see: https://github.com/chartjs/Chart.js/pull/6257
+            maxRotation: 90,
+            reverse: true,
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false,
+            tickMarkLength: 0,
+          },
+        },
+      ],
+    },
+    title: { display: false },
+  };
 
   return (
     <div className="col-md-12 col-xs-12 mb-4">
-      <canvas height={'200px'} id="styleChart" ref={chartRef} />
+      <Chart height={200} type="matrix" options={options} data={computedData} />
     </div>
   );
 };

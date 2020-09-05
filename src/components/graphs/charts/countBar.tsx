@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Chart } from '../chart';
 
 type CountBarProps = {
   data: any;
@@ -9,34 +9,32 @@ type CountBarProps = {
 export const CountBar: React.FC<CountBarProps> = (props) => {
   const { data, title } = props;
 
-  return (
-    <Bar
-      data={data}
-      legend={{ display: false }}
-      options={{
-        scales: {
-          yAxes: [
-            {
-              stacked: false,
-              ticks: { beginAtZero: true, maxTicksLimit: 5, padding: 8 },
-              gridLines: {
-                display: true,
-                drawBorder: false,
-              },
-            },
-          ],
-          xAxes: [
-            {
-              stacked: true,
-              gridLines: {
-                display: false,
-                drawBorder: false,
-              },
-            },
-          ],
+  const options = {
+    animation: { duration: 0 },
+    legend: { display: false },
+    scales: {
+      yAxes: [
+        {
+          stacked: false,
+          ticks: { beginAtZero: true, maxTicksLimit: 5, padding: 8 },
+          gridLines: {
+            display: true,
+            drawBorder: false,
+          },
         },
-        title: { display: true, text: title },
-      }}
-    />
-  );
+      ],
+      xAxes: [
+        {
+          stacked: true,
+          gridLines: {
+            display: false,
+            drawBorder: false,
+          },
+        },
+      ],
+    },
+    title: { display: true, text: title },
+  };
+
+  return <Chart data={data} options={options} type="bar" />;
 };

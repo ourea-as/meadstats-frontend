@@ -42,13 +42,6 @@ export const AppRoutes: React.FC<RoutesProps> = (props) => {
         <Navigate to={`/user/${username}`} />
       </Route>
 
-      {
-        // TODO: Redirect to map
-        /*<Route
-        path="/user/:name"
-        render={({ match }): ReactElement => <Navigate to={`/user/${match.params.name}/map`} />}
-      />*/
-      }
       <Route path="/user/:username/*" element={<User isAuthenticated={isAuthenticated} />} />
       <Navigate to="/" />
     </Routes>

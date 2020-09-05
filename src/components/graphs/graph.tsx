@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Line } from 'react-chartjs-2';
+import { Chart } from './chart';
 import moment from 'moment';
 import { useWindowSize } from 'react-use';
 import { ChartOptions } from 'chart.js';
@@ -47,6 +47,7 @@ const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
   };
 
   const graphOptions = {
+    animation: { duration: 0 },
     responsive: true,
     maintainAspectRatio: false,
     elements: {
@@ -93,7 +94,7 @@ const GraphChart: React.FC<GraphChartProps> = ({ data }) => {
   return (
     <>
       <div className="col-md-12 col-xs-12 mb-4">
-        <Line data={barData} height={300} options={graphOptions} />
+        <Chart data={barData} height={300} options={graphOptions} type="line" />
       </div>
     </>
   );
