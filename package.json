@@ -29,7 +29,7 @@
     "@types/react-simple-maps": "0.12.2",
     "@types/reactstrap": "8.5.1",
     "@types/topojson-specification": "1.0.1",
-    "@typescript-eslint/eslint-plugin": "4.0.1",
+    "@typescript-eslint/eslint-plugin": "4.13.0",
     "@typescript-eslint/parser": "4.0.1",
     "axios": "0.20.0",
     "bootstrap": "4.5.2",
