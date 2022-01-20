@@ -14,7 +14,7 @@
   "author": "Fredrik Bore <fredrik@bore.ai> (https://www.bore.ai)",
   "private": true,
   "dependencies": {
-    "@commitlint/cli": "9.1.2",
+    "@commitlint/cli": "16.0.3",
     "@commitlint/config-conventional": "9.1.2",
     "@fortawesome/fontawesome-svg-core": "1.2.30",
     "@fortawesome/free-regular-svg-icons": "5.14.0",
