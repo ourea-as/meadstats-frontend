@@ -10,7 +10,7 @@ import Flagicon from '../flagicon';
 import './table.css';
 
 const getImagelink = (badge: string): string => {
-  const base = 'https://untappd.akamaized.net/badges/bdg_';
+  const base = 'https://assets.untappd.com/badges/bdg_';
   const suffix = '_sm.jpg';
 
   return base + badge + suffix;

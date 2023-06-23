@@ -52,7 +52,7 @@ const beersFormatter = (cell, row) => {
     <span className="table-flex">
       <img
         className="table-profile-picture"
-        src={`https://untappd.akamaized.net/badges/${mapBeerToImage(row.total_beers)}`}
+        src={`https://assets.untappd.com/badges/${mapBeerToImage(row.total_beers)}`}
         alt="Total beers badge"
       />
       <div>
