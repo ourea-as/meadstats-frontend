@@ -31,7 +31,7 @@
     "@types/topojson-specification": "1.0.1",
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "@typescript-eslint/parser": "4.0.1",
-    "axios": "0.20.0",
+    "axios": "1.6.0",
     "bootstrap": "4.5.2",
     "chart.js": "2.9.3",
     "chartjs-chart-box-and-violin-plot": "2.3.0",
