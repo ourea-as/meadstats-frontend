@@ -14,8 +14,6 @@
   "author": "Fredrik Bore <fredrik@bore.ai> (https://www.bore.ai)",
   "private": true,
   "dependencies": {
-    "@commitlint/cli": "18.2.0",
-    "@commitlint/config-conventional": "18.1.0",
     "@fortawesome/fontawesome-svg-core": "6.4.2",
     "@fortawesome/free-regular-svg-icons": "6.4.2",
     "@fortawesome/free-solid-svg-icons": "6.4.2",
@@ -73,7 +71,7 @@
     "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview"
-},
+  },
   "browserslist": {
     "production": [
       ">0.2%",
