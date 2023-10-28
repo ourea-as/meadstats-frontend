@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, ReactElement } from 'react';
 
 import axios from 'axios';
 import { ComposableMap, Geographies, Geography, Markers, Marker, ZoomableGroup, Point } from 'react-simple-maps';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip'
 import * as TopoJSON from 'topojson-specification';
 import { Spring, config } from 'react-spring/renderprops';
 

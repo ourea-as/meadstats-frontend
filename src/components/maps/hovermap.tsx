@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { scaleLinear } from 'd3-scale';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { renderToString } from 'react-dom/server';
 
 import Flagicon from '../flagicon';

@@ -25,25 +25,14 @@ export const AppRoutes: React.FC<RoutesProps> = (props) => {
 
   return (
     <Routes>
-      <Route path="/tasting">
-        <Tasting />
-      </Route>
-      <Route path="/signout">
-        <Logout logoutUser={logoutUser} />
-      </Route>
+      <Route path="/tasting" element={<Tasting />} />
+      <Route path="/signout" element={<Logout logoutUser={logoutUser} />} />
 
-      {isAuthenticated ? null : (
-        <Route path="/">
-          <Landing />
-        </Route>
-      )}
+      {isAuthenticated ? null : <Route path="/" element={<Landing />} />}
 
-      <Route path="/">
-        <Navigate to={`/user/${username}`} />
-      </Route>
+      <Route path="/" element={<Navigate to={`/user/${username}`} />} />
 
       <Route path="/user/:username/*" element={<User isAuthenticated={isAuthenticated} />} />
-      <Navigate to="/" />
     </Routes>
   );
 };

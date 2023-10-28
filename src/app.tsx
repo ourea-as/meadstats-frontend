@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
-import jwtDecode from 'jwt-decode';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './assets/favicon.ico';
@@ -35,10 +35,11 @@ const App: React.FC = () => {
     }
 
     // Login user if token is stored
-    if (window.localStorage.getItem('authToken')) {
-      const decoded = jwtDecode(window.localStorage.getItem('authToken'));
+    const authToken = window.localStorage.getItem('authToken');
+    if (authToken) {
+      const decoded = jwtDecode<JwtPayload>(authToken);
       setIsAuthenticated(true);
-      setUsername(decoded.identity);
+      setUsername(decoded.sub!);
     } else {
       setIsAuthenticated(false);
     }
